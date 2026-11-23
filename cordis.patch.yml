@@ -1,0 +1,5 @@
+# 下班倒计时：插入本插件的一行 Loader 条目。
+# 注意：这个 id 同时是客户端读取配置的命名空间（client.js 的 NS 常量），改名要两处一起改。
+- insert:
+    - id: work-countdown
+      name: 'dsh-my-moyu'

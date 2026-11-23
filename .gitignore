@@ -1,0 +1,33 @@
+# 依赖（本插件是 link: 安装，正常不会生成；本地调试 pnpm/npm 时才出现）
+node_modules/
+
+# 构建产物
+dist/
+build/
+out/
+*.tgz
+
+# 日志
+*.log
+pnpm-debug.log*
+
+# 本地环境变量
+.env
+.env.*
+*.local
+
+# 编辑器 / IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+.cache/

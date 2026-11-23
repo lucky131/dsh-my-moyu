@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Work countdown">
+  <!-- 原始图形：一只指向 18 点方向的钟，代表下班倒计时 -->
+  <circle cx="32" cy="32" r="23" fill="none" stroke="#5B8DEF" stroke-width="4"/>
+  <path d="M32 17v15h13" fill="none" stroke="#5B8DEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="2.6" fill="#5B8DEF"/>
+  <!-- 六个刻度点 -->
+  <g fill="#5B8DEF">
+    <circle cx="32" cy="12" r="1.6"/>
+    <circle cx="52" cy="32" r="1.6"/>
+    <circle cx="32" cy="52" r="1.6"/>
+    <circle cx="12" cy="32" r="1.6"/>
+  </g>
+</svg>
