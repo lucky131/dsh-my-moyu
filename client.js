@@ -38,6 +38,8 @@ window.__ModuleLoader__.load({
         'panel.tomorrow': '明天',
         'panel.after': '后天',
         'panel.feels': '体感',
+        'panel.refresh': '刷新天气',
+        'panel.error': '天气更新失败：',
         'panel.empty': '暂无天气数据，请在设置里填写城市',
         'panel.stale': '天气更新失败，显示的是上次结果',
         'panel.work.start': '上班时间',
@@ -48,6 +50,8 @@ window.__ModuleLoader__.load({
         'usage.hint': '未配置 OpenCode Go Key',
         'usage.loading': '正在获取用量…',
         'usage.title': 'OpenCode Go 用量情况',
+        'usage.refresh': '刷新用量',
+        'usage.error': '用量更新失败：',
         'fish.title': '敲一下',
         'fish.merit': '功德+1',
         'tube.title': '摇一卦',
@@ -80,6 +84,36 @@ window.__ModuleLoader__.load({
         'settings.volume.desc': '敲木鱼的音量（0 为静音，只保留动画）',
         'settings.usage': '显示用量',
         'settings.usage.desc': '胶囊与详情里显示 OpenCode Go 的 5 小时 / 本周 / 本月已用百分比',
+        'keymap.open': '键盘农场',
+        'note.title': '便笺',
+        'note.ph': '写点什么…',
+        'note.done': '办完了',
+        'note.close': '关闭',
+        'rgb.title': '颜色转换',
+        'rgb.ph': '输入或粘贴吸色值',
+        'rgb.bad': '格式像 65,118,230 这样（QQ 吸色复制的那串）',
+        'rgb.copy': '复制',
+        'rgb.copied': '已复制',
+        'ts.title': '时间戳转换',
+        'ts.ph': '输入或粘贴时间戳',
+        'ts.bad': '只认纯数字的时间戳，秒和毫秒都行',
+        'ts.tag': '时间',
+        'ts.unit.sec': '按秒解析',
+        'ts.unit.ms': '按毫秒解析',
+        'keymap.ripe': '可收获',
+        'keymap.harvest': '点击收获',
+        'settings.keymap': '键盘统计',
+        'settings.keyAnim': '植物摇摆',
+        'settings.keySize': '键盘尺寸',
+        'settings.keySize.desc': '键盘农场整体大小；屏幕不够会自动收窄',
+        'settings.keySize.small': '小',
+        'settings.keySize.medium': '中',
+        'settings.keySize.large': '大',
+        'settings.keyAnim.desc': '键盘农场里的植物轻轻摆动；关掉可以省一点显卡和电',
+        'settings.keymap.desc': '只统计 DSH 窗口内按键的累计次数，数据存在本机配置里，不上传',
+        'settings.keymap.reset': '清空数据',
+        'settings.keymap.total': '总计',
+        'settings.keymap.confirm': '确定清空所有按键次数？此操作不可恢复。',
         'settings.title': 'my Moyu',
         'settings.intro': '显示距离下班的倒计时。改完保存立即生效。',
         'settings.start': '上班时间',
@@ -94,6 +128,8 @@ window.__ModuleLoader__.load({
         'settings.float.desc': '离开对话头部，变成可拖动的浮窗；位置拖到哪记到哪',
         'settings.city': '天气城市',
         'settings.city.desc': '中文城市名，如 杭州；留空则不显示天气',
+        'settings.timeout': '请求超时（秒）',
+        'settings.timeout.desc': '直连和代理两条通道都超过这个时间才算失败，默认 30 秒',
         'settings.weather': '显示天气',
         'settings.weather.desc': '胶囊上显示当前天气与温度，悬停展开 24 小时与 3 天',
         'settings.save': '保存',
@@ -126,6 +162,8 @@ window.__ModuleLoader__.load({
         'panel.tomorrow': 'Tomorrow',
         'panel.after': 'Day after',
         'panel.feels': 'Feels',
+        'panel.refresh': 'Refresh weather',
+        'panel.error': 'Weather update failed: ',
         'panel.empty': 'No weather data yet. Set a city in settings.',
         'panel.stale': 'Weather update failed; showing the last result',
         'panel.work.start': 'Work start',
@@ -136,6 +174,8 @@ window.__ModuleLoader__.load({
         'usage.hint': 'No OpenCode Go key configured',
         'usage.loading': 'Fetching usage…',
         'usage.title': 'OpenCode Go usage',
+        'usage.refresh': 'Refresh usage',
+        'usage.error': 'Usage update failed: ',
         'fish.title': 'Knock',
         'fish.merit': 'Merit +1',
         'tube.title': 'Draw a hexagram',
@@ -168,6 +208,36 @@ window.__ModuleLoader__.load({
         'settings.volume.desc': 'Knock volume (0 = silent, animation only)',
         'settings.usage': 'Show usage',
         'settings.usage.desc': 'Show OpenCode Go usage (5h / week / month, used %) in the pill and the panel',
+        'keymap.open': 'Keyboard farm',
+        'note.title': 'Sticky note',
+        'note.ph': 'Jot something down…',
+        'note.done': 'Done',
+        'note.close': 'Close',
+        'rgb.title': 'Color converter',
+        'rgb.ph': 'Paste a picked color',
+        'rgb.bad': 'Format like 65,118,230 (what the eyedropper copies)',
+        'rgb.copy': 'Copy',
+        'rgb.copied': 'Copied',
+        'ts.title': 'Timestamp',
+        'ts.ph': 'Paste a timestamp',
+        'ts.bad': 'Digits only — seconds or milliseconds',
+        'ts.tag': 'Time',
+        'ts.unit.sec': 'Read as seconds',
+        'ts.unit.ms': 'Read as milliseconds',
+        'keymap.ripe': 'Ripe',
+        'keymap.harvest': 'Click to harvest',
+        'settings.keymap': 'Keyboard stats',
+        'settings.keyAnim': 'Plant sway',
+        'settings.keySize': 'Keyboard size',
+        'settings.keySize.desc': 'Overall size of the keyboard farm; it shrinks automatically if the screen is too narrow',
+        'settings.keySize.small': 'Small',
+        'settings.keySize.medium': 'Medium',
+        'settings.keySize.large': 'Large',
+        'settings.keyAnim.desc': 'Plants in the keyboard farm sway gently; turning it off saves a little GPU and battery',
+        'settings.keymap.desc': 'Counts key presses inside this DSH window only; stored locally as plugin config',
+        'settings.keymap.reset': 'Reset all',
+        'settings.keymap.total': 'Total',
+        'settings.keymap.confirm': 'Clear all key counts? This cannot be undone.',
         'settings.title': 'my Moyu',
         'settings.intro': 'Shows the remaining time until the end of the workday. Changes apply as soon as you save.',
         'settings.start': 'Start time',
@@ -182,6 +252,8 @@ window.__ModuleLoader__.load({
         'settings.float.desc': 'Detach from the conversation header into a draggable pill',
         'settings.city': 'Weather city',
         'settings.city.desc': 'Chinese city name, for example 杭州; leave empty to hide weather',
+        'settings.timeout': 'Request timeout (s)',
+        'settings.timeout.desc': 'Fail only when both the direct and proxied request exceed this; 30s by default',
         'settings.weather': 'Show weather',
         'settings.weather.desc': 'Current condition and temperature in the pill; hover to expand 24 hours and 3 days',
         'settings.save': 'Save',
@@ -304,12 +376,21 @@ window.__ModuleLoader__.load({
       offsetX: 16,
       offsetY: 56,
       city: '',
+      requestTimeoutSeconds: 30,
       weatherVisible: true,
       weather: null,
       usageVisible: true,
       usage: null,
       almanac: null,
       volume: 70,
+      keyStats: '',
+      keyAnim: true,
+      keySize: 'medium',
+      keyCrops: '',
+      cropStock: '',
+      notes: '',
+      keyPanelDX: 0,
+      keyPanelDY: 0,
     };
 
     // 只用 Theme 服务列出的 --dsw-alias-* 令牌：跟随亮色 / 暗色主题，不写死颜色
@@ -317,8 +398,11 @@ window.__ModuleLoader__.load({
       // —— 胶囊：状态点 + 倒计时 + 天气 ——
       // 按需求统一成纯白卡面：这套配色是本组件自带的浅色主题，不随宿主亮暗翻转，
       // 白底必须配固定的深色文字，否则暗色主题下会白字白底。
-      '.wcd-pill,.wcd-panel,.wcd-mask{--wcd-bg:#fff;--wcd-fg:#1f2328;--wcd-muted:#6b7280;',
-      '--wcd-line:#e8eaed;--wcd-hover:#f4f5f7;--wcd-blue:#4c8dff;--wcd-green:#16a34a}',
+      '.wcd-pill,.wcd-panel,.wcd-mask,.wcd-kbd-win{--wcd-bg:#fff;--wcd-fg:#1f2328;--wcd-muted:#6b7280;',
+      '--wcd-line:#e8eaed;--wcd-hover:#f4f5f7;--wcd-blue:#4c8dff;--wcd-green:#16a34a;',
+      // 键盘田园配色：土 / 叶 / 花 / 果实
+      '--wcd-soil:#d3a066;--wcd-soil-dark:#b07f4c;--wcd-leaf:#6fbf5c;--wcd-leaf-dark:#4e9a44;',
+      '--wcd-flower:#f6c445;--wcd-fruit:#ef7a3d;--wcd-plot:#f4f0e5}',
       '.wcd-pill{position:relative;display:inline-flex;align-items:center;gap:8px;height:28px;',
       'padding:0 12px;border-radius:999px;font-size:13px;line-height:20px;white-space:nowrap;',
       'color:var(--wcd-muted);background:var(--wcd-bg);border:1px solid var(--wcd-line);',
@@ -357,26 +441,34 @@ window.__ModuleLoader__.load({
       '.wcd-al-items{display:flex;flex-wrap:wrap;gap:4px;font-size:11.5px;color:var(--wcd-fg);line-height:18px}',
       '.wcd-al-item{padding:0 5px;border-radius:4px;background:var(--wcd-hover)}',
       '.wcd-usage-block{display:block}',
-      '.wcd-usage-title{font-size:12px;line-height:16px;font-weight:600;color:var(--wcd-muted);',
+      '.wcd-usage-title{display:flex;align-items:center;gap:6px;',
+      'font-size:12px;line-height:16px;font-weight:600;color:var(--wcd-muted);',
       'text-align:left;margin-bottom:10px}',
       '.wcd-usage-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;',
       'padding-bottom:10px;margin:0;border-bottom:1px solid var(--wcd-line)}',
       '.wcd-usage-row .wcd-usage-item{gap:3px}',
       '.wcd-usage-row .wcd-usage-label{font-size:12px;line-height:15px}',
-      '.wcd-fish-row{display:flex;align-items:center;justify-content:center;gap:20px;padding-top:2px}',
+      // 工具横排：一行 5 个，第 6 个起自动换到第二行（这是默认排版，用户不再单独交代）
+      // space-evenly 让「左缘-图标1」「图标之间」「图标N-右缘」的间隙全部相等
+      '.wcd-fish-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-evenly;gap:4px 0;padding-top:2px}',
+      '.wcd-fish-break{flex:0 0 100%;width:100%;height:0;margin:0;padding:0;pointer-events:none}',
       // 浮窗里的工具行由「详情页是否活着」驱动，而不是纯 :hover——
       // 这样它和详情页共用同一套 200ms 防抖，收起时两者一起淡出
       '.wcd-float > .wcd-fish-row{margin-top:0;padding-top:0;max-height:0;opacity:0;overflow:hidden;',
       'transition:max-height .16s ease,padding-top .16s ease,margin-top .16s ease,opacity .16s ease}',
-      '.wcd-float[data-expand="true"] > .wcd-fish-row{max-height:52px;padding-top:2px;margin-top:12px;opacity:1;',
+      // 两行图标的高度上限：32 + 4 + 零高分隔行 + 4 + 32 + 2 padding = 74，留 4px 余量
+      '.wcd-float[data-expand="true"] > .wcd-fish-row{max-height:78px;padding-top:2px;margin-top:12px;opacity:1;',
       // 展开后放开裁剪：功德 +1 要往上飘到三环上面，overflow:hidden 会把它切掉
       'overflow:visible}',
+      // 工具按钮统一 32×32 盒子：像素图 16×16 正好整数 2 倍放大，不会出现像素粗细不均
+      // 一行固定 5 个：靠 .wcd-fish-break 硬换行，不依赖容器宽度，图标再小也不会挤进第 6 个
       '.wcd-tool{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;',
-      'transition:transform .12s ease}',
+      'position:relative;transition:transform .12s ease;width:32px;height:32px;flex:none}',
+      '.wcd-tool-dot{position:absolute;top:-2px;right:-2px;pointer-events:none}',
       '.wcd-tool:hover{transform:translateY(-1px)}',
       '.wcd-tool:active{transform:translateY(0) scale(.96)}',
-      '.wcd-tool[data-shake="true"] svg{animation:wcd-shake .5s ease-in-out}',
-      '.wcd-tarot[data-spin="true"] svg{animation:wcd-spin .55s cubic-bezier(.32,.72,.32,1);transform-origin:50% 50%}',
+      '.wcd-tool[data-shake="true"] svg,.wcd-tool[data-shake="true"] img{animation:wcd-shake .5s ease-in-out}',
+      '.wcd-tarot[data-spin="true"] svg,.wcd-tarot[data-spin="true"] img{animation:wcd-spin .55s cubic-bezier(.32,.72,.32,1);transform-origin:50% 50%}',
       '@keyframes wcd-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}',
       '@keyframes wcd-shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg)}',
       '45%{transform:rotate(6deg)}70%{transform:rotate(-3deg)}}',
@@ -394,12 +486,59 @@ window.__ModuleLoader__.load({
       '@keyframes wcd-merit-fade{0%{opacity:0}20%{opacity:1}100%{opacity:0}}',
       '@media (prefers-reduced-motion:reduce){.wcd-merit{animation:wcd-merit-fade .9s ease-out forwards}}',
       '.wcd-fish{display:inline-flex;cursor:pointer;-webkit-tap-highlight-color:transparent}',
-      '.wcd-tool svg{display:block}',
-      '.wcd-fish svg{transform-origin:50% 85%}',
-      '.wcd-fish[data-bonk="true"] svg{animation:wcd-bonk .26s cubic-bezier(.2,.9,.3,1)}',
+      '.wcd-tool svg,.wcd-tool img{display:block}',
+      // 图标铺满盒子；红点是绝对定位的小圆，不能被撑成 32×32
+      '.wcd-tool > svg:not(.wcd-tool-dot),.wcd-tool > img{width:100%;height:100%}',
+      '.wcd-tool .wcd-tool-dot{width:10px;height:10px}',
+      // 便笺层：整层不吃鼠标事件，只有便笺本体接收；层级在主面板之上、弹窗之下
+      '.wcd-note-layer{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:44}',
+      '.wcd-note{position:absolute;width:240px;pointer-events:auto;box-sizing:border-box;',
+      'background:#fff6bf;border:1px solid #ecd98d;border-radius:10px;',
+      // 阴影跟主面板同一档（.07），便笺小、叠在内容上，收紧模糊半径别让它看着比面板还重
+      'box-shadow:0 10px 20px rgba(15,23,42,.07);display:flex;flex-direction:column;overflow:hidden}',
+      '.wcd-note-head{position:relative;height:26px;flex:none;display:flex;align-items:center;justify-content:center;',
+      'cursor:grab;touch-action:none;border-bottom:1px solid rgba(196,168,74,.22)}',
+      '.wcd-note-head:active{cursor:grabbing}',
+      '.wcd-note-grip{display:flex;flex-direction:column;align-items:center;gap:2px}',
+      '.wcd-note-grip-bar{display:block;width:14px;height:1.5px;border-radius:1px;background:rgba(120,96,30,.45)}',
+      '.wcd-note-close{position:absolute;right:3px;top:2px;width:21px;height:21px;border:0;padding:0;',
+      'background:transparent;color:#a08a4a;font-size:15px;line-height:21px;cursor:pointer;border-radius:6px}',
+      '.wcd-note-close:hover{background:rgba(160,138,74,.16);color:#7a6528}',
+      '.wcd-note-body{width:100%;box-sizing:border-box;border:0;background:transparent;resize:none;overflow:hidden;',
+      'padding:6px 11px 12px;font:inherit;font-size:12.5px;line-height:19px;color:#5b4a1d;outline:none;min-height:52px;',
+      'font-family:inherit}',
+      '.wcd-note-body::placeholder{color:rgba(120,96,30,.4)}',
+      // —— 颜色转换小窗：屏幕正中的小卡片，输入 QQ 截图吸到的 r,g,b ——
+      '.wcd-rgb{box-sizing:border-box;width:300px;max-width:calc(100vw - 32px);padding:16px 18px 14px;',
+      'border-radius:16px;background:var(--wcd-bg);border:1px solid var(--wcd-line);',
+      'box-shadow:0 20px 48px rgba(15,23,42,.28);color:var(--wcd-fg);cursor:default;animation:wcd-pop .18s ease-out}',
+      '.wcd-rgb-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}',
+      '.wcd-rgb-title{font-size:13px;font-weight:600}',
+      '.wcd-rgb-close{width:22px;height:22px;border:none;background:transparent;color:var(--wcd-muted);font-size:16px;',
+      'line-height:1;cursor:pointer;border-radius:6px;padding:0}',
+      '.wcd-rgb-close:hover{background:var(--wcd-hover);color:var(--wcd-fg)}',
+      '.wcd-rgb-top{display:flex;align-items:center;gap:8px}',
+      '.wcd-rgb-input{flex:1;min-width:0;box-sizing:border-box;height:32px;padding:0 9px;border-radius:8px;',
+      'border:1px solid var(--wcd-line);background:var(--wcd-hover);color:var(--wcd-fg);font-size:13px;',
+      'font-family:inherit;font-variant-numeric:tabular-nums;outline:none}',
+      '.wcd-rgb-input:focus{border-color:var(--wcd-blue)}',
+      '.wcd-rgb-chip{width:32px;height:32px;flex:none;border-radius:8px;border:1px solid var(--wcd-line)}',
+      '.wcd-rgb-row{display:flex;align-items:center;gap:8px;margin-top:9px}',
+      '.wcd-rgb-tag{flex:none;width:32px;font-size:11px;color:var(--wcd-muted)}',
+      '.wcd-rgb-val{flex:1;min-width:0;font-size:12.5px;font-variant-numeric:tabular-nums;',
+      'overflow:hidden;text-overflow:ellipsis;white-space:nowrap}',
+      '.wcd-rgb-val[data-empty="true"]{color:var(--wcd-muted)}',
+      '.wcd-rgb-copy{flex:none;height:24px;padding:0 9px;border-radius:7px;border:1px solid var(--wcd-line);',
+      'background:transparent;color:var(--wcd-fg);font-size:11.5px;cursor:pointer}',
+      '.wcd-rgb-copy:hover{background:var(--wcd-hover)}',
+      '.wcd-rgb-copy[data-done="true"]{color:#2f9e44;border-color:rgba(47,158,68,.5)}',
+      '.wcd-rgb-bad{margin-top:8px;font-size:11px;line-height:15px;color:#d14343}',
+      '.wcd-ts-unit{margin-top:7px;font-size:11px;line-height:15px;color:var(--wcd-muted)}',
+      '.wcd-fish svg,.wcd-fish img{transform-origin:50% 85%}',
+      '.wcd-fish[data-bonk="true"] svg,.wcd-fish[data-bonk="true"] img{animation:wcd-bonk .26s cubic-bezier(.2,.9,.3,1)}',
       '@keyframes wcd-bonk{0%{transform:scale(1)}28%{transform:scale(.85) translateY(2px)}',
       '62%{transform:scale(1.08) translateY(-2px)}100%{transform:scale(1)}}',
-      '@media (prefers-reduced-motion:reduce){.wcd-fish[data-bonk="true"] svg{animation:none}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-fish[data-bonk="true"] svg,.wcd-fish[data-bonk="true"] img{animation:none}}',
       '.wcd-usage-hint{display:block;font-size:11px;color:var(--wcd-muted);text-align:center;',
       'overflow:hidden;text-overflow:ellipsis;white-space:nowrap;',
       'padding:4px 0 10px;margin:0;border-bottom:1px solid var(--wcd-line)}',
@@ -407,7 +546,7 @@ window.__ModuleLoader__.load({
       '.wcd-float{position:fixed;z-index:30;pointer-events:auto;cursor:default;touch-action:none;',
       'box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;gap:0;',
       'width:240px;height:auto;padding:16px 12px 10px;border-radius:14px;',
-      'border:1px solid var(--wcd-line);box-shadow:0 10px 36px rgba(15,23,42,.05)}',
+      'border:1px solid var(--wcd-line);box-shadow:0 10px 24px rgba(15,23,42,.07)}',
       // 顶部拖拽把手：只在浮窗形态里出现，hover 淡入；拖动只认这一小块
       '.wcd-grip{position:absolute;top:3px;left:50%;width:40px;height:12px;transform:translateX(-50%);',
       'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;',
@@ -417,20 +556,42 @@ window.__ModuleLoader__.load({
       '.wcd-float[data-dragging="true"] .wcd-grip{cursor:grabbing}',
       // 第二行：三环三等分整行
       '.wcd-float .wcd-usage{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:0;margin-top:12px}',
-      '.wcd-float:hover,.wcd-float[data-open="true"]{box-shadow:0 14px 46px rgba(15,23,42,.07)}',
-      '.wcd-float[data-dragging="true"]{box-shadow:0 18px 54px rgba(15,23,42,.09)}',
+      '.wcd-float:hover,.wcd-float[data-open="true"]{box-shadow:0 14px 31px rgba(15,23,42,.07)}',
+      '.wcd-float[data-dragging="true"]{box-shadow:0 18px 36px rgba(15,23,42,.07)}',
       // —— 详情面板：同一张白卡的下半部分 ——
       '.wcd-panel{position:fixed;z-index:40;box-sizing:border-box;padding:12px 14px;border-radius:14px;',
       'background:var(--wcd-bg);border:1px solid var(--wcd-line);',
-      'box-shadow:0 20px 56px rgba(15,23,42,.07);color:var(--wcd-fg);font-size:13px;line-height:1.45;',
+      'box-shadow:0 20px 37px rgba(15,23,42,.07);color:var(--wcd-fg);font-size:13px;line-height:1.45;',
       'user-select:none;-webkit-user-select:none;cursor:default;animation:wcd-pop .14s ease-out}',
       '@keyframes wcd-pop{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}',
+      // 关闭：蒙版淡出、卡片往回缩一点，方向和时间都跟打开对称
+      '.wcd-mask[data-closing="true"]{animation:wcd-fade-out .16s ease-in forwards;pointer-events:none}',
+      '.wcd-mask[data-closing="true"] > *{animation:wcd-pop-out .16s ease-in forwards}',
+      '@keyframes wcd-pop-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-4px)}}',
       // 淡出：先挂 data-out 播完动画再卸载，不做「瞬间消失」
       '.wcd-panel[data-out="true"]{animation:wcd-fade-out .16s ease-in forwards;pointer-events:none}',
       '@keyframes wcd-fade-out{from{opacity:1}to{opacity:0}}',
       '@media (prefers-reduced-motion:reduce){.wcd-panel,.wcd-panel[data-out="true"]{animation:none}}',
       // 块间距统一：相邻块之间只靠 margin-top 10px，块自身不再写 margin-bottom
       '.wcd-panel > * + *{margin-top:10px}',
+      // 手动刷新按钮：两个半圆弧箭头，转圈表示请求还在飞
+      // 对勾和按钮包在一组里：组靠右，对勾自然落在按钮左边
+      '.wcd-refresh-group{display:inline-flex;align-items:center;gap:2px;flex:none;margin-left:auto}',
+      '.wcd-refresh{flex:none;display:inline-flex;align-items:center;justify-content:center;',
+      'width:18px;height:18px;padding:0;border:0;border-radius:5px;background:transparent;',
+      'color:var(--wcd-muted);cursor:pointer;transition:background-color .16s ease,color .16s ease}',
+      '.wcd-refresh:hover{background:var(--wcd-hover);color:var(--wcd-fg)}',
+      '.wcd-refresh:active{color:var(--wcd-blue)}',
+      '.wcd-panel-head .wcd-refresh-group{margin-right:-2px}',
+      // 刷新成功：按钮左侧一枚绿色对勾，一秒后由组件卸载掉
+      '.wcd-refresh-ok{color:#2f9e44;animation:wcd-ok-pop .22s ease-out}',
+      '@keyframes wcd-ok-pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-refresh-ok{animation:none}}',
+      '.wcd-refresh[data-spin="true"] .wcd-refresh-ico{animation:wcd-refresh-spin .9s linear infinite}',
+      '@keyframes wcd-refresh-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-refresh[data-spin="true"] .wcd-refresh-ico{animation:none}}',
+      // 宿主写下的失败原因：红字一行，成功后 error 变空自动消失
+      '.wcd-err{font-size:11px;line-height:15px;color:#d14343;margin-top:5px;word-break:break-word}',
       '.wcd-panel-head{display:flex;align-items:center;gap:6px;',
       'white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
       '.wcd-city{font-weight:600;color:var(--wcd-fg)}',
@@ -474,6 +635,99 @@ window.__ModuleLoader__.load({
       '.wcd-day-wx{font-size:12px;color:var(--wcd-muted)}',
       '.wcd-empty{padding:16px 0 6px;text-align:center;color:var(--wcd-muted)}',
       '.wcd-stale{font-size:11px;color:#b45309}',
+      // 键盘入口（详情面板底部，面板保持 320 宽不撑肿）
+      // 独立键盘浮窗：右下角常驻，24px 格子，够放五位数
+      '.wcd-kbd-wrap{position:fixed;right:24px;bottom:24px;z-index:45}',
+      // 键盘底部：每种作物的库存，横向排开（在田埂内部，不另起背景）
+      '.wcd-stock{display:flex;align-items:center;justify-content:center;gap:18px;padding:0}',
+      '.wcd-stock-item{display:inline-flex;align-items:center;gap:5px;font-size:12px;line-height:1;color:#3d4a33}',
+      '.wcd-stock-emoji{font-size:14px;line-height:1}',
+      '.wcd-stock-num{font-variant-numeric:tabular-nums;font-weight:600;color:#2f3d27}',
+      '.wcd-kbd-win{position:relative;box-sizing:border-box;max-width:calc(100vw - 48px);',
+      'padding:24px 22px 22px;border:0;background:transparent;color:var(--wcd-fg);',
+      'user-select:none;-webkit-user-select:none;transform-origin:bottom right;',
+      'animation:wcd-fade .16s ease-out}',
+      // 关闭按钮：absolute 落在小键盘第一行最右列的空位
+      '.wcd-kbd-close{position:absolute;z-index:3;top:44px;right:38px;width:24px;height:24px;border:0;border-radius:8px;',
+      'background:transparent;color:var(--wcd-muted);font-size:18px;line-height:1;cursor:pointer}',
+      '.wcd-kbd-close:hover{background:var(--wcd-hover);color:var(--wcd-fg)}',
+      // 拖动把手：在叉号左边一格，三横线，按住拖整块浮窗
+      '.wcd-kbd-grip{position:absolute;z-index:3;top:44px;right:69px;width:24px;height:24px;border-radius:8px;',
+      'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;',
+      'cursor:grab;color:var(--wcd-muted);touch-action:none}',
+      '.wcd-kbd-grip:hover{background:var(--wcd-hover);color:var(--wcd-fg)}',
+      '.wcd-kbd-grip:active{cursor:grabbing}',
+      '.wcd-kbd-grip-bar{display:block;width:12px;height:1.5px;border-radius:1px;background:currentColor}',
+      '.wcd-keymap{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;overflow:visible;',
+      'padding:12px 12px 14px;background:#e9f1dc;border:1px solid #d9e5c7;border-radius:12px;',
+      'box-shadow:0 18px 48px rgba(15,23,42,.12)}',
+      '.wcd-kb-rows{display:flex;gap:12px;align-items:flex-start}',
+      // 主键区：容器宽固定 15 单位；特殊键定宽、其余键 flex:1 均分，六行左右两端都齐
+      '.wcd-kb-main{--u:30px;width:calc(var(--u) * 15 + 14 * 3px);display:flex;flex-direction:column;gap:3px}',
+      '.wcd-kb-row{display:flex;gap:3px;width:100%}',
+      // 辅助区与小键盘：严格 grid，列宽固定
+      '.wcd-kb-nav{display:grid;grid-template-columns:repeat(3,32px);grid-auto-rows:40px;gap:3px}',
+      '.wcd-kb-pad{display:grid;grid-template-columns:repeat(4,32px);grid-auto-rows:40px;gap:3px}',
+      '.wcd-key{flex:1 1 0;min-width:0;height:40px;border-radius:6px;background:var(--wcd-plot);',
+      'display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;',
+      'overflow:hidden;box-sizing:border-box;font-variant-numeric:tabular-nums}',
+      '.wcd-key-ghost,.wcd-key-ghost[data-on="true"]{background:transparent}',
+      // grid 区里的键交给单元格拉伸：跨行的 + 和回车才能真正占满两行
+      '.wcd-kb-nav .wcd-key,.wcd-kb-pad .wcd-key{height:auto;min-height:40px}',
+      // 每一格 = 一块立方体土地：下层是前壁（放键名），上层是土壤面（作物种在上面）
+      '.wcd-key.wcd-plot{display:block;position:relative;overflow:visible;background:transparent;',
+      'cursor:pointer;border-radius:6px;transition:box-shadow .15s ease}',
+      '.wcd-key.wcd-plot:hover{z-index:20;box-shadow:0 3px 8px rgba(0,0,0,.14)}',
+      // 果冻：移入轻弹一下，按下幅度更大
+      '@keyframes wcd-jelly-soft{0%{transform:scale(1)}35%{transform:scale(1.05)}70%{transform:scale(.99)}100%{transform:scale(1)}}',
+      '@keyframes wcd-jelly{0%{transform:scale(1)}25%{transform:scale(.9)}55%{transform:scale(1.08)}80%{transform:scale(.97)}100%{transform:scale(1)}}',
+      '.wcd-plot:hover{animation:wcd-jelly-soft .28s ease}',
+      '.wcd-plot:active{animation:wcd-jelly .36s cubic-bezier(.2,.9,.3,1)}',
+      // 自定义气泡提示（不用原生 title）
+      '.wcd-plot::after{content:attr(data-tip);position:absolute;left:50%;top:100%;transform:translateX(-50%);',
+      'margin-top:4px;background:rgba(28,24,18,.92);color:#fff;font-size:10px;line-height:14px;',
+      'padding:2px 6px;border-radius:5px;white-space:nowrap;pointer-events:none;opacity:0;z-index:5}',
+      '.wcd-plot:hover::after{opacity:1}',
+      '.wcd-key-ghost::after{display:none}',
+      '.wcd-plot-side{position:absolute;left:0;right:0;top:calc(100% - 18px);bottom:0;border-radius:0 0 6px 6px;',
+      'background:var(--plot-side,#8a6642)}',
+      '.wcd-plot-top{position:absolute;left:0;right:0;top:0;height:calc(100% - 12px);border-radius:6px;',
+      'background-color:var(--plot-top,#ccd89a);',
+      // 底部一条 6px 深绿边框 = 草根与土层的分界（草地的厚度感）
+      'box-shadow:inset 0 -6px 0 color-mix(in srgb, var(--plot-top,#ccd89a) 55%, #2c5a22)}',
+      // 作物画布统一 30x60、根统一落在画布底部；整体上移到土壤面中心（上移上层高度的 50%）
+      // 固定 30x66 的渲染尺寸，宽键（空格、0）也按同一比例画，所有植物一样大
+      '.wcd-sway{position:absolute;left:50%;bottom:calc(6px + 50%);width:30px;height:66px;',
+      'transform:translateX(calc(-50% + var(--cx,0px))) translateY(var(--cy,0px)) var(--flip,scaleX(1));',
+      'pointer-events:none;z-index:4}',
+      '.wcd-crop{display:block;width:100%;height:100%;transform-origin:50% 100%;animation:none}',
+      // 只有开启动画时才有名字；具体周期/延时由每格的 inline style 错开
+      // 满级植物：金色光晕呼吸，提醒可以点击收获
+      '.wcd-sway[data-ripe="true"]{animation:wcd-ripe-pulse 2.4s ease-in-out infinite}',
+      '@keyframes wcd-ripe-pulse{',
+      '0%,100%{filter:drop-shadow(0 0 3px rgba(255,204,51,.75)) drop-shadow(0 0 1px rgba(255,242,160,.7))}',
+      '50%{filter:drop-shadow(0 0 11px rgba(255,204,51,1)) drop-shadow(0 0 3px rgba(255,246,190,.95))}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-sway[data-ripe="true"]{animation:none;',
+      'filter:drop-shadow(0 0 6px rgba(255,204,51,.9)) drop-shadow(0 0 2px rgba(255,246,190,.8))}}',
+      '.wcd-kbd-win[data-anim="true"] .wcd-crop{animation-name:wcd-sway-tilt;',
+      'animation-iteration-count:infinite;animation-timing-function:ease-in-out}',
+      '@keyframes wcd-sway-tilt{',
+      '0%,100%{transform:rotate(calc(-1 * var(--amp,1.8deg)))}50%{transform:rotate(var(--amp,1.8deg))}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-crop{animation:none !important}}',
+      // 田埂外的小装饰：只做氛围，不吃鼠标
+      '.wcd-kbd-deco{position:absolute;inset:0;pointer-events:none}',
+      '.wcd-deco{position:absolute;display:block}',
+      '.wcd-deco-grass{left:22px;top:4px;width:34px;height:30px;z-index:2}',
+      // 栅栏 + 稻草人：卡在右上角，下半截被田埂盖住
+      '.wcd-deco-farm{right:10px;top:-6px;width:84px;height:50px}',
+      '.wcd-plot-key{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);z-index:3;',
+      'font-size:9px;line-height:10px;color:#fff;font-weight:700;pointer-events:none;white-space:nowrap;',
+      'text-shadow:0 1px 1px rgba(0,0,0,.28)}',
+      // 满级：键名换「可收获」，纯金色文字，不发光、不带动画
+      '.wcd-plot-key[data-ripe="true"]{color:#e8b31e;font-size:7.5px;letter-spacing:-.2px}',
+      '.wcd-nav-deco{position:relative;overflow:hidden;border-radius:6px}',
+      '.wcd-nav-svg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:100%;height:100%;display:block}',
+      '.wcd-sprite{position:absolute;width:0;height:0;overflow:hidden}',
       // —— 卦象弹窗 ——
       '.wcd-mask{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;',
       'background:rgba(15,23,42,.28);animation:wcd-fade .16s ease-out}',
@@ -527,7 +781,7 @@ window.__ModuleLoader__.load({
       '.wcd-tarot-img[data-rev="true"]{transform:rotate(180deg)}',
       '.wcd-gua-foot{margin-top:14px;padding-top:10px;border-top:1px solid var(--wcd-line);',
       'font-size:11px;color:var(--wcd-muted);text-align:center}',
-      '@media (prefers-reduced-motion:reduce){.wcd-mask,.wcd-gua{animation:none}}',
+      '@media (prefers-reduced-motion:reduce){.wcd-mask,.wcd-gua,.wcd-mask[data-closing="true"],.wcd-mask[data-closing="true"] > *{animation:none}}',
       // —— 设置页 ——
       '.wcd-form{display:flex;flex-direction:column;gap:18px;max-width:560px}',
       '.wcd-head{display:flex;flex-direction:column;gap:4px}',
@@ -668,12 +922,21 @@ window.__ModuleLoader__.load({
         offsetX: toNumber(v.offsetX, FALLBACK.offsetX),
         offsetY: toNumber(v.offsetY, FALLBACK.offsetY),
         city: typeof v.city === 'string' ? v.city : '',
+        requestTimeoutSeconds: clamp(toNumber(v.requestTimeoutSeconds, 30), 5, 120),
         weatherVisible: v.weatherVisible !== false,
         weather: normalizeWeather(v.weather),
         usageVisible: v.usageVisible !== false,
         almanac: normalizeAlmanac(v.almanac),
         usage: normalizeUsage(v.usage),
         volume: clamp(toNumber(v.volume, 70), 0, 100),
+        keyStats: typeof v.keyStats === 'string' ? v.keyStats : '',
+        keyAnim: v.keyAnim !== false,
+        keySize: v.keySize === 'small' || v.keySize === 'large' ? v.keySize : 'medium',
+        keyCrops: typeof v.keyCrops === 'string' ? v.keyCrops : '',
+        cropStock: typeof v.cropStock === 'string' ? v.cropStock : '',
+        notes: typeof v.notes === 'string' ? v.notes : '',
+        keyPanelDX: toNumber(v.keyPanelDX, 0),
+        keyPanelDY: toNumber(v.keyPanelDY, 0),
       };
     }
 
@@ -687,8 +950,11 @@ window.__ModuleLoader__.load({
         showSeconds: cfg.showSeconds,
         float: cfg.float,
         city: cfg.city,
+        requestTimeoutSeconds: cfg.requestTimeoutSeconds,
         weatherVisible: cfg.weatherVisible,
         usageVisible: cfg.usageVisible,
+        keyAnim: cfg.keyAnim,
+        keySize: cfg.keySize,
         volume: cfg.volume,
       };
     }
@@ -784,6 +1050,254 @@ window.__ModuleLoader__.load({
           if (!retried && /revision|conflict/i.test(msg)) persistOffsets(ctx, offsetX, offsetY, true);
         }).catch(function () { /* 位置没记住不影响本次拖动 */ });
       }).catch(function () { /* 读不到配置就只移动这一次 */ });
+    }
+
+    // —— 键盘统计：只数 DSH 窗口内的按键，按 event.code 累计，节流写回配置 ——
+    var KEY_STATS = {};
+    var KEY_STATS_DIRTY = false;
+    var KEY_STATS_LOADED = false;
+    // 每格植物的外观（作物/翻转/偏移/幅度）：第一次按下时随机定下，与次数一起持久化
+    var KEY_LOOKS = {};
+    var LOOKS_DIRTY = false;
+    // 满级阈值：到了就能收获，主面板入口挂红点提醒
+    var RIPE_AT = 1000;
+
+    // 每种作物的库存：跨会话累计，键盘底部和设置页都读这里
+    var CROP_STOCK = {};
+    var STOCK_DIRTY = false;
+
+    function parseStock(raw) {
+      var map = parseCrops(raw);
+      var out = {};
+      for (var k in map) {
+        var n = Number(map[k]) || 0;
+        if (CROP_KINDS.indexOf(k) >= 0 && n > 0) out[k] = Math.floor(n);
+      }
+      return out;
+    }
+
+    function addStock(crop, n) {
+      if (CROP_KINDS.indexOf(crop) < 0) return;
+      CROP_STOCK[crop] = (CROP_STOCK[crop] || 0) + Math.max(1, Math.floor(Number(n) || 1));
+      STOCK_DIRTY = true;
+    }
+
+    function stockTotal() {
+      var sum = 0;
+      for (var k in CROP_STOCK) sum += Number(CROP_STOCK[k]) || 0;
+      return sum;
+    }
+
+    // —— 便笺 ——
+    // 每张便笺自己记 id / 正文 / 固定定位的 left,top；改一次写一次配置（打字节流 500ms）
+    var NOTES = [];
+    var NOTES_LOADED = false;
+    var NOTES_DIRTY = false;
+    var NOTES_TIMER = null;
+    var NOTE_SUBS = [];
+
+    function noteId() {
+      return 'n' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    }
+
+    function noteNotify() {
+      for (var i = 0; i < NOTE_SUBS.length; i++) {
+        try {
+          NOTE_SUBS[i]();
+        } catch (e) {
+          /* 某个订阅者挂了不影响别人 */
+        }
+      }
+    }
+
+    function parseNotes(raw) {
+      if (typeof raw !== 'string' || raw === '') return [];
+      try {
+        var arr = JSON.parse(raw);
+        if (!Array.isArray(arr)) return [];
+        var out = [];
+        for (var i = 0; i < arr.length; i++) {
+          var it = arr[i];
+          if (!it || typeof it !== 'object' || typeof it.id !== 'string') continue;
+          out.push({
+            id: it.id,
+            text: typeof it.text === 'string' ? it.text : '',
+            x: Number(it.x) || 0,
+            y: Number(it.y) || 0,
+          });
+        }
+        return out;
+      } catch (e) {
+        return [];
+      }
+    }
+
+    // 便笺写入走和统计同一套 revision 重试
+    function persistNotes(ctx, json, retried) {
+      describeNamespace(ctx).then(function (hit) {
+        if (!hit) return;
+        var remote = getRemote(ctx);
+        if (!remote || !remote.settings || typeof remote.settings.update !== 'function') return;
+        remote.settings.update(NS, { notes: json }, hit.revision).then(function (res) {
+          if (res && res.ok) return;
+          var msg = (res && res.error && res.error.message) || '';
+          if (!retried && /revision|conflict/i.test(msg)) persistNotes(ctx, json, true);
+        }).catch(function () { /* 没存上就等下一次改动再写 */ });
+      }).catch(function () { /* 配置读不到就只在内存里 */ });
+    }
+
+    function flushNotes(ctx) {
+      if (!NOTES_DIRTY || !NOTES_LOADED) return;
+      NOTES_DIRTY = false;
+      persistNotes(ctx, JSON.stringify(NOTES), false);
+    }
+
+    // 打字时别一个字符写一次盘
+    function scheduleFlushNotes(ctx) {
+      if (NOTES_TIMER) clearTimeout(NOTES_TIMER);
+      NOTES_TIMER = setTimeout(function () {
+        NOTES_TIMER = null;
+        flushNotes(ctx);
+      }, 500);
+    }
+
+    // 主面板点一次就新建一张，位置错开叠放
+    function addNote(ctx) {
+      var win = typeof window !== 'undefined' ? window : null;
+      var vw = (win && win.innerWidth) || 1280;
+      var vh = (win && win.innerHeight) || 800;
+      var step = (NOTES.length % 6) * 22;
+      NOTES.push({
+        id: noteId(),
+        text: '',
+        x: Math.max(12, Math.round(vw / 2 - 120 + step)),
+        y: Math.max(56, Math.round(vh / 2 - 140 + step)),
+      });
+      NOTES_DIRTY = true;
+      noteNotify();
+      flushNotes(ctx);
+    }
+
+    function findNote(id) {
+      for (var i = 0; i < NOTES.length; i++) {
+        if (NOTES[i].id === id) return NOTES[i];
+      }
+      return null;
+    }
+
+    function setNoteText(ctx, id, text) {
+      var n = findNote(id);
+      if (!n || n.text === text) return;
+      n.text = text;
+      NOTES_DIRTY = true;
+      scheduleFlushNotes(ctx);
+    }
+
+    function setNotePos(ctx, id, x, y) {
+      var n = findNote(id);
+      if (!n || (n.x === x && n.y === y)) return;
+      n.x = x;
+      n.y = y;
+      NOTES_DIRTY = true;
+      flushNotes(ctx);
+    }
+
+    // × 表示这件事办完：直接把这张便笺扔掉
+    function doneNote(ctx, id) {
+      for (var i = 0; i < NOTES.length; i++) {
+        if (NOTES[i].id !== id) continue;
+        NOTES.splice(i, 1);
+        NOTES_DIRTY = true;
+        noteNotify();
+        flushNotes(ctx);
+        return;
+      }
+    }
+
+    function keyStatsHasRipe() {
+      for (var k in KEY_STATS) {
+        if (Number(KEY_STATS[k]) >= RIPE_AT) return true;
+      }
+      return false;
+    }
+
+    function parseKeyStats(raw) {
+      if (typeof raw !== 'string' || raw === '') return {};
+      try {
+        var obj = JSON.parse(raw);
+        return obj && typeof obj === 'object' ? obj : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    // 与拖动回写同一套 revision 重试；失败只是这一次没存上
+    function persistKeyStats(ctx, json, looksJson, stockJson, retried) {
+      describeNamespace(ctx).then(function (hit) {
+        if (!hit) return;
+        var remote = getRemote(ctx);
+        if (!remote || !remote.settings || typeof remote.settings.update !== 'function') return;
+        remote.settings.update(NS, { keyStats: json, keyCrops: looksJson, cropStock: stockJson }, hit.revision).then(function (res) {
+          if (res && res.ok) return;
+          var msg = (res && res.error && res.error.message) || '';
+          if (!retried && /revision|conflict/i.test(msg)) persistKeyStats(ctx, json, looksJson, stockJson, true);
+        }).catch(function () { /* 没存上不影响当前统计 */ });
+      }).catch(function () { /* 配置读不到就只在内存里累计 */ });
+    }
+
+    function flushKeyStats(ctx) {
+      if (!KEY_STATS_DIRTY && !LOOKS_DIRTY && !STOCK_DIRTY) return;
+      // 历史数据还没读回来就先不写，否则会把之前的累计覆盖掉
+      if (!KEY_STATS_LOADED) return;
+      KEY_STATS_DIRTY = false;
+      LOOKS_DIRTY = false;
+      STOCK_DIRTY = false;
+      persistKeyStats(ctx, JSON.stringify(KEY_STATS), JSON.stringify(KEY_LOOKS), JSON.stringify(CROP_STOCK), false);
+    }
+
+    // 定时器被系统睡眠打断时，客户端会写这个字段让宿主补刷
+    function persistPing(ctx, retried) {
+      describeNamespace(ctx).then(function (hit) {
+        if (!hit) return;
+        var remote = getRemote(ctx);
+        if (!remote || !remote.settings || typeof remote.settings.update !== 'function') return;
+        remote.settings.update(NS, { ping: String(Date.now()) }, hit.revision).then(function (res) {
+          if (res && res.ok) return;
+          var msg = (res && res.error && res.error.message) || '';
+          if (!retried && /revision|conflict/i.test(msg)) persistPing(ctx, true);
+        }).catch(function () { /* 补刷失败不影响渲染 */ });
+      }).catch(function () {});
+    }
+
+    // 键盘浮窗拖动结束后回写偏移；和拖动胶囊一样带 revision 重试
+    function persistKeyPanel(ctx, dx, dy, retried) {
+      describeNamespace(ctx).then(function (hit) {
+        if (!hit) return;
+        var remote = getRemote(ctx);
+        if (!remote || !remote.settings || typeof remote.settings.update !== 'function') return;
+        remote.settings.update(NS, { keyPanelDX: dx, keyPanelDY: dy }, hit.revision).then(function (res) {
+          if (res && res.ok) return;
+          var msg = (res && res.error && res.error.message) || '';
+          if (!retried && /revision|conflict/i.test(msg)) persistKeyPanel(ctx, dx, dy, true);
+        }).catch(function () { /* 没记住也不影响本次拖动 */ });
+      }).catch(function () { /* 读不到配置就只移动这一次 */ });
+    }
+
+    function keyStatsTotal() {
+      var n = 0;
+      for (var k in KEY_STATS) n += Number(KEY_STATS[k]) || 0;
+      return n;
+    }
+
+    // 清空统计（设置页的重置按钮用）
+    function resetKeyStats(ctx) {
+      KEY_STATS = {};
+      KEY_LOOKS = {};
+      CROP_STOCK = {};
+      KEY_STATS_DIRTY = true;
+      LOOKS_DIRTY = true;
+      STOCK_DIRTY = true;
+      flushKeyStats(ctx);
     }
 
     // 天气码 → 本地化文案
@@ -979,74 +1493,39 @@ window.__ModuleLoader__.load({
     var knockNoise = null;
 
     // 木鱼 + 敲棍：渐变木色、鱼口阴线、木纹、底部投影
-    function FishIcon() {
-      return h(
-        "svg",
-        { viewBox: "0 0 56 32", width: 44, height: 44, "aria-hidden": true, focusable: false },
-        h(
-          "defs",
-          null,
-          h(
-            "linearGradient",
-            { id: "wcdWood", x1: "0", y1: "0", x2: "0", y2: "1" },
-            h("stop", { offset: "0", stopColor: "#DEAC76" }),
-            h("stop", { offset: "1", stopColor: "#A9713C" }),
-          ),
-          h(
-            "linearGradient",
-            { id: "wcdWoodHead", x1: "0", y1: "0", x2: "1", y2: "1" },
-            h("stop", { offset: "0", stopColor: "#E8B984" }),
-            h("stop", { offset: "1", stopColor: "#C08A50" }),
-          ),
-        ),
-        h("ellipse", { cx: 28, cy: 28.6, rx: 15.5, ry: 1.9, fill: "#000", opacity: 0.07 }),
-        h("path", {
-          d: "M9.5 23.4C9.5 13.8 16.8 7.6 27 7.6c10.2 0 17.4 6.2 17.4 15.8 0 2.3-1.7 3.6-4.4 3.6H13.9c-2.7 0-4.4-1.3-4.4-3.6Z",
-          fill: "url(#wcdWood)",
-        }),
-        h("path", {
-          d: "M12.6 19.4c2.6-6 9.2-9 17.2-8.6",
-          stroke: "#F0CB9B", strokeWidth: 2, fill: "none", strokeLinecap: "round", opacity: 0.5,
-        }),
-        h("path", {
-          d: "M14.6 21.2c4.4-4.6 22-4.6 26.4 0",
-          stroke: "#6C3F1D", strokeWidth: 2.4, fill: "none", strokeLinecap: "round", opacity: 0.9,
-        }),
-        h("path", {
-          d: "M18.5 24.6c5.6-1.6 12.4-1.6 18 0",
-          stroke: "#8C5A2B", strokeWidth: 1, fill: "none", opacity: 0.25,
-        }),
-        h("path", {
-          d: "M20.5 26.6c4.6-1.1 10.2-1.1 14.8 0",
-          stroke: "#8C5A2B", strokeWidth: 1, fill: "none", opacity: 0.18,
-        }),
-        h("circle", { cx: 46.6, cy: 16.4, r: 3.1, fill: "#B9803F" }),
-        h("circle", { cx: 46.6, cy: 15.6, r: 1.5, fill: "#DCA972", opacity: 0.7 }),
-        h("path", { d: "M30.4 8.6 45.6 3.2", stroke: "#C08A50", strokeWidth: 2.8, strokeLinecap: "round" }),
-        h("ellipse", { cx: 28.6, cy: 9.6, rx: 4.4, ry: 3.9, fill: "url(#wcdWoodHead)" }),
-        h("ellipse", { cx: 27.4, cy: 8.4, rx: 1.6, ry: 1.2, fill: "#F0CB9B", opacity: 0.55 }),
-      );
-    }
+        // 七个工具图标：用户自绘 16×16 像素 PNG，转成 data URI 内联。
+    // 客户端模块没有可用的插件目录 URL（页面里没有独立请求），只能内联。
+    var ICON_BUTTON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABqUlEQVR4AYyQu0vDUBTGvyqJVvCBD7AgIj4QUXQQHBRxcRNxVMFR3BRxc1fxT5Di4FREXDq0XboIdlBw0RYdbKUtClKLjxapbfV6v6QJSWvBkN+95xzO+eXm1qDqowqgnMrmKgJVfOxvgjxMd8JAF9olfwj0YbalfcfcTCgql5QJqg/TojS0crNhEahiLRAHv0psXZZkbNEtM96N3ORbEujDMsdNmqsdfpn1nfAncjUqBpePZIMukQJVzPuSsgBEbh/hzArcxwWCiYJJ4O4Z/vd6rYdLobEevWu8H1VIAUs6xfQrVpRJPbGsdT+Klp18NeHt0gslk9Ng0SZggSwXB7jZOBVdUJr7bDUmmiDiDTFGKpVBz9IqnO0j2C4MmWx996PW2aH1GEv67FALNQEj/v/wwhScLhfQNYy2mVUbLRMLMDCGOWcKmPAkUX8I3bPjcE2NVsAe6zBzKcg7Yu4l8AJZIIngFaJut0nM40F4bwPW4Zenc9mad0iB3JF3XOzOMfgXxjCbSwKG+kkYlSOyWbNkHWbRImCadyT969C4PkDSAgcJ5GnZafALAAD//9EFIk4AAAAGSURBVAMAiom6SctIojgAAAAASUVORK5CYII=";
+    var ICON_TUBE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABt0lEQVR4AXyRXShDYRzGn7lArpQoXyVRSnFBEbUkRa5InWvtgpKi3blxq3xFuZALKXe74Wa+c7GUj5haxjKy5nOWkc1ktR3neW1v+zhZ53nP+/8/z//3vu1kIf6LxVR19OhVZZmXXa7qiV66JMB84hceB9+2JhA4mkLizf2Z0gZ6IpS0SMBcc5Fhydgghm4sx7ibtcKzvC3e3FeYOnFs6smASADpPCmwfoD5NRtmdh1wOd1S1vEVVClNGRAJ4K2U8C0K+tsw0mtEriEH1qdvqe7hPtQ73OhxhBiVSgGwS0j1QCumN8xY2ByTarkOIWrxMpIiCQhH7g177YsIfH7AnG/HeWUxBqOHULRb1dmuENy6FIPPp3tgVhTaIgHaXj6FailWA1a8/xQJYMJIH2ZfF0DD4VLFsK1rEsZ2hS1d6QL8hkcZHrj4uzobxY0d/3/GkiETc+DpPLmmrB+2fYuQMHQW3Rswl3zylz2CWpOZ7QylANQTL1528kTI9bACKubRSp8K5/Kstsl8JICfhv9yAkIQxTo36BOT9JkTRXyRANY0GeJQQuxT7NPnPlkpABoMMZwu9umn6xcAAP//WG1oVQAAAAZJREFUAwBzJfT9QrJKDwAAAABJRU5ErkJggg==";
+    var ICON_TAROT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABzUlEQVR4AYySSyisYRjH/99hFseZ4+RQyKVkQVZSSEqspJRIFiRFRGEhK3sLyiVJMqxYiIWUjWIvQqa+ciuaGbcyLs0YMaPx/R+9nxkzyjS/5/mey/eb3rf5hc9P0Hj8Ccba51cJgrkJ/1Ccmgzr7xR0Fg1Fpbt0jm/yR5gFCuRlVnExAaYwGvKWzDrgvxWx0TAlFBg10FzwF2NNGfLsjtFATm9n8T/5DXaXTfqxliTJoUEE5VnxmN/zoH/5yZw5zkcwUZcudW1akkh0l46jmxvpqSCCBd0t9dvrneRDtw79QUONzYPFlUzMHAdgv/fK7GugQPO++KRvtcRKZsjKqMTVqwvrD0HJFTntbEdAQURTNSg58eygKr9PWtaEP5jq3UJngdyVXGSYwOsPyGJooIRHOvc5MNy8KaPS7DjJDGGC1pLIW+aSYm7ZCXLg/Dgy+6agOiceXWuP7OHMuR6V6QM/FLJoBFPAgVHDvtZj4tgfALnQJxCK9/maqxqDKWBRmOhHW8soRptW4RvcQEWjQyir34aituOEqyZKoNG647aAqOnLmQ1fudwdVmPJSsBCJBSxIIf3j4gGZ4pQAXtyrsnrbYzr8q9k/R3cxzsAAAD//0/l8/sAAAAGSURBVAMA/5LfyAXvklMAAAAASUVORK5CYII=";
+    var ICON_TOMATO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABaElEQVR4AZSRzytEURzFj2eGbFjMTEaJiEJTyuwxe6kpFH+AlIWysJg/wEKyU0opNVmQZi0LJMWOMllopiGFZzSIpgk9nW/u7c7wXs2rc398v+d87reeBZfPX9vkKLlYpOwKYHd8o5+bp/4A+Gp8PeqMrHUhs/8iYd6nNgdlIikYSxmA4Wi9H/dzNzhcyIptYLIdpwkbZ9PnaPM5oEcav4sGsHEVCSPZHRANL3Uiv5MTxZY7MBMIiRabg2UQAahwXV8ErSuraBiKIbv9gb2eFlE6aSMe8on4sAkRAIsMByfiPKJ4dIBd25EzF/NMEGtKlnqdYasxjLv5WdXz3NUUeoLSRQbF4xMJ9V4+yK6Wyruqc9eA59QWKBarkQZUEzK91uf3a03liPydpsm8p56+pJV4zINZPcH1e0kaXosKmx4BkDSaKyD95g4xw+p1ggTAAyFjtwXQ+J/oocww7xrACyE0eIkeepV+AAAA//9qxFWYAAAABklEQVQDALeuq9FZBupHAAAAAElFTkSuQmCC";
+    var ICON_NOTE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABZklEQVR4AaSSzStEURjGn7kaH4mNjSzkT6B8xCTNShY2slLSZKN87JRkrUFRGmWDblNE003JQulKE6XIZGuFxahZyCDlu+fUezrXvTVTc+vX+zznvO9zzz1dCyU+noBwWe1vMZjv9ARw4/1tD+TxdERVapNMPAK+hL3EF8BFsrN8zOLj4+sF2atJHRIYMDq8jopwOY7WtkEtSFroNS8SgQEbyTHE7AX0jg+BWtBThggMMPZxvZVSp7g/SZvLWgcGzE+sgrCrJTaoTtEY7ab1oQN4s7xtdswmpkCoC6ECzOGDJQdEBvkJoh/shEhdLXOYq/3TAyDUhJ/A+nx5iM3ULaUHdQJukqeMA1ZiavrzpOsZFGN9fudD9T02yP7KBfgDkd3FtNb0d7kf9HXUqDn2co5GnUBMV2sDop1NikhbHYjpq6or4bg5mI8K4AJDmmfOILTP3YD893E3C/ZyhugAGm4UA3uFPwAAAP//8pe+5AAAAAZJREFUAwDnjtQhv1w0IAAAAABJRU5ErkJggg==";
+    var ICON_PALETTE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB10lEQVR4AWyRSyh0cRjGn5n6sPgu8y1mvmw+JdHEAqMoSZEohcWUlUkSwmIWVthYsSOhREmULMnGZWFyHbktGJRQU5oxriNyieF5c/6dGXOa3znv/3nf55n3dIyIcsX+MIf0RBlR0rcAGp9eLqCHmnJEFGEBHKSRM7vuAAhrauxpUNNQAWx6dvZEpzEnLxVEhM8bQzQ4+ynJTwIo+JuLYHLk49pmxe+fIWnqbwwl1BhED2sji6P/8XhzbfMszBVkgNsQCif7F7INN4qLsVBSyAZDNz64fY+Is8cKDqcZiakWQU1GFAznn0sAe7aiEGJqrQpqGgxbX9qXI9eX4usmAVUFf/HHHv8lRX+kZ5vl00Z2JWAwoUvpNacPII6NMtR7l5Vu0F0DGW6lS8D93SMOzDNocJ2pBovbcwOq164EnvV09izI0fj8GjCMjTrRPzwPW1IuViYDwubWL1zOmuCd9wmukpZQk7VD8DzPgh56ZQMWFLb7MxE8Dgr/3lvhP7hRNJrK4bn3CsPHfaCHK0gACwoMqbC0gXRnWTDdnozg4aIw7kxBemUpVv1TykyfCuBBC2EQX6lvZBXFWYmwF6bJKw701oWZ6QkLoMAQwhAatKdxYuWbmfMfAAAA//8iE605AAAABklEQVQDAOWp+3ux9SxJAAAAAElFTkSuQmCC";
+    var ICON_CLOCK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABwElEQVR4AYyTTSiDcRzHv15vThQlIRcXN5RSO4mDlwM5aMkFNwc5UEgkpRy8lEKSkxDRiFrIS6wlL4dlq51W29iGvRRm9dj3n+e/zZ6V1Wf/3/P7/b7f3+959iwdGp/szFwl6DpQvkMWxbddr0zUFivMabRC00BtdG/1q2HKU9MgHPGl5RZ1Ym7BiuGRe0zchMAcXbgJYUySDFgkPsc6Rg0LmD5Zhcc6BeaIx7YI+3KVuE4yYEPQuw/vYx+CW+N4P5oXBM53hMi1UYmKmjGxGcVEbkAxp345jfCbrpHXewp/6RAyll4x99KC1pUMOMzP2O/KxuxDQN6SNKAbCRkPkd+xw1DS1lAHXXMjei4LZU4NhAGnc3WuzMks3j05kWWxMRTQpLG9S5js6Qu0n4HojH5RHD1Q0TeIErOdYUrEBqzy3nn+h2A4ItukgZpRp/P64tYEwjgV0oBPnk3HZ3c8kmDesLcLfY41oSYM+JaVdZvhe3Kj2TkJNv+F4qbwlRDrN73JPyNNqmccsDk+UG4ahmFzLUZ0ss5/LcQDxjcpZkJswIDQhO5maxi6T0uMX3H8f4L9JMGACZrwTdOCNfbE8wMAAP//ozQ2GAAAAAZJREFUAwBGge/J07SIDwAAAABJRU5ErkJggg==";
 
+    // 像素图标统一 32×32 盒子（16×16 的整数 2 倍）；pixelated 防止浏览器用插值抹平像素边界
+    function pixelIcon(src) {
+      return function PixelIcon() {
+        return h('img', {
+          src: src,
+          width: 32,
+          height: 32,
+          alt: '',
+          'aria-hidden': true,
+          draggable: false,
+          style: { imageRendering: 'pixelated' },
+        });
+      };
+    }
+    var FishIcon = pixelIcon(ICON_BUTTON);
+    var TubeIcon = pixelIcon(ICON_TUBE);
+    var TarotIcon = pixelIcon(ICON_TAROT);
+    var FarmIcon = pixelIcon(ICON_TOMATO);
+    var NoteIcon = pixelIcon(ICON_NOTE);
+    var RgbIcon = pixelIcon(ICON_PALETTE);
+    var ClockIcon = pixelIcon(ICON_CLOCK);
     // 签筒图标：竹筒 + 三支露出筒口的签（红头）。比木鱼高一点、筒身加宽，视觉上才不显小。
-    function TubeIcon() {
-      return h(
-        "svg",
-        { viewBox: "0 0 32 38", width: 36, height: 36, "aria-hidden": true, focusable: false },
-        h("path", { d: "M10.5 22 7.2 8.6", stroke: "#DCC6A0", strokeWidth: 2.6, strokeLinecap: "round" }),
-        h("path", { d: "M16 21.5 16 4", stroke: "#DCC6A0", strokeWidth: 2.6, strokeLinecap: "round" }),
-        h("path", { d: "M21.5 22 24.8 9.4", stroke: "#DCC6A0", strokeWidth: 2.6, strokeLinecap: "round" }),
-        h("circle", { cx: 7.2, cy: 7.6, r: 2.1, fill: "#C0392B" }),
-        h("circle", { cx: 16, cy: 3.2, r: 2.1, fill: "#C0392B" }),
-        h("circle", { cx: 24.8, cy: 8.4, r: 2.1, fill: "#C0392B" }),
-        h("rect", { x: 5.5, y: 18.5, width: 21, height: 15.5, rx: 5, fill: "#C99055" }),
-        h("ellipse", { cx: 16, cy: 18.5, rx: 10.5, ry: 3.2, fill: "#B9803F" }),
-        h("ellipse", { cx: 16, cy: 18.5, rx: 7.8, ry: 2.3, fill: "#8C5A2B", opacity: 0.45 }),
-        h("path", { d: "M7.6 28.4h16.8", stroke: "#E0B77F", strokeWidth: 1.2, opacity: 0.5 }),
-      );
-    }
-
-    // 塔罗 22 张大阿卡那：牌名 / 英文 / 正位解读 / 逆位解读
+        // 塔罗 22 张大阿卡那：牌名 / 英文 / 正位解读 / 逆位解读
     // 解读为本次自撰的白话（不抄任何现有塔罗译本），语气与卦辞白话一致。
     var TAROT = [
       ["愚者", "The Fool", "牌面上一只脚已经踏出悬崖，手里拎个小包袱，天上太阳正亮，脚边小狗还在叫。这张牌讲的是开始：什么都没准备好，但就是该走了。想得太周全的人反而迈不出第一步，先动起来，路是一边走一边长出来的。感情上心动就去，别先算结果；钱上小试可以，别押身家。你现在最值钱的资产是轻，别急着背上太重的东西。", "牌还是那张，气氛却不对了。想得美却一步没动，或者准备不足就冲出去，摔了还不知道为什么。逆位讲的是不落地：计划停在嘴上，冲动当成了勇气。感情上别信听着很美的承诺，也别说自己做不到的话。钱上花得没谱，先记账。跟人相处，说得比做得好听的人早晚露馅，别学他，也别信他。"],
@@ -1102,27 +1581,8 @@ window.__ModuleLoader__.load({
     ];
 
     // 塔罗牌图标：一张稍稍倾斜的牌背（只画牌框与星纹，不用任何图片）
-    function TarotIcon() {
-      return h(
-        "svg",
-        { viewBox: "0 0 30 40", width: 34, height: 36, "aria-hidden": true, focusable: false },
-        h(
-          "g",
-          { transform: "rotate(-7 15 20)" },
-          h("rect", { x: 5, y: 4, width: 20, height: 32, rx: 3, fill: "#B9803F", opacity: 0.14 }),
-          h("rect", { x: 5, y: 4, width: 20, height: 32, rx: 3, fill: "none", stroke: "#B9803F", strokeWidth: 1.4 }),
-          h("path", {
-            d: "M15 11.5 16.6 17 22 18.5 16.6 20 15 25.5 13.4 20 8 18.5 13.4 17Z",
-            fill: "#C9A46B",
-          }),
-          h("circle", { cx: 15, cy: 29.4, r: 1.2, fill: "#B9803F", opacity: 0.75 }),
-          h("circle", { cx: 11.4, cy: 30.6, r: 0.8, fill: "#B9803F", opacity: 0.5 }),
-          h("circle", { cx: 18.6, cy: 30.6, r: 0.8, fill: "#B9803F", opacity: 0.5 }),
-        ),
-      );
-    }
-
-    // 三张牌阵：每张牌在「过去 / 现在 / 未来」各写正逆两段，纯离线、不联网、不依赖模型。
+        // 键盘农场入口图标：一块草方块 + 一株小苗，和键盘里的地块同款
+        // 三张牌阵：每张牌在「过去 / 现在 / 未来」各写正逆两段，纯离线、不联网、不依赖模型。
     // 结构：[ { past: [正位, 逆位], present: [正位, 逆位], future: [正位, 逆位] } ]，索引与 TAROT 对齐。
     var TAROT_POS = [
       {
@@ -1268,9 +1728,57 @@ window.__ModuleLoader__.load({
       };
     }
 
+    // 关闭也要走完动画：先打 data-closing 让蒙版和卡片淡出，过 160ms 再真卸载
+    var MODAL_EXIT_MS = 160;
+
+    function useModalDismiss(onClose) {
+      var closingState = React.useState(false);
+      var closing = closingState[0];
+      var setClosing = closingState[1];
+      var timerRef = React.useRef(null);
+      function requestClose() {
+        if (timerRef.current) return;
+        setClosing(true);
+        timerRef.current = setTimeout(function () {
+          timerRef.current = null;
+          onClose();
+        }, MODAL_EXIT_MS);
+      }
+      React.useEffect(function () {
+        return function () {
+          if (timerRef.current) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+          }
+        };
+      }, []);
+      return { closing: closing, requestClose: requestClose };
+    }
+
+    // 蒙版关闭的正确判据：按下和松开都要落在蒙版上。
+    // 在窗口里按下、拖到外面松开（比如框选文字）不能算关闭——那只是想拖出去
+    function useMaskClose(onClose) {
+      var downRef = React.useRef(false);
+      return {
+        onMouseDown: function (e) {
+          downRef.current = e.target === e.currentTarget;
+        },
+        onMouseUp: function (e) {
+          var hit = downRef.current && e.target === e.currentTarget;
+          downRef.current = false;
+          if (hit) onClose();
+        },
+        onMouseLeave: function () {
+          downRef.current = false;
+        },
+      };
+    }
+
     function TarotModal(props) {
       var spread = props.spread;
       var t = props.t;
+      var dismiss = useModalDismiss(props.onClose);
+      var mask = useMaskClose(dismiss.requestClose);
       var SLOT = { past: t("tarot.past"), present: t("tarot.present"), future: t("tarot.future") };
       // 位置专属解读优先；表里缺项时退回牌义本体
       function meaning(index, slot, reversed) {
@@ -1285,7 +1793,7 @@ window.__ModuleLoader__.load({
       }
       return h(
         "div",
-        { className: "wcd-mask", onClick: props.onClose },
+        Object.assign({ className: "wcd-mask", "data-closing": dismiss.closing ? "true" : "false" }, mask),
         h(
           "div",
           { className: "wcd-gua wcd-tarot-modal", onClick: function (e) { e.stopPropagation(); } },
@@ -1296,7 +1804,7 @@ window.__ModuleLoader__.load({
             h("span", { className: "wcd-tarot-en" }, t("tarot.spread.en")),
             h(
               "button",
-              { className: "wcd-gua-close", type: "button", onClick: props.onClose },
+              { className: "wcd-gua-close", type: "button", onClick: dismiss.requestClose },
               "×",
             ),
           ),
@@ -1402,6 +1910,8 @@ window.__ModuleLoader__.load({
     function GuaModal(props) {
       var spread = props.spread;
       var t = props.t;
+      var dismiss = useModalDismiss(props.onClose);
+      var mask = useMaskClose(dismiss.requestClose);
       var gua = spread.gua;
       var changed = spread.changed;
       var moves = spread.moves || [];
@@ -1411,7 +1921,7 @@ window.__ModuleLoader__.load({
         : t("gua.moves") + "：" + moves.map(function (i) { return t("gua.pos." + i); }).join("、");
       return h(
         "div",
-        { className: "wcd-mask", onClick: props.onClose },
+        Object.assign({ className: "wcd-mask", "data-closing": dismiss.closing ? "true" : "false" }, mask),
         h(
           "div",
           { className: "wcd-gua", onClick: function (e) { e.stopPropagation(); } },
@@ -1422,7 +1932,7 @@ window.__ModuleLoader__.load({
             h("span", { className: "wcd-gua-name" }, gua[3] + gua[1]),
             h(
               "button",
-              { className: "wcd-gua-close", type: "button", onClick: props.onClose, title: t("gua.close") },
+              { className: "wcd-gua-close", type: "button", onClick: dismiss.requestClose, title: t("gua.close") },
               "×",
             ),
           ),
@@ -1573,6 +2083,1180 @@ window.__ModuleLoader__.load({
       return { kind: 'done', tone: '', label: t('state.done'), num: '', title: title };
     }
 
+    // 主键区：每行右端分别是 F12 / 退格 / 反斜杠 / 回车 / 右 Shift / 右 Ctrl，行宽统一 15 单位
+    var KEY_MAIN = [
+      [['Escape', 'Esc', 1.5], ['F1', 'F1'], ['F2', 'F2'], ['F3', 'F3'], ['F4', 'F4'],
+        ['F5', 'F5'], ['F6', 'F6'], ['F7', 'F7'], ['F8', 'F8'], ['F9', 'F9'],
+        ['F10', 'F10'], ['F11', 'F11'], ['F12', 'F12']],
+      [['Backquote', '`'], ['Digit1', '1'], ['Digit2', '2'], ['Digit3', '3'], ['Digit4', '4'],
+        ['Digit5', '5'], ['Digit6', '6'], ['Digit7', '7'], ['Digit8', '8'], ['Digit9', '9'],
+        ['Digit0', '0'], ['Minus', '-'], ['Equal', '='], ['Backspace', '⌫', 2]],
+      [['Tab', 'Tab', 1.5], ['KeyQ', 'Q'], ['KeyW', 'W'], ['KeyE', 'E'], ['KeyR', 'R'],
+        ['KeyT', 'T'], ['KeyY', 'Y'], ['KeyU', 'U'], ['KeyI', 'I'], ['KeyO', 'O'],
+        ['KeyP', 'P'], ['BracketLeft', '['], ['BracketRight', ']'], ['Backslash', '\\', 1.5]],
+      [['CapsLock', 'Caps', 1.75], ['KeyA', 'A'], ['KeyS', 'S'], ['KeyD', 'D'], ['KeyF', 'F'],
+        ['KeyG', 'G'], ['KeyH', 'H'], ['KeyJ', 'J'], ['KeyK', 'K'], ['KeyL', 'L'],
+        ['Semicolon', ';'], ['Quote', "'"], ['Enter', '↵', 2.25]],
+      [['ShiftLeft', 'Shift', 2.25], ['KeyZ', 'Z'], ['KeyX', 'X'], ['KeyC', 'C'],
+        ['KeyV', 'V'], ['KeyB', 'B'], ['KeyN', 'N'], ['KeyM', 'M'], ['Comma', ','],
+        ['Period', '.'], ['Slash', '/'], ['ShiftRight', 'Shift', 2.75]],
+      [['ControlLeft', 'Ctrl', 1.25], ['MetaLeft', 'Win', 1.25], ['AltLeft', 'Alt', 1.25],
+        ['Space', 'Space'], ['AltRight', 'Alt', 1.25], ['MetaRight', 'Win', 1.25],
+        ['ContextMenu', 'Menu', 1.25], ['ControlRight', 'Ctrl', 1.25]],
+    ];
+
+    // 辅助区：严格 3 列 grid，共 6 行，与主键区等高
+    var KEY_NAV = [
+      ['PrintScreen', 'Prt'], ['ScrollLock', 'Scr'], ['Pause', 'Pau'],
+      ['Insert', 'Ins'], ['Home', 'Home'], ['PageUp', 'PgUp'],
+      ['Delete', 'Del'], ['End', 'End'], ['PageDown', 'PgDn'],
+      { deco: 'pond', w: 2 }, { deco: 'rock', w: 1 },
+      null, ['ArrowUp', '↑'], null,
+      ['ArrowLeft', '←'], ['ArrowDown', '↓'], ['ArrowRight', '→'],
+    ];
+
+    // 小键盘：严格 4 列 grid，第一行留空、整体下移一行；+ 与 ↵ 各占 1 列 2 行，0 占 1 行 2 列
+    var KEY_PAD = [
+      { g: 1, col: 1, row: 1 },
+      { g: 1, col: 2, row: 1 },
+      { g: 1, col: 3, row: 1 },
+      { g: 1, col: 4, row: 1 },
+      { c: 'NumLock', l: 'Num', col: 1, row: 2 },
+      { c: 'NumpadDivide', l: '/', col: 2, row: 2 },
+      { c: 'NumpadMultiply', l: '*', col: 3, row: 2 },
+      { c: 'NumpadSubtract', l: '-', col: 4, row: 2 },
+      { c: 'Numpad7', l: '7', col: 1, row: 3 },
+      { c: 'Numpad8', l: '8', col: 2, row: 3 },
+      { c: 'Numpad9', l: '9', col: 3, row: 3 },
+      { c: 'NumpadAdd', l: '+', col: 4, row: 3, h: 2 },
+      { c: 'Numpad4', l: '4', col: 1, row: 4 },
+      { c: 'Numpad5', l: '5', col: 2, row: 4 },
+      { c: 'Numpad6', l: '6', col: 3, row: 4 },
+      { c: 'Numpad1', l: '1', col: 1, row: 5 },
+      { c: 'Numpad2', l: '2', col: 2, row: 5 },
+      { c: 'Numpad3', l: '3', col: 3, row: 5 },
+      { c: 'NumpadEnter', l: '↵', col: 4, row: 5, h: 2 },
+      { c: 'Numpad0', l: '0', col: 1, row: 6, w: 2 },
+      { c: 'NumpadDecimal', l: '.', col: 3, row: 6 },
+    ];
+
+    // 次数太长就缩写，格子只有 12px 宽
+    function keyCountText(n) {
+      var v = Number(n) || 0;
+      if (v >= 1000000) return Math.round(v / 1000000) + 'm';
+      if (v >= 1000) return Math.round(v / 1000) + 'k';
+      return String(v);
+    }
+
+    // 键盘作物图：6 档，扁平田园风。画布 30x60，底部对齐格子底，
+    // 高等级的植物会向上长出格子边界，做出生长和立体感。
+    // 草地色：越贫瘠越接近枯草/灰绿，越肥沃越饱和的绿
+    var PLOT_TINT = ['#e3dfcc', '#dbe0b4', '#ccd89a', '#b8cf7c', '#9ec25e', '#83b348'];
+    // 下层泥土：越肥沃越深
+    var PLOT_SIDE = ['#9c7b52', '#957349', '#8c6a41', '#836039', '#785530', '#6d4b28'];
+
+    // 每格种什么、朝哪边、偏多少：这一格的外观在「从 0 次到第一次按下」时
+    // 随机定下来并存进 keyCrops，之后只长不换，跟按键次数一起持久化。
+    var CROP_KINDS = ['carrot', 'tomato', 'cabbage', 'corn', 'potato'];
+
+    function parseCrops(raw) {
+      if (typeof raw !== 'string' || raw === '') return {};
+      try {
+        var obj = JSON.parse(raw);
+        return obj && typeof obj === 'object' && !Array.isArray(obj) ? obj : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function randomLook() {
+      return {
+        crop: CROP_KINDS[Math.floor(Math.random() * CROP_KINDS.length)],
+        flip: Math.random() < 0.5 ? -1 : 1,
+        dx: Math.round(Math.random() * 4 - 2),
+        dy: Math.round(Math.random() * 4 - 2),
+        // 摆动幅度 1.0 ~ 3.0 度，步进 0.1
+        amp: Number((1 + Math.random() * 2).toFixed(1)),
+      };
+    }
+
+    function normalizeLook(look) {
+      var l = look && typeof look === 'object' ? look : {};
+      function num(v, lo, hi, fallback) {
+        var n = Number(v);
+        return Number.isFinite(n) ? Math.max(lo, Math.min(hi, n)) : fallback;
+      }
+      return {
+        crop: CROP_KINDS.indexOf(l.crop) >= 0 ? l.crop : 'carrot',
+        flip: l.flip === -1 ? -1 : 1,
+        dx: Math.round(num(l.dx, -2, 2, 0)),
+        dy: Math.round(num(l.dy, -2, 2, 0)),
+        amp: Number(num(l.amp, 1, 3, 1.8).toFixed(1)),
+      };
+    }
+
+    // 兼容两种历史格式：字符串（只有作物名）/ 对象（完整外观）
+    function parseLooks(raw) {
+      var map = parseCrops(raw);
+      var out = {};
+      for (var k in map) {
+        var v = map[k];
+        out[k] = normalizeLook(typeof v === 'string' ? { crop: v } : v);
+      }
+      return out;
+    }
+
+    function lookOf(code, map) {
+      var hit = map && map[code];
+      return hit ? normalizeLook(hit) : normalizeLook(null);
+    }
+
+    // 作物六档 = 六个生长阶段，全部画在统一画布 30x60、根贴画布底（= 键中心土面）。
+    // 萝卜埋在土里的部分画超出画布底边，被裁掉，只留露出的上半截。
+    function CropSprite() {
+      function sym(id, kids) {
+        return h('symbol', { id: id, viewBox: '0 0 30 60' }, kids);
+      }
+      return h(
+        'svg',
+        { className: 'wcd-sprite', 'aria-hidden': 'true' },
+        h(
+          'defs',
+          null,
+          // 0 荒地：什么都不长
+          sym('wcd-crop-0', []),
+          // 1 独苗：刚破土，只有一根茎，没有叶
+          sym('wcd-crop-1', [
+            h('path', { d: 'M15 60V55C15 52.4 13.5 50.8 11 51.4', stroke: '#3f7f34', strokeWidth: 1.9, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M11 51.4c-.9 .2-1.5 .8-1.8 1.5', stroke: '#5aa94a', strokeWidth: 1.3, strokeLinecap: 'round', fill: 'none' }),
+          ]),
+          // 2 幼苗：主苗长出真叶，周围再冒几根刚破土的小茎
+          sym('wcd-crop-2', [
+            h('path', { d: 'M9.6 60C9.6 57.4 8.8 55 7.7 53.3', stroke: '#4e9a44', strokeWidth: 1.5, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M5.9 60C6 57.8 5.6 56.2 4.9 55.3', stroke: '#5aa94a', strokeWidth: 1.3, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M20.9 60C20.9 57.6 21.6 55.3 22.5 53.6', stroke: '#4e9a44', strokeWidth: 1.5, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M24.2 60C24.1 58 24.5 56.6 25.2 55.8', stroke: '#5aa94a', strokeWidth: 1.3, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 60C15 55 14.4 51.2 14.9 47', stroke: '#3f7f34', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 50c-3 0-5.2-1.9-5.2-4.5 3 .4 5.2 2.3 5.2 4.5z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 51.8c3 0 5.2-1.9 5.2-4.5-3 .4-5.2 2.3-5.2 4.5z', fill: '#5aa94a' }),
+          ]),
+          // 3 草丛：五根草叶高低错落 + 一根亮色细草 + 第一朵小花
+          sym('wcd-crop-3', [
+            h('path', {
+              d: 'M9 60C9 54 8 49 6.5 45M12.5 60C12.5 53 11.5 47.5 10 42.5M15.5 60C16 52 16 45.5 15.5 39.5M19 60C20 54 21 48.5 22.5 44.5M22.5 60C23 56 24 53 25 50',
+              stroke: '#4e9a44', strokeWidth: 1.7, strokeLinecap: 'round', fill: 'none',
+            }),
+            h('path', { d: 'M10.8 60C10.8 55 10 51 9 47.8', stroke: '#7fcf6a', strokeWidth: 1.1, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M6.5 45V43', stroke: '#4e9a44', strokeWidth: 1.1, strokeLinecap: 'round', fill: 'none' }),
+            h('circle', { cx: 6.5, cy: 41.2, r: 2, fill: '#f6c445' }),
+            h('circle', { cx: 6.5, cy: 41.2, r: 0.7, fill: '#e39a1c' }),
+          ]),
+          // 4 结果：羽状叶丛散开，萝卜肩刚顶出土面一点点
+          sym('wcd-crop-4-carrot', [
+            h('path', {
+              d: 'M14.5 53C13.2 45 11 37.5 8.8 31.5M15.5 53C16.8 45 19 37.5 21.2 31.5M14 53C13.2 48.5 11.6 43.5 9.6 39.5M16 53C16.8 48.5 18.4 43.5 20.4 39.5',
+              stroke: '#4e9a44', strokeWidth: 1.7, strokeLinecap: 'round', fill: 'none',
+            }),
+            h('path', { d: 'M15 53C15 46.5 14.7 38 14.3 30', stroke: '#6fbf5c', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none' }),
+            // 萝卜肩：只有 7px 冒出土面
+            h('path', {
+              d: 'M15 53c-2.7 0-4.6 1.7-4.6 4.2 0 1 .3 1.9 .9 2.8h7.4c.6-.9 .9-1.8 .9-2.8 0-2.5-1.9-4.2-4.6-4.2z',
+              fill: '#ef7a3d',
+            }),
+            h('path', { d: 'M15 53c-1.7 0-3.1.7-3.9 1.9.7.5 2.1.8 3.9.8s3.2-.3 3.9-.8c-.8-1.2-2.2-1.9-3.9-1.9z', fill: '#f7a06b' }),
+            h('path', { d: 'M7 60C6.7 56 6 52.5 4.8 49.6', stroke: '#4e9a44', strokeWidth: 1.1, strokeLinecap: 'round', fill: 'none' }),
+            h('circle', { cx: 4.8, cy: 47.8, r: 1.8, fill: '#f6c445' }),
+            h('circle', { cx: 4.8, cy: 47.8, r: 0.7, fill: '#e39a1c' }),
+          ]),
+          // 5 成熟：大半截萝卜露出土面，带横纹和亮面，大叶冠 + 两侧草花
+          sym('wcd-crop-5-carrot', [
+            h('path', {
+              d: 'M14.5 36C13 30.5 11 26 8.5 22.5M15.5 36C17 30.5 19 26 21.5 22.5M14 36C13.1 32 11.7 28.5 9.7 25.5M16 36C16.9 32 18.3 28.5 20.3 25.5',
+              stroke: '#4e9a44', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none',
+            }),
+            h('path', { d: 'M15 36C15 30 14.8 25 14.5 22', stroke: '#6fbf5c', strokeWidth: 1.9, strokeLinecap: 'round', fill: 'none' }),
+            // 萝卜露出 24px，底部到画布底边为止
+            h('path', {
+              d: 'M15 36c-3 0-5.2 1.9-5.2 4.8 0 3.6 1.7 9 5.2 19.2 3.5-10.2 5.2-15.6 5.2-19.2 0-2.9-2.2-4.8-5.2-4.8z',
+              fill: '#ef7a3d', transform: 'rotate(-5 15 52)',
+            }),
+            h('path', { d: 'M15 36c-2.2 0-4 1.2-4.8 3.1 1 .6 2.6 1 4.8 1s3.8-.4 4.8-1c-.8-1.9-2.6-3.1-4.8-3.1z', fill: '#f7a06b', transform: 'rotate(-5 15 52)' }),
+            h('path', {
+              d: 'M11.2 47c2.5.8 5.1.8 7.6 0M12 53.5c2 .6 4 .6 6 0',
+              stroke: '#c9552a', strokeWidth: 0.8, strokeLinecap: 'round', fill: 'none', opacity: 0.55,
+              transform: 'rotate(-5 15 52)',
+            }),
+            h('path', { d: 'M7 60C6.6 54.5 5.6 49.5 4.2 45.2', stroke: '#4e9a44', strokeWidth: 1.2, strokeLinecap: 'round', fill: 'none' }),
+            h('circle', { cx: 4.2, cy: 43.2, r: 2, fill: '#f6c445' }),
+            h('circle', { cx: 4.2, cy: 43.2, r: 0.8, fill: '#e39a1c' }),
+            h('path', { d: 'M23 60C23.4 55 24.4 50.5 25.8 46.8', stroke: '#4e9a44', strokeWidth: 1.2, strokeLinecap: 'round', fill: 'none' }),
+            h('circle', { cx: 25.8, cy: 44.8, r: 2, fill: '#f6c445' }),
+            h('circle', { cx: 25.8, cy: 44.8, r: 0.8, fill: '#e39a1c' }),
+            // 旁边的小萝卜：只露出一点肩头
+            h('path', {
+              d: 'M8.2 54c-2.4 0-4.1 1.4-4.1 3.4 0 .9 .3 1.8 .9 2.8h6.4c.6-1 .9-1.9 .9-2.8 0-2-1.7-3.4-4.1-3.4z',
+              fill: '#ef7a3d',
+            }),
+            h('path', { d: 'M8.2 54c-1.5 0-2.7.5-3.4 1 .6.4 1.8.7 3.4.7s2.8-.3 3.4-.7c-.7-.5-1.9-1-3.4-1z', fill: '#f7a06b' }),
+            h('path', { d: 'M6.4 53.8C5.9 50.8 5.1 48.2 4.2 46', stroke: '#4e9a44', strokeWidth: 1.2, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M22.8 56.4c-1.6 0-2.7 1-2.7 2.3 0 .6 .2 1.2 .6 1.7h4.4c.4-.5 .6-1.1 .6-1.7 0-1.3-1.1-2.3-2.7-2.3z', fill: '#ef7a3d', transform: 'rotate(4 22.8 58)' }),
+            h('path', { d: 'M22.8 56.4c-.9 0-1.7.3-2.2.6 .4.3 1.2.4 2.2.4s1.8-.1 2.2-.4c-.5-.3-1.3-.6-2.2-.6z', fill: '#f7a06b', transform: 'rotate(4 22.8 58)' }),
+            h('path', { d: 'M24.6 56.1C25.1 54.2 25.7 52.5 26.4 51', stroke: '#4e9a44', strokeWidth: 1.1, strokeLinecap: 'round', fill: 'none' }),
+          ]),
+          // 4/5 档的番茄
+          sym('wcd-crop-4-tomato', [
+            h('path', { d: 'M15 60V45', stroke: '#3f7f34', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 50c-3.4 0-5.8-2-5.8-4.6 3.4 .5 5.8 2.4 5.8 4.6z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 52.2c3.4 0 5.8-2 5.8-4.6-3.4 .5-5.8 2.4-5.8 4.6z', fill: '#5aa94a' }),
+            h('path', { d: 'M15 47c-2.6 0-4.4-1.6-4.4-3.6 2.6 .4 4.4 1.8 4.4 3.6z', fill: '#7fcf6a' }),
+            // 果实坐在茎顶上
+            h('circle', { cx: 15, cy: 40, r: 5.6, fill: '#e2503f' }),
+            h('circle', { cx: 13.2, cy: 38.2, r: 1.9, fill: '#f39180', opacity: 0.9 }),
+            h('path', {
+              d: 'M15 34.2 16.1 37.2 19.2 37.6 16.8 39.5 17.5 42.4 15 40.7 12.5 42.4 13.2 39.5 10.8 37.6 13.9 37.2z',
+              fill: '#4f9a3e',
+            }),
+          ]),
+          sym('wcd-crop-5-tomato', [
+            h('path', { d: 'M15 60V36', stroke: '#3f7f34', strokeWidth: 1.9, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 48c-4 0-6.8-2.4-6.8-5.4 4 .6 6.8 2.8 6.8 5.4z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 50.6c4 0 6.8-2.4 6.8-5.4-4 .6-6.8 2.8-6.8 5.4z', fill: '#5aa94a' }),
+            h('path', { d: 'M15 43c-3.2 0-5.4-2-5.4-4.4 3.2 .5 5.4 2.2 5.4 4.4z', fill: '#7fcf6a' }),
+            // 主果
+            h('circle', { cx: 15, cy: 29, r: 7, fill: '#e2503f' }),
+            h('circle', { cx: 12.8, cy: 26.8, r: 2.4, fill: '#f39180', opacity: 0.9 }),
+            h('path', {
+              d: 'M15 22.4 16.3 25.9 19.9 26.4 17.1 28.6 17.9 32 15 30 12.1 32 12.9 28.6 10.1 26.4 13.7 25.9z',
+              fill: '#4f9a3e',
+            }),
+            // 侧果：贴着主果右下方长出
+            h('circle', { cx: 23.4, cy: 42, r: 3.8, fill: '#d9483a' }),
+            h('circle', { cx: 22.4, cy: 40.8, r: 1.3, fill: '#f39180', opacity: 0.85 }),
+            h('path', {
+              d: 'M23.4 38.4 24 40.4 26 40.7 24.4 42 24.8 44 23.4 42.9 22 44 22.4 42 20.8 40.7 22.8 40.4z',
+              fill: '#4f9a3e',
+            }),
+          ]),
+          // 4/5 档的卷心菜
+          sym('wcd-crop-4-cabbage', [
+            // 外层翻开的叶子
+            h('path', { d: 'M15 59c-5.2 0-9.4-2.4-10.8-6.2 5.2 .8 9.4 3.2 10.8 6.2z', fill: '#7fb350' }),
+            h('path', { d: 'M15 59c5.2 0 9.4-2.4 10.8-6.2-5.2 .8-9.4 3.2-10.8 6.2z', fill: '#6da545' }),
+            h('path', { d: 'M15 59c-3.8-1.4-6.4-4.2-7.4-7.8 4 1.8 6.8 4.6 7.4 7.8z', fill: '#8fbf5e' }),
+            h('path', { d: 'M15 59c3.8-1.4 6.4-4.2 7.4-7.8-4 1.8-6.8 4.6-7.4 7.8z', fill: '#7fb350' }),
+            // 菜球
+            h('ellipse', { cx: 15, cy: 49, rx: 9.6, ry: 8.6, fill: '#b8d98a' }),
+            h('ellipse', { cx: 15, cy: 48, rx: 7.6, ry: 6.9, fill: '#cfe8a8' }),
+            h('ellipse', { cx: 15, cy: 47, rx: 5, ry: 4.4, fill: '#e0f0c0' }),
+            // 叶脉：菜心 + 向外发散的弧线（不闭合）
+            h('circle', { cx: 15, cy: 44.6, r: 1.5, fill: '#c9e39f' }),
+            h('path', {
+              d: 'M15 46.2c-1.7 1.9-2.9 4.2-3.5 6.6M15 46.2c1.7 1.9 2.9 4.2 3.5 6.6',
+              stroke: '#9dc46a', strokeWidth: 0.7, strokeLinecap: 'round', fill: 'none',
+            }),
+            h('path', {
+              d: 'M13.4 47.6c-.6 1.9-.9 4-.9 6.2M16.6 47.6c.6 1.9 .9 4 .9 6.2',
+              stroke: '#aed383', strokeWidth: 0.6, strokeLinecap: 'round', fill: 'none',
+            }),
+          ]),
+          sym('wcd-crop-5-cabbage', [
+            // 外层翻开的叶子
+            h('path', { d: 'M12 60c-6.2 0-11.4-2.8-12.8-6.8 6.2 .8 10.8 3.4 12.8 6.8z', fill: '#7fb350' }),
+            h('path', { d: 'M12 60c6.2 0 11.4-2.8 12.8-6.8-6.2 .8-10.8 3.4-12.8 6.8z', fill: '#6da545' }),
+            // 主球
+            h('ellipse', { cx: 11.5, cy: 46, rx: 10.8, ry: 9.8, fill: '#b8d98a' }),
+            h('ellipse', { cx: 11.5, cy: 45, rx: 8.4, ry: 7.6, fill: '#cfe8a8' }),
+            h('ellipse', { cx: 11.5, cy: 44, rx: 5.4, ry: 4.8, fill: '#e0f0c0' }),
+            h('circle', { cx: 11.5, cy: 42.4, r: 1.7, fill: '#c9e39f' }),
+            h('path', {
+              d: 'M11.5 44.2c-2 2.2-3.4 5-4.1 7.8M11.5 44.2c2 2.2 3.4 5 4.1 7.8',
+              stroke: '#9dc46a', strokeWidth: 0.8, strokeLinecap: 'round', fill: 'none',
+            }),
+            h('path', {
+              d: 'M9.6 45.9c-.7 2.2-1.1 4.7-1.1 7.3M13.4 45.9c.7 2.2 1.1 4.7 1.1 7.3',
+              stroke: '#aed383', strokeWidth: 0.7, strokeLinecap: 'round', fill: 'none',
+            }),
+            // 旁边的小卷心菜
+            h('path', { d: 'M25 59c-2.8 0-5.2-1.4-6-3.6 2.8 .5 5.2 1.8 6 3.6z', fill: '#7fb350' }),
+            h('ellipse', { cx: 24.4, cy: 53.5, rx: 5.4, ry: 4.8, fill: '#b8d98a' }),
+            h('ellipse', { cx: 24.4, cy: 52.8, rx: 4, ry: 3.5, fill: '#cfe8a8' }),
+            h('circle', { cx: 24.4, cy: 51.6, r: 0.9, fill: '#c9e39f' }),
+            h('path', {
+              d: 'M24.4 52.4c-1.1 1.1-1.9 2.4-2.3 3.9M24.4 52.4c1.1 1.1 1.9 2.4 2.3 3.9',
+              stroke: '#9dc46a', strokeWidth: 0.6, strokeLinecap: 'round', fill: 'none',
+            }),
+          ]),
+          // 4/5 档的玉米
+          sym('wcd-crop-4-corn', [
+            h('path', { d: 'M15 60V33', stroke: '#5f9a3c', strokeWidth: 2, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 47c-4-1-7.2-3.8-8.6-7.6 3.6 1 6.6 3.4 8.6 7.6z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 43c4-1 7.2-3.8 8.6-7.6-3.6 1-6.6 3.4-8.6 7.6z', fill: '#5aa94a' }),
+            h('path', { d: 'M15 51c-3.4-.6-6-2.4-7.4-5 3 .2 5.6 1.8 7.4 5z', fill: '#7fcf6a' }),
+            // 玉米棒
+            h('ellipse', { cx: 15, cy: 38, rx: 4, ry: 7.6, fill: '#f0d987' }),
+            h('path', {
+              d: 'M13 35.4c1.4 .5 2.6 .5 4 0M12.6 38.4c1.6 .5 3.2 .5 4.8 0M12.6 41.4c1.6 .5 3.2 .5 4.8 0M13 44.2c1.4 .4 2.6 .4 4 0',
+              stroke: '#d4b24a', strokeWidth: 0.6, fill: 'none',
+            }),
+            // 苞叶包住棒的下半截
+            h('path', { d: 'M15 48c-2.6-1.4-4-4-4-7.4 2.4 1.6 3.8 4.2 4 7.4z', fill: '#6da545' }),
+            h('path', { d: 'M15 48c2.6-1.4 4-4 4-7.4-2.4 1.6-3.8 4.2-4 7.4z', fill: '#7fb350' }),
+          ]),
+          sym('wcd-crop-5-corn', [
+            h('path', { d: 'M15 60V26', stroke: '#5f9a3c', strokeWidth: 2.1, strokeLinecap: 'round', fill: 'none' }),
+            // 顶部雄花
+            h('path', { d: 'M15 26c-3-2-5-5-5.5-8M15 26c3-2 5-5 5.5-8M15 26v-9', stroke: '#8fbf5e', strokeWidth: 0.8, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 48c-4.6-1.2-8.2-4.4-9.6-8.8 4 1.2 7.6 4 9.6 8.8z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 42c4.6-1.2 8.2-4.4 9.6-8.8-4 1.2-7.6 4-9.6 8.8z', fill: '#5aa94a' }),
+            h('path', { d: 'M15 53c-3.8-.8-6.6-2.8-8-5.8 3.4 .4 6.2 2.2 8 5.8z', fill: '#7fcf6a' }),
+            // 主棒
+            h('path', { d: 'M15 30c-2.8 0-4.6 2.2-4.6 5.6 0 4.4 2 8.4 4.6 10.4 2.6-2 4.6-6 4.6-10.4 0-3.4-1.8-5.6-4.6-5.6z', fill: '#f0d987' }),
+            h('path', {
+              d: 'M12 34c2 .6 4 .6 6 0M11.8 38c2.2 .7 4.4 .7 6.6 0M11.8 42c2.2 .7 4.4 .7 6.6 0M12.4 46c1.8 .6 3.6 .6 5.4 0M13.6 49.4c1 .3 2 .3 3 0',
+              stroke: '#d4b24a', strokeWidth: 0.65, fill: 'none',
+            }),
+            // 苞叶
+            h('path', { d: 'M15 51c-3-1.6-4.6-4.6-4.6-8.4 2.8 1.8 4.4 4.8 4.6 8.4z', fill: '#6da545' }),
+            h('path', { d: 'M15 51c3-1.6 4.6-4.6 4.6-8.4-2.8 1.8-4.4 4.8-4.6 8.4z', fill: '#7fb350' }),
+            // 侧边小玉米棒
+            h('ellipse', { cx: 22, cy: 44, rx: 2.6, ry: 4.6, fill: '#f0d987', transform: 'rotate(18 22 44)' }),
+            h('path', {
+              d: 'M21 41.5c.7 .2 1.4 .2 2.1 0M20.6 44c.9 .3 1.8 .3 2.7 0M21 46.5c.7 .2 1.4 .2 2.1 0',
+              stroke: '#d4b24a', strokeWidth: 0.5, fill: 'none', transform: 'rotate(18 22 44)',
+            }),
+          ]),
+          // 4/5 档的土豆
+          sym('wcd-crop-4-potato', [
+            h('path', { d: 'M15 47V42', stroke: '#4e9a44', strokeWidth: 1.6, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 45c-2.6 0-4.4-1.4-4.8-3.4 2.6 .4 4.4 1.6 4.8 3.4z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 44c2.6 0 4.4-1.4 4.8-3.4-2.6 .4-4.4 1.6-4.8 3.4z', fill: '#5aa94a' }),
+            // 土豆大半埋在土里，只露顶
+            h('ellipse', { cx: 15, cy: 54, rx: 8, ry: 6.5, fill: '#d4a24a' }),
+            h('ellipse', { cx: 13.5, cy: 52.4, rx: 4.6, ry: 3, fill: '#e0b566', opacity: 0.8 }),
+            h('circle', { cx: 11.8, cy: 54.6, r: 0.9, fill: '#b08030', opacity: 0.7 }),
+            h('circle', { cx: 17.6, cy: 52.8, r: 0.8, fill: '#b08030', opacity: 0.7 }),
+            h('circle', { cx: 15.4, cy: 56.2, r: 0.7, fill: '#b08030', opacity: 0.6 }),
+          ]),
+          sym('wcd-crop-5-potato', [
+            h('path', { d: 'M15 45V38', stroke: '#4e9a44', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none' }),
+            h('path', { d: 'M15 43c-3.2 0-5.4-1.8-5.8-4.2 3.2 .5 5.4 2 5.8 4.2z', fill: '#6fbf5c' }),
+            h('path', { d: 'M15 41c3.2 0 5.4-1.8 5.8-4.2-3.2 .5-5.4 2-5.8 4.2z', fill: '#5aa94a' }),
+            h('path', { d: 'M15 46c-2.4 0-4-1.4-4.4-3.2 2.4 .4 4 1.6 4.4 3.2z', fill: '#7fcf6a' }),
+            // 主土豆
+            h('ellipse', { cx: 12, cy: 52, rx: 10, ry: 8.5, fill: '#d4a24a' }),
+            h('ellipse', { cx: 10, cy: 50, rx: 5.5, ry: 4, fill: '#e0b566', opacity: 0.75 }),
+            h('circle', { cx: 8, cy: 54, r: 1, fill: '#b08030', opacity: 0.65 }),
+            h('circle', { cx: 15, cy: 50.5, r: 0.9, fill: '#b08030', opacity: 0.65 }),
+            h('circle', { cx: 12, cy: 57, r: 0.8, fill: '#b08030', opacity: 0.6 }),
+            // 旁边的小土豆
+            h('ellipse', { cx: 23, cy: 56.5, rx: 5, ry: 4.2, fill: '#c99b45' }),
+            h('ellipse', { cx: 22, cy: 55.2, rx: 2.8, ry: 2.2, fill: '#d9ad5c', opacity: 0.8 }),
+            h('circle', { cx: 24.6, cy: 57.6, r: 0.7, fill: '#a87a2e', opacity: 0.6 }),
+          ]),
+        ),
+      );
+    }
+
+    // 辅助区空白格里的小景：水塘、石头
+    function navDeco(kind) {
+      if (kind === 'pond') {
+        return h(
+          'svg',
+          { viewBox: '0 0 60 30', 'aria-hidden': 'true', className: 'wcd-nav-svg' },
+          h('ellipse', { cx: 30, cy: 18, rx: 27, ry: 10, fill: '#8fd3f0' }),
+          h('ellipse', { cx: 30, cy: 16, rx: 23, ry: 7.5, fill: '#a9dff7' }),
+          h('ellipse', { cx: 21, cy: 14, rx: 7, ry: 2.2, fill: '#e6f7ff', opacity: 0.85 }),
+        );
+      }
+      return h(
+        'svg',
+        { viewBox: '0 0 30 30', 'aria-hidden': 'true', className: 'wcd-nav-svg' },
+        h('ellipse', { cx: 10, cy: 20, rx: 8, ry: 5.5, fill: '#b9b4a8' }),
+        h('ellipse', { cx: 12, cy: 18.5, rx: 6, ry: 4, fill: '#cbc6b9' }),
+        h('ellipse', { cx: 22, cy: 23, rx: 5.5, ry: 3.6, fill: '#a9a49a' }),
+      );
+    }
+
+    function KeyBoard(props) {
+      var stats = props.stats || {};
+      var t = props.t || function (key) { return key; };
+
+      // 收获后立刻重渲染：父级每秒才 tick 一次，点完等一秒才变荒地手感太差
+      var tickState = React.useState(0);
+      var bump = function () { tickState[1](function (v) { return v + 1; }); };
+
+      // 点一下格子分两种：满级 → 收获（库存 +1、清零回荒地）；没满级 → 次数 +1
+      // 手动 +1 沿用同一套初始化：荒地被点第一下时才随机选作物和姿态
+      function tap(code) {
+        var n = Number(KEY_STATS[code]) || 0;
+        if (n >= RIPE_AT) {
+          var look = KEY_LOOKS[code];
+          addStock(look && look.crop ? look.crop : randomLook().crop, 1);
+          delete KEY_STATS[code];
+          delete KEY_LOOKS[code];
+        } else {
+          KEY_STATS[code] = n + 1;
+          if (!KEY_LOOKS[code]) KEY_LOOKS[code] = randomLook();
+        }
+        KEY_STATS_DIRTY = true;
+        LOOKS_DIRTY = true;
+        flushKeyStats(props.ctx);
+        bump();
+      }
+
+      // 生长阶段按固定次数阈值分档：0 / 1 / 10 / 50 / 200 / 1000
+      // 固定阈值是「满级后收获」玩法的前提，等级不再随总量漂移
+      function tierOf(n) {
+        var v = Number(n) || 0;
+        if (v <= 0) return 0;
+        if (v < 10) return 1;
+        if (v < 50) return 2;
+        if (v < 200) return 3;
+        if (v < 1000) return 4;
+        return 5;
+      }
+
+      // 外观全部来自这一格初始化时定下的 look，不再按 code 哈希
+      function plot(n, code, look) {
+        var l = look || normalizeLook(null);
+        var dx = l.dx;
+        var dy = l.dy;
+        var flip = l.flip === -1 ? 'scaleX(-1)' : 'scaleX(1)';
+        var amp = l.amp.toFixed(1) + 'deg';
+        // 摆动相位由外观派生：同格永远一致，不同格错开
+        var phase = Math.abs(Math.round(l.dx * 37 + l.dy * 61 + l.amp * 100)) || 1;
+        var tier = tierOf(n);
+        // 4/5 档按作物种类取图形，其它档位共用
+        var symId = tier >= 4 ? 'wcd-crop-' + tier + '-' + l.crop : 'wcd-crop-' + tier;
+        return h(
+          'span',
+          {
+            className: 'wcd-sway',
+            // 满级（>=1000 次）挂金色呼吸光，提示可以收获
+            'data-ripe': tier >= 5 ? 'true' : 'false',
+            style: { '--cx': dx + 'px', '--cy': dy + 'px', '--flip': flip },
+          },
+          h(
+            'svg',
+            {
+              className: 'wcd-crop',
+              viewBox: '0 0 30 60',
+              preserveAspectRatio: 'xMidYMax meet',
+              'aria-hidden': 'true',
+              style: {
+                animationDuration: (2.8 + (phase % 900) / 1000) + 's',
+                animationDelay: '-' + (phase % 3000) + 'ms',
+                '--amp': amp,
+              },
+            },
+            h('use', { href: '#' + symId }),
+          ),
+        );
+      }
+
+      function keyCell(item, idx, inGrid) {
+        if (!item) return h('span', { className: 'wcd-key wcd-key-ghost', key: 'g' + idx });
+        var code = item[0];
+        var label = item[1];
+        var w = item[2];
+        var fixed = typeof w === 'number' && w > 0;
+        var n = Number(stats[code]) || 0;
+        var tier = tierOf(n);
+        var cellStyle = inGrid || !fixed ? {} : { flex: '0 0 calc(var(--u) * ' + w + ')' };
+        cellStyle['--plot-top'] = PLOT_TINT[tier];
+        cellStyle['--plot-side'] = PLOT_SIDE[tier];
+        return h(
+          'span',
+          {
+            className: 'wcd-key wcd-plot',
+            key: code,
+            style: cellStyle,
+            'data-tip': label + ' · ' + n + (tier >= 5 ? ' · ' + t('keymap.harvest') : ''),
+            onClick: function () { tap(code); },
+            'data-on': n > 0 ? 'true' : 'false',
+          },
+          h('span', { className: 'wcd-plot-side' }),
+          h('span', { className: 'wcd-plot-top' }),
+          plot(n, code, lookOf(code, KEY_LOOKS)),
+          h(
+            'span',
+            { className: 'wcd-plot-key', 'data-ripe': tier >= 5 ? 'true' : 'false' },
+            tier >= 5 ? t('keymap.ripe') : label,
+          ),
+        );
+      }
+
+      function padCell(item, idx) {
+        if (!item) return h('span', { className: 'wcd-key wcd-key-ghost', key: 'pg' + idx });
+        if (item.g) {
+          return h('span', {
+            className: 'wcd-key wcd-key-ghost',
+            key: 'pg' + idx,
+            style: { gridColumn: item.col, gridRow: item.row },
+          });
+        }
+        var n = Number(stats[item.c]) || 0;
+        var tier = tierOf(n);
+        return h(
+          'span',
+          {
+            className: 'wcd-key wcd-plot',
+            key: item.c,
+            style: {
+              gridColumn: item.col + ' / span ' + (item.w || 1),
+              gridRow: item.row + ' / span ' + (item.h || 1),
+              '--plot-top': PLOT_TINT[tier],
+              '--plot-side': PLOT_SIDE[tier],
+            },
+            'data-tip': item.l + ' · ' + n + (tier >= 5 ? ' · ' + t('keymap.harvest') : ''),
+            onClick: function () { tap(item.c); },
+            'data-on': n > 0 ? 'true' : 'false',
+          },
+          h('span', { className: 'wcd-plot-side' }),
+          h('span', { className: 'wcd-plot-top' }),
+          plot(n, item.c, lookOf(item.c, KEY_LOOKS)),
+          h(
+            'span',
+            { className: 'wcd-plot-key', 'data-ripe': tier >= 5 ? 'true' : 'false' },
+            tier >= 5 ? t('keymap.ripe') : item.l,
+          ),
+        );
+      }
+
+      return h(
+        'div',
+        { className: 'wcd-keymap' },
+        h(
+          'div',
+          { className: 'wcd-kb-rows' },
+          h(CropSprite),
+          h(
+            'div',
+            { className: 'wcd-kb-main' },
+            KEY_MAIN.map(function (row, i) {
+              return h(
+                'div',
+                { className: 'wcd-kb-row', key: 'r' + i },
+                row.map(function (item, j) { return keyCell(item, j, false); }),
+              );
+            }),
+          ),
+          h(
+            'div',
+            { className: 'wcd-kb-nav' },
+            KEY_NAV.map(function (item, i) {
+              if (item && item.deco) {
+                return h(
+                  'div',
+                  { className: 'wcd-nav-deco', key: 'nd' + i, style: { gridColumn: 'span ' + (item.w || 1) } },
+                  navDeco(item.deco),
+                );
+              }
+              return keyCell(item, i, true);
+            }),
+          ),
+          h(
+            'div',
+            { className: 'wcd-kb-pad' },
+            KEY_PAD.map(function (item, i) { return padCell(item, i); }),
+          ),
+        ),
+        h(StockBar),
+      );
+    }
+
+    // 田埂外的装饰：一簇草、一汪水塘、几块石头。纯装饰，不吃鼠标事件。
+    function FarmDeco() {
+      return h(
+        'div',
+        { className: 'wcd-kbd-deco', 'aria-hidden': 'true' },
+        h(
+          'svg',
+          { className: 'wcd-deco wcd-deco-grass', viewBox: '0 0 34 30' },
+          h('path', {
+            d: 'M6 29C6 22 5 17 3 12M11 29C11 21 10 15 8 10M16 29C16.5 21 16.5 14 16 8',
+            stroke: '#4e9a44', strokeWidth: 2, strokeLinecap: 'round', fill: 'none',
+          }),
+          h('path', {
+            d: 'M22 29C22.5 23 23.5 18 25 14M27 29C27 24 28 20 29.5 17',
+            stroke: '#6fbf5c', strokeWidth: 1.8, strokeLinecap: 'round', fill: 'none',
+          }),
+        ),
+        h(
+          'svg',
+          { className: 'wcd-deco wcd-deco-farm', viewBox: '0 0 84 50' },
+          // 栅栏
+          h('rect', { x: 6, y: 12, width: 3, height: 38, rx: 1.2, fill: '#c9a06a' }),
+          h('rect', { x: 23, y: 10, width: 3, height: 40, rx: 1.2, fill: '#c9a06a' }),
+          h('rect', { x: 40, y: 12, width: 3, height: 38, rx: 1.2, fill: '#c9a06a' }),
+          h('rect', { x: 4.5, y: 19, width: 40, height: 2.2, rx: 1.1, fill: '#b98f5c' }),
+          h('rect', { x: 4.5, y: 29, width: 40, height: 2.2, rx: 1.1, fill: '#b98f5c' }),
+          // 稻草人：帽子 → 头 → 身体 连在一起，底部被田埂遮住
+          h('rect', { x: 62, y: 16, width: 2.4, height: 34, rx: 1.2, fill: '#8a6642' }),
+          h('rect', { x: 50, y: 24, width: 26, height: 2.4, rx: 1.2, fill: '#8a6642' }),
+          h('path', { d: 'M53 9 63 3 73 9z', fill: '#c9a06a' }),
+          h('rect', { x: 55, y: 9, width: 16, height: 2.4, rx: 1.2, fill: '#b98f5c' }),
+          h('circle', { cx: 63, cy: 15, r: 6, fill: '#e8c27a' }),
+          h('circle', { cx: 60.5, cy: 15, r: 0.9, fill: '#5b4a36' }),
+          h('circle', { cx: 65.5, cy: 15, r: 0.9, fill: '#5b4a36' }),
+          h('path', { d: 'M57 19h12l-2 22h-8z', fill: '#c97a3d' }),
+          h('path', { d: 'M57 19 63 25 69 19z', fill: '#e08a4a' }),
+        ),
+      );
+    }
+
+    // 键盘浮窗：独立开关，右下角常驻，格子比详情面板宽得多
+    // 库存行的图标用 emoji：和农场主题贴合，也省得自己画
+    var STOCK_EMOJI = { carrot: '🥕', tomato: '🍅', cabbage: '🥬', corn: '🌽', potato: '🥔' };
+
+    // 键盘底部居中：每种作物各有几颗
+    function StockBar() {
+      return h(
+        'div',
+        { className: 'wcd-stock' },
+        CROP_KINDS.map(function (kind) {
+          var n = Number(CROP_STOCK[kind]) || 0;
+          return h(
+            'span',
+            { className: 'wcd-stock-item', key: kind, 'data-kind': kind },
+            h(
+              'span',
+              { className: 'wcd-stock-emoji', 'aria-hidden': 'true' },
+              STOCK_EMOJI[kind] || '🌱',
+            ),
+            h('span', { className: 'wcd-stock-num' }, String(n)),
+          );
+        }),
+      );
+    }
+
+    // 色环图标：六个 60° 的色块拼成一圈，中间镂空（外径 9.4、内径 4.3，圆心 12,12）
+
+        // QQ 截图吸色复制出来的是「65,118,230」，逗号可能是全角，也可能带空格，都认
+    function parseRgbInput(text) {
+      var m = String(text || '').match(/(\d{1,3})\s*[,，\s]\s*(\d{1,3})\s*[,，\s]\s*(\d{1,3})/);
+      if (!m) return null;
+      var out = [Number(m[1]), Number(m[2]), Number(m[3])];
+      if (out[0] > 255 || out[1] > 255 || out[2] > 255) return null;
+      return out;
+    }
+
+    function hexOf(rgb) {
+      return (
+        '#' +
+        rgb
+          .map(function (n) {
+            var s = n.toString(16);
+            return s.length === 1 ? '0' + s : s;
+          })
+          .join('')
+      );
+    }
+
+    // 优先用异步剪贴板；被权限拦了退回 textarea + execCommand
+    function copyText(text) {
+      try {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (e) {
+        // 落到兜底方案
+      }
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        return ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    var RGB_LAST = '';
+
+    function RgbModal(props) {
+      var t = props.t;
+      var dismiss = useModalDismiss(props.onClose);
+      var mask = useMaskClose(dismiss.requestClose);
+      var rawState = React.useState(props.initial || '');
+      var raw = rawState[0];
+      var setRaw = rawState[1];
+      var doneState = React.useState('');
+      var done = doneState[0];
+      var setDone = doneState[1];
+      var rgb = parseRgbInput(raw);
+      var css = rgb ? 'rgb(' + rgb.join(', ') + ')' : '';
+      var hex = rgb ? hexOf(rgb) : '';
+
+      // 「已复制」两个字停一秒半自己退回去
+      React.useEffect(
+        function () {
+          if (!done) return undefined;
+          var id = setTimeout(function () {
+            setDone('');
+          }, 1400);
+          return function () {
+            clearTimeout(id);
+          };
+        },
+        [done],
+      );
+
+      // Esc 关窗
+      React.useEffect(function () {
+        function onKey(e) {
+          if (e.key === 'Escape') dismiss.requestClose();
+        }
+        document.addEventListener('keydown', onKey, true);
+        return function () {
+          document.removeEventListener('keydown', onKey, true);
+        };
+      }, []);
+
+      function copy(kind, value) {
+        if (!value) return;
+        copyText(value);
+        setDone(kind);
+      }
+
+      function copyBtn(kind, value) {
+        var hit = done === kind;
+        return h(
+          'button',
+          {
+            key: 'copy-' + kind,
+            type: 'button',
+            className: 'wcd-rgb-copy',
+            'data-done': hit ? 'true' : 'false',
+            disabled: !value,
+            onClick: function (e) {
+              e.stopPropagation();
+              copy(kind, value);
+            },
+          },
+          hit ? t('rgb.copied') : t('rgb.copy'),
+        );
+      }
+
+      return h(
+        'div',
+        Object.assign({ className: 'wcd-mask', 'data-closing': dismiss.closing ? 'true' : 'false' }, mask),
+        h(
+          'div',
+          {
+            className: 'wcd-rgb',
+            onClick: function (e) {
+              e.stopPropagation();
+            },
+          },
+          h(
+            'div',
+            { className: 'wcd-rgb-head' },
+            h('span', { className: 'wcd-rgb-title' }, t('rgb.title')),
+            h(
+              'button',
+              {
+                type: 'button',
+                className: 'wcd-rgb-close',
+                title: t('note.close'),
+                onClick: function (e) {
+                  e.stopPropagation();
+                  dismiss.requestClose();
+                },
+              },
+              '×',
+            ),
+          ),
+          h(
+            'div',
+            { className: 'wcd-rgb-top' },
+            h('input', {
+              className: 'wcd-rgb-input',
+              value: raw,
+              placeholder: t('rgb.ph'),
+              spellCheck: false,
+              autoFocus: true,
+              onChange: function (e) {
+                RGB_LAST = e.target.value;
+                setRaw(e.target.value);
+                setDone('');
+              },
+            }),
+            h('span', {
+              className: 'wcd-rgb-chip',
+              style: { background: rgb ? 'rgb(' + rgb.join(',') + ')' : 'transparent' },
+            }),
+          ),
+          raw !== '' && !rgb ? h('div', { className: 'wcd-rgb-bad' }, t('rgb.bad')) : null,
+          h(
+            'div',
+            { className: 'wcd-rgb-row' },
+            h('span', { className: 'wcd-rgb-tag' }, 'RGB'),
+            h('span', { className: 'wcd-rgb-val', 'data-empty': rgb ? 'false' : 'true' }, css || '—'),
+            copyBtn('css', css),
+          ),
+          h(
+            'div',
+            { className: 'wcd-rgb-row' },
+            h('span', { className: 'wcd-rgb-tag' }, 'HEX'),
+            h('span', { className: 'wcd-rgb-val', 'data-empty': hex ? 'false' : 'true' }, hex || '—'),
+            copyBtn('hex', hex),
+          ),
+        ),
+      );
+    }
+
+    // 时钟图标：圆表盘 + 时针分针
+        function pad2(n) {
+      return n < 10 ? '0' + n : String(n);
+    }
+
+    // 统一成「2026-01-01 11:11:11」，用本地时区——时间戳本身没有时区，按机器的来最符合直觉
+    function formatStamp(ms) {
+      var d = new Date(ms);
+      if (isNaN(d.getTime())) return '';
+      return (
+        d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) +
+        ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds())
+      );
+    }
+
+    // 秒与毫秒按长度判断：秒到 2286 年才 11 位，毫秒从 1973 年起就是 13 位，1e11 是干净的分界
+    function parseStamp(raw) {
+      var s = String(raw || '').trim();
+      if (!/^\d{1,16}$/.test(s)) return null;
+      var n = Number(s);
+      var isMs = n >= 1e11;
+      var text = formatStamp(isMs ? n : n * 1000);
+      if (!text) return null;
+      return { ms: isMs, text: text };
+    }
+
+    var TS_LAST = '';
+
+    function TsModal(props) {
+      var t = props.t;
+      var dismiss = useModalDismiss(props.onClose);
+      var mask = useMaskClose(dismiss.requestClose);
+      var rawState = React.useState(props.initial || '');
+      var raw = rawState[0];
+      var setRaw = rawState[1];
+      var doneState = React.useState(false);
+      var done = doneState[0];
+      var setDone = doneState[1];
+      var parsed = parseStamp(raw);
+
+      React.useEffect(
+        function () {
+          if (!done) return undefined;
+          var id = setTimeout(function () {
+            setDone(false);
+          }, 1400);
+          return function () {
+            clearTimeout(id);
+          };
+        },
+        [done],
+      );
+
+      React.useEffect(function () {
+        function onKey(e) {
+          if (e.key === 'Escape') dismiss.requestClose();
+        }
+        document.addEventListener('keydown', onKey, true);
+        return function () {
+          document.removeEventListener('keydown', onKey, true);
+        };
+      }, []);
+
+      return h(
+        'div',
+        Object.assign({ className: 'wcd-mask', 'data-closing': dismiss.closing ? 'true' : 'false' }, mask),
+        h(
+          'div',
+          {
+            className: 'wcd-rgb',
+            onClick: function (e) {
+              e.stopPropagation();
+            },
+          },
+          h(
+            'div',
+            { className: 'wcd-rgb-head' },
+            h('span', { className: 'wcd-rgb-title' }, t('ts.title')),
+            h(
+              'button',
+              {
+                type: 'button',
+                className: 'wcd-rgb-close',
+                title: t('note.close'),
+                onClick: function (e) {
+                  e.stopPropagation();
+                  dismiss.requestClose();
+                },
+              },
+              '×',
+            ),
+          ),
+          h(
+            'div',
+            { className: 'wcd-rgb-top' },
+            h('input', {
+              className: 'wcd-rgb-input',
+              value: raw,
+              placeholder: t('ts.ph'),
+              spellCheck: false,
+              autoFocus: true,
+              onChange: function (e) {
+                TS_LAST = e.target.value;
+                setRaw(e.target.value);
+                setDone(false);
+              },
+            }),
+          ),
+          raw !== '' && !parsed ? h('div', { className: 'wcd-rgb-bad' }, t('ts.bad')) : null,
+          parsed
+            ? h('div', { className: 'wcd-ts-unit' }, parsed.ms ? t('ts.unit.ms') : t('ts.unit.sec'))
+            : null,
+          h(
+            'div',
+            { className: 'wcd-rgb-row' },
+            h('span', { className: 'wcd-rgb-tag' }, t('ts.tag')),
+            h(
+              'span',
+              { className: 'wcd-rgb-val', 'data-empty': parsed ? 'false' : 'true' },
+              parsed ? parsed.text : '—',
+            ),
+            h(
+              'button',
+              {
+                type: 'button',
+                className: 'wcd-rgb-copy',
+                'data-done': done ? 'true' : 'false',
+                disabled: !parsed,
+                onClick: function (e) {
+                  e.stopPropagation();
+                  if (!parsed) return;
+                  copyText(parsed.text);
+                  setDone(true);
+                },
+              },
+              done ? t('rgb.copied') : t('rgb.copy'),
+            ),
+          ),
+        ),
+      );
+    }
+
+
+    // 便笺图标：黄色便利贴，右下角折起
+        // 一张便笺：顶栏中间三横能拖、右上角 × 表示办完、正文多高它就多高
+    function NoteCard(props) {
+      var note = props.note;
+      var ctx = props.ctx;
+      var t = props.t;
+      var posState = React.useState({ x: Number(note.x) || 0, y: Number(note.y) || 0 });
+      var pos = posState[0];
+      var setPos = posState[1];
+      var startRef = React.useRef(null);
+      var posRef = React.useRef(pos);
+      var taRef = React.useRef(null);
+      posRef.current = pos;
+
+      // 正文变长变短，输入框跟着长高，不出现内部滚动条
+      React.useEffect(function () {
+        var el = taRef.current;
+        if (!el) return;
+        el.style.height = 'auto';
+        el.style.height = Math.max(52, el.scrollHeight) + 'px';
+      }, [note.text]);
+
+      function onDown(e) {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        e.stopPropagation();
+        startRef.current = { x: e.clientX, y: e.clientY, px: posRef.current.x, py: posRef.current.y };
+        try {
+          e.currentTarget.setPointerCapture(e.pointerId);
+        } catch (err) {
+          /* 没有指针捕获也能拖，只是移出把手会断 */
+        }
+      }
+      function onMove(e) {
+        var s = startRef.current;
+        if (!s) return;
+        var vw = (typeof window !== 'undefined' && window.innerWidth) || 1280;
+        var vh = (typeof window !== 'undefined' && window.innerHeight) || 800;
+        var nx = Math.min(Math.max(0, s.px + (e.clientX - s.x)), Math.max(0, vw - 240));
+        var ny = Math.min(Math.max(0, s.py + (e.clientY - s.y)), Math.max(0, vh - 40));
+        var next = { x: nx, y: ny };
+        posRef.current = next;
+        setPos(next);
+      }
+      function onUp() {
+        if (!startRef.current) return;
+        startRef.current = null;
+        // 松手才落盘，拖动过程不写配置
+        setNotePos(ctx, note.id, Math.round(posRef.current.x), Math.round(posRef.current.y));
+      }
+
+      return h(
+        'div',
+        { className: 'wcd-note', style: { left: Math.round(pos.x) + 'px', top: Math.round(pos.y) + 'px' } },
+        h(
+          'div',
+          {
+            className: 'wcd-note-head',
+            onPointerDown: onDown,
+            onPointerMove: onMove,
+            onPointerUp: onUp,
+            onPointerCancel: onUp,
+          },
+          h(
+            'span',
+            { className: 'wcd-note-grip', 'aria-hidden': 'true' },
+            h('span', { className: 'wcd-note-grip-bar' }),
+            h('span', { className: 'wcd-note-grip-bar' }),
+            h('span', { className: 'wcd-note-grip-bar' }),
+          ),
+          h(
+            'button',
+            {
+              className: 'wcd-note-close',
+              type: 'button',
+              title: t('note.done'),
+              'aria-label': t('note.done'),
+              onPointerDown: function (e) { e.stopPropagation(); },
+              onClick: function (e) {
+                e.stopPropagation();
+                doneNote(ctx, note.id);
+              },
+            },
+            '×',
+          ),
+        ),
+        h('textarea', {
+          className: 'wcd-note-body',
+          ref: taRef,
+          value: note.text,
+          placeholder: t('note.ph'),
+          spellCheck: false,
+          onChange: function (e) {
+            setNoteText(ctx, note.id, e.target.value);
+            noteNotify();
+          },
+        }),
+      );
+    }
+
+    function NoteLayer(props) {
+      return h(
+        'div',
+        { className: 'wcd-note-layer' },
+        props.notes.map(function (n) {
+          return h(NoteCard, { key: n.id, note: n, ctx: props.ctx, t: props.t });
+        }),
+      );
+    }
+
+    function KbdPanel(props) {
+      // 位置记在配置里：打开时从 props 读回上次拖到的偏移
+      var dragState = React.useState({
+        dx: Number(props.initialX) || 0,
+        dy: Number(props.initialY) || 0,
+      });
+      var drag = dragState[0];
+      var setDrag = dragState[1];
+      var startRef = React.useRef(null);
+      var dragRef = React.useRef(drag);
+      dragRef.current = drag;
+
+      // 配置可能晚于组件就绪：到位后把记忆位置补上，避免先停在右下角
+      React.useEffect(function () {
+        if (startRef.current) return;
+        setDrag({ dx: Number(props.initialX) || 0, dy: Number(props.initialY) || 0 });
+      }, [props.initialX, props.initialY]);
+
+      function onDown(e) {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        startRef.current = {
+          x: e.clientX,
+          y: e.clientY,
+          dx: dragRef.current.dx,
+          dy: dragRef.current.dy,
+        };
+        try {
+          e.currentTarget.setPointerCapture(e.pointerId);
+        } catch (err) {
+          /* 没有指针捕获也能拖，只是移出把手会断 */
+        }
+      }
+      function onMove(e) {
+        var s = startRef.current;
+        if (!s) return;
+        var next = { dx: s.dx + (e.clientX - s.x), dy: s.dy + (e.clientY - s.y) };
+        dragRef.current = next;
+        setDrag(next);
+      }
+      function onUp() {
+        var s = startRef.current;
+        startRef.current = null;
+        if (!s) return;
+        // 松手才落盘，拖动过程不写配置
+        if (props.onDrop) {
+          props.onDrop(Math.round(dragRef.current.dx), Math.round(dragRef.current.dy));
+        }
+      }
+
+      var shift = 'translate(' + Math.round(drag.dx) + 'px,' + Math.round(drag.dy) + 'px)';
+
+      // 尺寸档：small 0.85 / medium 1 / large 1.5；屏幕放不下时按视口自动收窄
+      var size = props.size || 'medium';
+      var scale = size === 'large' ? 1.5 : size === 'small' ? 0.85 : 1;
+      if (typeof window !== 'undefined' && window.innerWidth > 0) {
+        var maxK = (window.innerWidth - 60) / 780;
+        if (maxK > 0 && maxK < scale) scale = maxK;
+      }
+      return h(
+        'div',
+        { className: 'wcd-kbd-wrap', style: { transform: shift } },
+        h(
+          'div',
+          {
+            className: 'wcd-kbd-win',
+            'data-anim': props.animate ? 'true' : 'false',
+            style: { transform: 'scale(' + scale.toFixed(3) + ')' },
+          },
+        // 关闭按钮浮在小键盘第一行最右列，三横线把手在它左边一格
+        h('button', { className: 'wcd-kbd-close', type: 'button', onClick: props.onClose }, '×'),
+        h(
+          'div',
+          {
+            className: 'wcd-kbd-grip',
+            onPointerDown: onDown,
+            onPointerMove: onMove,
+            onPointerUp: onUp,
+            onPointerCancel: onUp,
+          },
+          h('span', { className: 'wcd-kbd-grip-bar' }),
+          h('span', { className: 'wcd-kbd-grip-bar' }),
+          h('span', { className: 'wcd-kbd-grip-bar' }),
+        ),
+          h(FarmDeco),
+          h(KeyBoard, { stats: KEY_STATS, t: props.t, ctx: props.ctx }),
+        ),
+      );
+    }
+
     // 未来 24 小时 / 未来 3 天：详情面板
     function WeatherPanel(props) {
       var wx = props.wx;
@@ -1610,7 +3294,16 @@ window.__ModuleLoader__.load({
             h('span', { className: 'wcd-head-temp' }, tempText(wx.temp)),
             h('span', { className: 'wcd-head-dim' }, t('panel.feels') + ' ' + tempText(wx.feels)),
             h('span', { className: 'wcd-head-dim' }, tempText(wx.low) + '~' + tempText(wx.high)),
+            h(RefreshBtn, {
+              label: t('panel.refresh'),
+              spin: props.spin === true,
+              ok: props.ok === true,
+              onClick: props.onRefreshWx,
+            }),
           ),
+          wx.error
+            ? h('div', { className: 'wcd-err', key: 'wxerr' }, t('panel.error') + wx.error)
+            : null,
           h(
             'div',
             { className: 'wcd-strip-wrap', key: 'stripwrap' },
@@ -1658,6 +3351,7 @@ window.__ModuleLoader__.load({
         if (wx.error) body.push(h('div', { className: 'wcd-stale', key: 'stale' }, t('panel.stale')));
       }
 
+
       return h(
         'div',
         {
@@ -1687,6 +3381,59 @@ window.__ModuleLoader__.load({
       storm: '#A66BFF',
       unknown: '#9AA6B2',
     };
+
+    // 两个半圆弧 + 两个箭头的手动刷新图标；spinning 时整枚图标匀速转
+    function RefreshIcon() {
+      return h(
+        'svg',
+        { className: 'wcd-refresh-ico', viewBox: '0 0 16 16', width: 13, height: 13, 'aria-hidden': 'true', focusable: 'false' },
+        h('path', { d: 'M2.4 8.6A6 6 0 0 1 12 4.2', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' }),
+        h('path', { d: 'M13.6 7.4A6 6 0 0 1 4 11.8', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round' }),
+        h('path', { d: 'M12.1 1.9v3.2H8.9', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+        h('path', { d: 'M3.9 14.1v-3.2h3.2', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+      );
+    }
+
+    // 刷新成功的绿色对勾：只在 props.ok 为真时出现，靠 setTimeout 一秒后卸载
+    function RefreshOk() {
+      return h(
+        'svg',
+        { className: 'wcd-refresh-ok', viewBox: '0 0 16 16', width: 12, height: 12, 'aria-hidden': 'true', focusable: 'false' },
+        h('path', {
+          d: 'M3.2 8.4l3.1 3.1 6.5-6.8',
+          fill: 'none',
+          stroke: 'currentColor',
+          strokeWidth: 1.8,
+          strokeLinecap: 'round',
+          strokeLinejoin: 'round',
+        }),
+      );
+    }
+
+    // 首行最右侧的小按钮：点一下让宿主立刻补刷一次；成功时左边先闪一枚对勾
+    function RefreshBtn(props) {
+      return h(
+        'span',
+        { className: 'wcd-refresh-group' },
+        props.ok ? h(RefreshOk) : null,
+        h(
+          'button',
+          {
+            className: 'wcd-refresh',
+            type: 'button',
+            title: props.label,
+            'aria-label': props.label,
+            'data-spin': props.spin ? 'true' : 'false',
+            onClick: function (e) {
+              e.stopPropagation();
+              e.preventDefault();
+              if (props.onClick) props.onClick();
+            },
+          },
+          h(RefreshIcon),
+        ),
+      );
+    }
 
     function WeatherGlyph(props) {
       var kind = WX_GROUP[props.code] || 'unknown';
@@ -1823,6 +3570,26 @@ window.__ModuleLoader__.load({
       var bonkState = React.useState(0);
       var bonk = bonkState[0];
       var setBonk = bonkState[1];
+      // 便笺列表存在模块级（配置回读后直接可见），这里只用一个自增版本号触发重渲染
+      var noteVersion = React.useState(0);
+      // 颜色小窗：记住上一次输入，重新打开还在（QQ 吸色常常连着转好几个值）
+      var rgbOpenState = React.useState(false);
+      var rgbOpen = rgbOpenState[0];
+      var setRgbOpen = rgbOpenState[1];
+      // 时间戳小窗
+      var tsOpenState = React.useState(false);
+      var tsOpen = tsOpenState[0];
+      var setTsOpen = tsOpenState[1];
+      var setNoteVersion = noteVersion[1];
+      React.useEffect(function () {
+        var fn = function () { setNoteVersion(function (n) { return n + 1; }); };
+        NOTE_SUBS.push(fn);
+        return function () {
+          var i = NOTE_SUBS.indexOf(fn);
+          if (i >= 0) NOTE_SUBS.splice(i, 1);
+          flushNotes(ctx);
+        };
+      }, []);
       // 木鱼上飘的「功德+1」：每条一个 id，动画结束自己摘掉，最多留 8 条
       var meritState = React.useState([]);
       var merits = meritState[0];
@@ -1838,6 +3605,88 @@ window.__ModuleLoader__.load({
       var spin = spinState[0];
       var setSpin = spinState[1];
       var tarotState = React.useState(null);
+      // 键盘浮窗的开关：独立于详情面板，开了就一直挂着
+      var keyWinState = React.useState(false);
+      var keyWin = keyWinState[0];
+      var setKeyWin = keyWinState[1];
+      // 场上有没有可收获的植物：定时看内存里的统计，出现/消失才重渲染
+      var ripeState = React.useState(false);
+      var ripeOn = ripeState[0];
+      var setRipeOn = ripeState[1];
+      // 手动刷新：写 ping 让宿主立刻补刷。天气和用量各有一套转圈 / 对勾，互不打断；
+      // 转圈值就是「这次开始转的时间戳」（0 = 没在转），30 秒兜底用它计时
+      var spinState = React.useState({ wx: 0, usage: 0 });
+      var spinMap = spinState[0];
+      var setSpinMap = spinState[1];
+      var okState = React.useState({ wx: false, usage: false });
+      var okMap = okState[0];
+      var setOkMap = okState[1];
+      var sigRef = React.useRef({ wx: null, usage: null });
+      // 只改其中一边，另一边原样保留——这是「互不影响」的关键
+      function patchSide(setter, which, value) {
+        setter(function (prev) {
+          var next = Object.assign({}, prev);
+          next[which] = value;
+          return next;
+        });
+      }
+      function manualRefresh(which) {
+        patchSide(setSpinMap, which, Date.now());
+        // 先清掉旧对勾，连点两次也能各闪一次
+        patchSide(setOkMap, which, false);
+        persistPing(ctx);
+      }
+      // 快照指纹：at 变了＝这次成功了，errorAt 变了＝这次失败了。天气、用量各看各的
+      function snapSig(snap) {
+        if (!snap) return '';
+        return String(snap.at || '') + '|' + String(snap.errorAt || '') + '|' + String(snap.error || '');
+      }
+      React.useEffect(function () {
+        var wxSig = snapSig(cfg.weather);
+        var usageSig = snapSig(cfg.usage);
+        var prev = sigRef.current;
+        sigRef.current = { wx: wxSig, usage: usageSig };
+        // 首次挂载只记基线，不当作「请求回来了」
+        var doneWx = spinMap.wx > 0 && prev.wx !== null && wxSig !== prev.wx;
+        var doneUsage = spinMap.usage > 0 && prev.usage !== null && usageSig !== prev.usage;
+        if (!doneWx && !doneUsage) return;
+        if (doneWx) {
+          patchSide(setSpinMap, 'wx', 0);
+          if (!((cfg.weather && cfg.weather.error) || '')) patchSide(setOkMap, 'wx', true);
+        }
+        if (doneUsage) {
+          patchSide(setSpinMap, 'usage', 0);
+          if (!((cfg.usage && cfg.usage.error) || '')) patchSide(setOkMap, 'usage', true);
+        }
+      }, [cfg.weather, cfg.usage, spinMap]);
+      // 兜底：按设置里的请求超时（默认 30 秒）停转圈，和宿主那边的判定窗口对齐
+      var spinLimitMs = (Number(cfg.requestTimeoutSeconds) || 30) * 1000;
+      React.useEffect(function () {
+        if (!(spinMap.wx > 0)) return undefined;
+        var id = setTimeout(function () { patchSide(setSpinMap, 'wx', 0); }, spinLimitMs);
+        return function () { clearTimeout(id); };
+      }, [spinMap.wx]);
+      React.useEffect(function () {
+        if (!(spinMap.usage > 0)) return undefined;
+        var id = setTimeout(function () { patchSide(setSpinMap, 'usage', 0); }, spinLimitMs);
+        return function () { clearTimeout(id); };
+      }, [spinMap.usage]);
+      // 对勾各管各的：一秒后自己消失，不影响另一边
+      React.useEffect(function () {
+        if (!okMap.wx) return undefined;
+        var id = setTimeout(function () { patchSide(setOkMap, 'wx', false); }, 1000);
+        return function () { clearTimeout(id); };
+      }, [okMap.wx]);
+      React.useEffect(function () {
+        if (!okMap.usage) return undefined;
+        var id = setTimeout(function () { patchSide(setOkMap, 'usage', false); }, 1000);
+        return function () { clearTimeout(id); };
+      }, [okMap.usage]);
+      React.useEffect(function () {
+        setRipeOn(keyStatsHasRipe());
+        var id = setInterval(function () { setRipeOn(keyStatsHasRipe()); }, 3000);
+        return function () { clearInterval(id); };
+      }, []);
       var tarot = tarotState[0];
       var setTarot = tarotState[1];
 
@@ -1937,10 +3786,34 @@ window.__ModuleLoader__.load({
             ? h(
                 'div',
                 { className: 'wcd-usage-block', key: 'usage' },
-                h('div', { className: 'wcd-usage-title' }, t('usage.title')),
+                h(
+                  'div',
+                  { className: 'wcd-usage-title' },
+                  t('usage.title'),
+                  h(RefreshBtn, {
+                    label: t('usage.refresh'),
+                    spin: spinMap.usage > 0,
+                    ok: okMap.usage === true,
+                    onClick: function () { manualRefresh('usage'); },
+                  }),
+                ),
+                usage.error
+                  ? h('div', { className: 'wcd-err', key: 'usageerr' }, t('usage.error') + usage.error)
+                  : null,
                 h('div', { className: 'wcd-usage-row' }, usageItems(34, true)),
               )
             : h('div', { className: 'wcd-usage-hint', key: 'usage', title: usageHint }, usageHint);
+
+      // 客户端每秒重渲染时顺带检查快照是否过期：超过 1 小时就写 ping 让宿主补刷，
+      // 这是系统睡眠导致宿主定时器停摆时的兜底
+      var pingAtRef = React.useRef(0);
+      React.useEffect(function () {
+        var at = cfg.weather && cfg.weather.at ? Date.parse(cfg.weather.at) : 0;
+        if (!at || Date.now() - at < 1200000) return;
+        if (Date.now() - pingAtRef.current < 300000) return;
+        pingAtRef.current = Date.now();
+        persistPing(ctx);
+      });
 
       // 浮窗挂上后回报一次自检（每个页面会话一次）
       React.useEffect(function () {
@@ -2144,8 +4017,9 @@ window.__ModuleLoader__.load({
       function panelPlacement(el) {
         var rect = el.getBoundingClientRect();
         var vp = viewport();
+        // 面板宽度 320：键盘挪到独立浮窗后，这里不需要再撑宽
         var W = Math.min(320, Math.max(240, vp.w - 24));
-        // 用量块 + 天气块的高度估算，用来决定向下展开还是向上翻
+        // 用量块 + 天气块 + 键盘块的高度估算，用来决定向下展开还是向上翻
         var H = (almanacBlock ? 130 : 0) + (usageBlock ? 122 : 0) + (wx.hours.length ? 250 : 130);
         // 与卡片水平居中：卡片比面板窄（280 vs 320），以中线对齐
         var left = clamp(rect.left + rect.width / 2 - W / 2, 12, Math.max(12, vp.w - W - 12));
@@ -2446,6 +4320,84 @@ window.__ModuleLoader__.load({
                 },
                 h(TarotIcon),
               ),
+              // 便笺：每点一次就新开一张，所以不做开关
+              h(
+                'span',
+                {
+                  className: 'wcd-tool wcd-note-btn',
+                  role: 'button',
+                  title: t('note.title'),
+                  onPointerDown: function (e) { e.stopPropagation(); },
+                  onPointerUp: function (e) { e.stopPropagation(); },
+                  onClick: function (e) {
+                    e.stopPropagation();
+                    addNote(ctx);
+                  },
+                },
+                h(NoteIcon),
+              ),
+              h(
+                'span',
+                {
+                  className: 'wcd-tool wcd-farm',
+                  role: 'button',
+                  title: t('keymap.open'),
+                  onPointerDown: function (e) { e.stopPropagation(); },
+                  onPointerUp: function (e) { e.stopPropagation(); },
+                  onClick: function (e) {
+                    e.stopPropagation();
+                    setKeyWin(!keyWin);
+                  },
+                },
+                h(FarmIcon),
+                ripeOn
+                  ? h(
+                      'svg',
+                      {
+                        className: 'wcd-tool-dot',
+                        width: 10,
+                        height: 10,
+                        viewBox: '0 0 10 10',
+                        'aria-hidden': 'true',
+                      },
+                      h('circle', { cx: 5, cy: 5, r: 4, fill: '#e5484d', stroke: '#fff', strokeWidth: 1.5 }),
+                    )
+                  : null,
+              ),
+              // 强制换行：占满整行、零高度的分隔块，保证第一行恰好 5 个工具
+              h('span', { key: 'fishBreak', className: 'wcd-fish-break' }, null),
+              // 颜色转换：第六个工具，落在第二行
+              h(
+                'span',
+                {
+                  className: 'wcd-tool wcd-rgb-btn',
+                  role: 'button',
+                  title: t('rgb.title'),
+                  onPointerDown: function (e) { e.stopPropagation(); },
+                  onPointerUp: function (e) { e.stopPropagation(); },
+                  onClick: function (e) {
+                    e.stopPropagation();
+                    setRgbOpen(true);
+                  },
+                },
+                h(RgbIcon),
+              ),
+              // 时间戳转换：第七个工具，也在第二行
+              h(
+                'span',
+                {
+                  className: 'wcd-tool wcd-ts-btn',
+                  role: 'button',
+                  title: t('ts.title'),
+                  onPointerDown: function (e) { e.stopPropagation(); },
+                  onPointerUp: function (e) { e.stopPropagation(); },
+                  onClick: function (e) {
+                    e.stopPropagation();
+                    setTsOpen(true);
+                  },
+                },
+                h(ClockIcon),
+              ),
             )
           : null,
       );
@@ -2457,6 +4409,9 @@ window.__ModuleLoader__.load({
             open: open,
             panelRef: panelRef,
             stripRef: stripRef,
+            spin: spinMap.wx > 0,
+            ok: okMap.wx,
+            onRefreshWx: function () { manualRefresh('wx'); },
             usageBlock: usageBlock,
             almanacBlock: almanacBlock,
             workMarks: workMarks,
@@ -2472,7 +4427,38 @@ window.__ModuleLoader__.load({
         null,
         pill,
         panel,
+        NOTES.length ? h(NoteLayer, { notes: NOTES, ctx: ctx, t: t }) : null,
         gua ? h(GuaModal, { spread: gua, t: t, onClose: function () { setGua(null); } }) : null,
+        rgbOpen
+          ? h(RgbModal, {
+              t: t,
+              initial: RGB_LAST,
+              onClose: function () {
+                setRgbOpen(false);
+              },
+            })
+          : null,
+        tsOpen
+          ? h(TsModal, {
+              t: t,
+              initial: TS_LAST,
+              onClose: function () {
+                setTsOpen(false);
+              },
+            })
+          : null,
+        keyWin
+          ? h(KbdPanel, {
+              t: t,
+              ctx: ctx,
+              animate: cfg.keyAnim !== false,
+              size: cfg.keySize,
+              initialX: cfg.keyPanelDX,
+              initialY: cfg.keyPanelDY,
+              onClose: function () { setKeyWin(false); },
+              onDrop: function (dx, dy) { persistKeyPanel(ctx, dx, dy, false); },
+            })
+          : null,
         tarot
           ? h(TarotModal, { spread: tarot, t: t, onClose: function () { setTarot(null); } })
           : null,
@@ -2681,6 +4667,20 @@ window.__ModuleLoader__.load({
           }),
         ),
         field(
+          'settings.timeout',
+          'settings.timeout.desc',
+          h('input', {
+            className: 'wcd-range',
+            type: 'range',
+            min: '5',
+            max: '120',
+            step: '5',
+            value: String(draft.requestTimeoutSeconds),
+            onChange: function (e) { patch({ requestTimeoutSeconds: Number(e.target.value) }); },
+          }),
+          h('span', { className: 'wcd-range-value' }, draft.requestTimeoutSeconds + 's'),
+        ),
+        field(
           'settings.weather',
           'settings.weather.desc',
           h('input', {
@@ -2714,6 +4714,48 @@ window.__ModuleLoader__.load({
           }),
           h('span', { className: 'wcd-range-value' }, draft.volume + '%'),
         ),
+        field(
+          'settings.keyAnim',
+          'settings.keyAnim.desc',
+          h('input', {
+            className: 'wcd-check',
+            type: 'checkbox',
+            checked: draft.keyAnim !== false,
+            onChange: function (e) { patch({ keyAnim: !!e.target.checked }); },
+          }),
+        ),
+        field(
+          'settings.keySize',
+          'settings.keySize.desc',
+          h('select', {
+            className: 'wcd-input',
+            value: draft.keySize || 'medium',
+            onChange: function (e) { patch({ keySize: e.target.value }); },
+          },
+            h('option', { value: 'small' }, t('settings.keySize.small')),
+            h('option', { value: 'medium' }, t('settings.keySize.medium')),
+            h('option', { value: 'large' }, t('settings.keySize.large')),
+          ),
+        ),
+        field(
+          'settings.keymap',
+          'settings.keymap.desc',
+          h(
+            'button',
+            {
+              className: 'wcd-btn',
+              type: 'button',
+              onClick: function () {
+                if (window.confirm && !window.confirm(t('settings.keymap.confirm'))) return;
+                resetKeyStats(ctx);
+                // 重新渲染一次，让总计立刻归零
+                setDraft(Object.assign({}, draft));
+              },
+            },
+            t('settings.keymap.reset'),
+          ),
+          h('span', { className: 'wcd-status' }, t('settings.keymap.total') + ' ' + keyStatsTotal()),
+        ),
         h(
           'div',
           { className: 'wcd-actions' },
@@ -2732,6 +4774,7 @@ window.__ModuleLoader__.load({
             { className: 'wcd-status', 'data-kind': status },
             status === 'saved' ? t('settings.saved') : status === 'failed' ? errorText : '',
           ),
+
         ),
       );
     }
@@ -2796,7 +4839,90 @@ window.__ModuleLoader__.load({
         };
       });
 
-      // 席位一：对话头部右侧的 utilities 行
+      // 键盘统计：只数本窗口内的按键，按 event.code 累计；停手 5 秒或页面隐藏时落盘。
+      try {
+        var statsTimer = null;
+        function flushSoon() {
+          if (statsTimer) return;
+          statsTimer = setTimeout(function () {
+            statsTimer = null;
+            flushKeyStats(ctx);
+          }, 5000);
+        }
+        function onKeyDown(e) {
+          if (!e || e.repeat) return;
+          var code = typeof e.code === 'string' ? e.code : '';
+          if (!code) return;
+          KEY_STATS[code] = (KEY_STATS[code] || 0) + 1;
+          KEY_STATS_DIRTY = true;
+          // 0 次 → 第一次按下：这一格的作物和姿态从此定型
+          if (!KEY_LOOKS[code]) {
+            KEY_LOOKS[code] = randomLook();
+            LOOKS_DIRTY = true;
+          }
+          flushSoon();
+        }
+        function onVisibility() {
+          if (document.visibilityState === 'hidden') {
+            flushKeyStats(ctx);
+          }
+        }
+        function loadOnce(tries) {
+          if (KEY_STATS_LOADED) return;
+          describeNamespace(ctx).then(function (hit) {
+            if (!hit || !hit.value) {
+              // 远程还没就绪：最多重试约 10 秒，期间先不写盘
+              if (tries < 20) setTimeout(function () { loadOnce(tries + 1); }, 500);
+              return;
+            }
+            KEY_STATS_LOADED = true;
+            var parsed = parseKeyStats(hit.value.keyStats);
+            for (var k in parsed) {
+              // 与本次会话已累计的合并，别把历史冲掉
+              KEY_STATS[k] = (KEY_STATS[k] || 0) + (Number(parsed[k]) || 0);
+            }
+            KEY_LOOKS = parseLooks(hit.value.keyCrops);
+            CROP_STOCK = parseStock(hit.value.cropStock);
+            // 便笺只在启动时读一次，之后以内存里的为准（避免边打字边被回读覆盖）
+            NOTES = parseNotes(hit.value.notes);
+            NOTES_LOADED = true;
+            noteNotify();
+            // 老数据只有次数、没有外观：统一随机一次，次数保留
+            var filled = false;
+            for (var kk in KEY_STATS) {
+              if (Number(KEY_STATS[kk]) > 0 && !KEY_LOOKS[kk]) {
+                KEY_LOOKS[kk] = randomLook();
+                filled = true;
+              }
+            }
+            if (filled) {
+              // 迁移出来的随机外观立刻落盘，下次启动就不会再抽一次
+              LOOKS_DIRTY = true;
+              flushKeyStats(ctx);
+            }
+            KEY_STATS_DIRTY = true;
+          }).catch(function () {
+            if (tries < 20) setTimeout(function () { loadOnce(tries + 1); }, 500);
+          });
+        }
+        loadOnce(0);
+        document.addEventListener('keydown', onKeyDown, true);
+        document.addEventListener('visibilitychange', onVisibility);
+        ctx.effect(function () {
+          return function () {
+            document.removeEventListener('keydown', onKeyDown, true);
+            document.removeEventListener('visibilitychange', onVisibility);
+            if (statsTimer) {
+              clearTimeout(statsTimer);
+              statsTimer = null;
+            }
+            flushKeyStats(ctx);
+          };
+        });
+      } catch (e) {
+        /* 统计挂了也不能影响倒计时 */
+      }
+
       ctx.slots.inject('conversation.session.header.utilities', function () {
         try {
           return ctx.slots.register(

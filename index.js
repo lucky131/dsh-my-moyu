@@ -2,6 +2,27 @@
 // Config 声明全部可配置项；天气由宿主拉取后写进 volatile 快照，客户端只读投影渲染。
 // 天气失败一律保留上一次成功快照，绝不影响倒计时。
 
+import https from "node:https";
+// DSH 的 HMR 用 AsyncLocalStorage（服务 ctx.hmr 上的 executing 字段）标记
+// 「正在替换模块/配置」。插件在 apply 期间创建的定时器会把那个 store 一路继承下去，
+// 于是之后每次 settings.update 都被判成「HMR transactions cannot be nested」而永久失败
+// （除非重启 DSH）——表现就是「重启后第一次成功，之后怎么刷都没反应」。
+// 这里在写回时用同一个 AsyncLocalStorage 实例清掉 store，跳出事发范围。
+function withoutHmr(ctx, fn) {
+  let scope = null;
+  try {
+    const hmr = typeof ctx.get === "function" ? ctx.get("hmr") : null;
+    scope = hmr && hmr.executing ? hmr.executing : null;
+  } catch (e) {
+    scope = null;
+  }
+  if (!scope || typeof scope.run !== "function" || !scope.getStore()) return fn();
+  return scope.run(undefined, fn);
+}
+
+import net from "node:net";
+import tls from "node:tls";
+
 // @deepseek-ai/schemastery 是宿主包（不在 npm 上），只能由宿主提供。
 // 静态 import 一旦解析不到，整棵插件树都会加载失败，所以这里「尽力动态解析 + 最小 shim 兜底」。
 async function resolveSchemaFactory() {
@@ -69,6 +90,16 @@ const USAGE_URL = "https://opencode.ai/zen/go/v1/usage";
 // 凭据名按顺序尝试（产品专用的排第一）
 const OCG_CREDENTIALS = ["OPENCODE_GO_API_KEY", "OPENCODE_API_KEY"];
 const REQUEST_TIMEOUT_MS = 15000;
+// 天气请求的总预算：直连和代理同时跑，谁先回来用谁；两个都在这个时间内没回来才算失败。
+// 默认 30 秒，可在设置里用 requestTimeoutSeconds 调（5~120）
+const RACE_TIMEOUT_MS = 30000;
+let raceTimeoutMs = RACE_TIMEOUT_MS;
+function setRaceTimeout(ms) {
+  const n = Number(ms);
+  raceTimeoutMs = Number.isFinite(n) && n > 0 ? Math.min(120000, Math.max(5000, n)) : RACE_TIMEOUT_MS;
+}
+// 代理默认值（v2rayN 之类的本地 HTTP 入站口），可用 HTTPS_PROXY / HTTP_PROXY 环境变量覆盖
+const PROXY_FALLBACK = { host: "127.0.0.1", port: 10808 };
 const USER_AGENT = "dsh-work-countdown/1.1";
 const GEO_TTL_MS = 24 * 3600 * 1000;
 
@@ -176,6 +207,11 @@ function buildConfigSchema() {
       .default(15)
       .description("天气刷新间隔（分钟，5~180）")
       .volatile(),
+    requestTimeoutSeconds: z
+      .number()
+      .default(30)
+      .description("单次请求超时（秒，5~120）；直连与代理两条都超时才判失败")
+      .volatile(),
     // 宿主写入的天气快照；code = -1 表示还没有数据
     weather: Weather.default({}).volatile(),
     // ── OpenCode Go 用量 ──
@@ -214,6 +250,51 @@ function buildConfigSchema() {
       })
       .default({})
       .volatile(),
+    // 键盘统计：客户端写入的「每个键的累计次数」JSON（event.code -> 次数）
+    keyStats: z
+      .string()
+      .default("")
+      .description("键盘按键累计次数（JSON，插件写入）")
+      .volatile(),
+    // 客户端发现快照过期时写这个时间戳，宿主看到就立刻补刷一次
+    ping: z
+      .string()
+      .default("")
+      .description("刷新请求（客户端写入）")
+      .volatile(),
+    // 每格当前种的作物：{ "KeyA": "tomato", ... }
+    keyCrops: z
+      .string()
+      .default("")
+      .description("每格作物种类（JSON，插件写入）")
+      .volatile(),
+    // 每种作物的库存：{ "carrot": 3, ... }
+    cropStock: z
+      .string()
+      .default("")
+      .description("作物库存（JSON，插件写入）")
+      .volatile(),
+    // 便笺：[{ "id": "...", "text": "...", "x": 120, "y": 200 }, ...]
+    notes: z
+      .string()
+      .default("")
+      .description("便笺（JSON，插件写入）")
+      .volatile(),
+    // 键盘整体尺寸：small / medium / large
+    keySize: z
+      .string()
+      .default("medium")
+      .description("键盘尺寸（small / medium / large）")
+      .volatile(),
+    // 键盘里的植物是否摇摆
+    keyAnim: z
+      .boolean()
+      .default(true)
+      .description("键盘农场里的植物摇摆动画")
+      .volatile(),
+    // 键盘浮窗的位置偏移（相对右下角，拖动松手后写回）
+    keyPanelDX: z.number().default(0).volatile(),
+    keyPanelDY: z.number().default(0).volatile(),
     // 自检状态：客户端把「浮窗席位是否登记成功 / 浮窗是否挂上」写回这里。
     diag: z
       .string()
@@ -272,23 +353,170 @@ function describeError(e) {
   return code && detail && detail !== code ? `${msg}（${code}：${detail}）` : msg || String(code);
 }
 
-async function getJson(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+// 用 node:https 而不是全局 fetch：fetch(undici) 会复用 keep-alive 连接，
+// 长时间运行后池里的连接被中间设备悄悄断掉，就会一直 CONNECT_TIMEOUT。
+// 每条请求独立建连（agent:false），不共享连接池，也就没有可泄漏的跨请求状态。
+// 代理地址：环境变量优先，否则用本地常见的 HTTP 入站端口
+function proxyAddress() {
+  const raw = process.env.HTTPS_PROXY || process.env.https_proxy || process.env.HTTP_PROXY || process.env.http_proxy || "";
+  const m = /^(?:https?:\/\/)?([^:/@]+)(?::(\d+))?/.exec(raw.trim());
+  if (m && m[1]) return { host: m[1], port: Number(m[2]) || 10808 };
+  return PROXY_FALLBACK;
+}
+
+// node 原生不支持 https 走代理，只能自己开一条 CONNECT 隧道，再把 TLS 套在隧道上
+class TunnelAgent extends https.Agent {
+  constructor(host, port) {
+    super({ keepAlive: false, maxSockets: 4 });
+    this._host = host;
+    this._port = port;
+  }
+  createConnection(options, cb) {
+    const addr = proxyAddress();
+    const sock = net.connect({ host: addr.host, port: addr.port });
+    let buf = "";
+    let done = false;
+    const fail = (e) => {
+      if (done) return;
+      done = true;
+      try {
+        sock.destroy();
+      } catch (e2) {
+        /* 已经断了 */
+      }
+      cb(e);
+    };
+    sock.setTimeout(raceTimeoutMs, () => fail(new Error("代理握手超时")));
+    sock.on("error", fail);
+    sock.on("connect", () => {
+      sock.write("CONNECT " + this._host + ":" + this._port + " HTTP/1.1\r\nHost: " + this._host + ":" + this._port + "\r\n\r\n");
+    });
+    sock.on("data", (chunk) => {
+      if (done) return;
+      buf += chunk.toString("latin1");
+      const idx = buf.indexOf("\r\n\r\n");
+      if (idx < 0) return;
+      const head = buf.slice(0, idx);
+      if (!/^HTTP\/1\.[01] 200/.test(head)) {
+        fail(new Error("代理拒绝：" + head.split("\r\n")[0]));
+        return;
+      }
+      done = true;
+      sock.setTimeout(0);
+      sock.removeAllListeners("data");
+      const secure = tls.connect({ socket: sock, servername: this._host });
+      secure.once("error", (e) => cb(e));
+      secure.once("secureConnect", () => cb(null, secure));
+    });
+  }
+}
+
+// 单条通道：返回 { promise, abort }。abort 用来在「另一条先通了」时立刻把这条收摊
+function startJsonRequest(url, agent, label) {
+  let abort = () => {};
+  const promise = new Promise((resolve, reject) => {
+    let settled = false;
+    let req = null;
+    // 硬超时兜底：req.setTimeout 只在 socket 分配之后才生效，DNS 解析或 TCP/TLS 握手挂住时不会触发，
+    // 请求就永久 pending，inflight 一直占着，天气从此再也不刷新——「时间停住」就是这么来的
+    const hard = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      try {
+        if (req) req.destroy();
+      } catch (e) {
+        /* 已经断了 */
+      }
+      reject(new Error(label + "超时（" + raceTimeoutMs + "ms）"));
+    }, raceTimeoutMs);
+    function done(fn, value) {
+      if (settled) return;
+      settled = true;
+      clearTimeout(hard);
+      fn(value);
+    }
+    abort = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(hard);
+      try {
+        if (req) req.destroy();
+      } catch (e) {
+        /* 已经断了 */
+      }
+      reject(new Error(label + "已被另一条通道抢先"));
+    };
+    req = https.get(
+      url,
+      {
+        headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
+        // 直连不共享 Agent（没有跨请求状态可泄漏）；代理走上面自建的隧道
+        agent: agent || false,
+        // 当前网络 IPv6 不可达，先试 IPv6 只会白等一轮
+        family: 4,
+        timeout: raceTimeoutMs,
+      },
+      (res) => {
+        let body = "";
+        res.setEncoding("utf8");
+        res.on("data", (chunk) => { body += chunk; });
+        res.on("end", () => {
+          const code = res.statusCode || 0;
+          if (code < 200 || code >= 300) {
+            done(reject, new Error("HTTP " + code + (body ? "：" + body.slice(0, 120) : "")));
+            return;
+          }
+          try {
+            done(resolve, JSON.parse(body));
+          } catch (e) {
+            done(reject, new Error("接口返回非 JSON：" + body.slice(0, 120)));
+          }
+        });
+        res.on("error", (e) => done(reject, e));
+      },
+    );
+    req.setTimeout(raceTimeoutMs, () => {
+      req.destroy(new Error(label + "超时（" + raceTimeoutMs + "ms）"));
+    });
+    req.on("error", (e) => done(reject, e));
   });
-  let body = "";
-  try {
-    body = await res.text();
-  } catch (e) {
-    /* 留空 */
-  }
-  if (!res.ok) throw new Error("HTTP " + res.status + (body ? "：" + body.slice(0, 120) : ""));
-  try {
-    return JSON.parse(body);
-  } catch (e) {
-    throw new Error("接口返回非 JSON：" + body.slice(0, 120));
-  }
+  return {
+    promise: promise,
+    abort: function () {
+      abort();
+    },
+  };
+}
+
+// 直连和代理同时跑：谁先拿到数据用谁，另一条立刻掐掉；
+// 只有两条都没在 30 秒内返回才算失败，失败时把两边的原因一起写出来
+function getJson(url) {
+  const host = new URL(url).hostname;
+  const direct = startJsonRequest(url, null, "直连");
+  const proxied = startJsonRequest(url, new TunnelAgent(host, 443), "代理");
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let pending = 2;
+    const errs = [];
+    function win(value) {
+      if (settled) return;
+      settled = true;
+      direct.abort();
+      proxied.abort();
+      resolve(value);
+    }
+    function lose(label, e) {
+      if (settled) return;
+      errs.push(label + "：" + (e && e.message ? e.message : String(e)));
+      pending -= 1;
+      if (pending === 0) {
+        settled = true;
+        reject(new Error(errs.join("；")));
+      }
+    }
+    direct.promise.then(win, (e) => lose("直连", e));
+    proxied.promise.then(win, (e) => lose("代理", e));
+  });
 }
 
 // 城市名 → 经纬度。中文名可用；重名时取第一个结果（可写「杭州,浙江」这种带省份的串）
@@ -458,9 +686,17 @@ export function apply(ctx, config) {
       city: String(vget(cfg.city, "") || "").trim(),
       visible: vget(cfg.weatherVisible, true) !== false,
       minutes: Math.min(180, Math.max(5, Number(vget(cfg.weatherRefreshMinutes, 15)) || 15)),
+      timeoutMs: Math.min(120, Math.max(5, Number(vget(cfg.requestTimeoutSeconds, 30)) || 30)) * 1000,
       usageVisible: vget(cfg.usageVisible, true) !== false,
       usageMinutes: Math.min(60, Math.max(1, Number(vget(cfg.usageRefreshMinutes, 5)) || 5)),
+      ping: String(vget(cfg.ping, "") || ""),
     };
+  }
+
+  // 快照里落盘的时间戳。进程内 lastAt 会因重启 / 定时器异常而失真，落盘时间更可靠
+  function snapAt(snap) {
+    const at = snap && typeof snap.at === "string" ? Date.parse(snap.at) : 0;
+    return Number.isFinite(at) ? at : 0;
   }
 
   // 表单 ns = 本行 patch 的 id
@@ -484,13 +720,23 @@ export function apply(ctx, config) {
       await settings.update(ENTRY_ID, patch);
     } catch (e) {
       const msg = (e && e.message) || String(e);
+      if (msg.indexOf("HMR transactions cannot be nested") !== -1) {
+        // 被 HMR 事务挡住：换个作用域再写一次
+        try {
+          await withoutHmr(ctx, function () {
+            return settings.update(ENTRY_ID, patch);
+          });
+          return;
+        } catch (e2) {
+          /* 换作用域也没写成功，落到下面的告警 */
+        }
+      }
       if (msg.indexOf("No configurable plugin entry") === -1 && msg.indexOf("is not registered") === -1) {
-        console.error("[work-countdown] 写回天气快照失败", msg);
+      console.error("[work-countdown] 写回天气快照失败", msg);
       }
     }
   }
 
-  // 天气快照没变就不写，避免每轮刷新都把配置文件和设置文档刷一遍
   async function writeWeather(next) {
     const prev = vget(cfg.weather, null);
     try {
@@ -505,13 +751,20 @@ export function apply(ctx, config) {
   let lastGood = null;
   let lastAt = 0;
   let inflight = null;
+  let inflightAt = 0;
 
   async function refresh(force) {
-    if (inflight) return inflight;
+    // 卡死的 inflight 不能永久挡住刷新：超过 90 秒当它死了，直接重建
+    if (inflight && Date.now() - inflightAt < 90000) return inflight;
     const current = readCfg();
+    setRaceTimeout(current.timeoutMs);
     if (!current.city || !current.visible) return null;
-    if (!force && Date.now() - lastAt < current.minutes * 60000) return null;
+    if (!force) {
+      const stamped = Math.max(lastAt, snapAt(vget(cfg.weather, null)));
+      if (Date.now() - stamped < current.minutes * 60000) return null;
+    }
 
+    inflightAt = Date.now();
     inflight = (async function () {
       try {
         let geo = geoCache;
@@ -527,7 +780,7 @@ export function apply(ctx, config) {
       } catch (e) {
         // 失败只写错误，保留上一次成功快照（没有就写空快照，让客户端隐藏天气）
         const prev = lastGood || vget(cfg.weather, null) || emptyWeather();
-        const kept = Object.assign({}, prev, { error: describeError(e) });
+        const kept = Object.assign({}, prev, { error: describeError(e), errorAt: new Date().toISOString() });
         if (!lastGood && (kept.code === -1 || kept.code === undefined)) kept.code = -1;
         await writeWeather(kept);
         return null;
@@ -600,6 +853,7 @@ export function apply(ctx, config) {
 
   let lastUsageAt = 0;
   let usageInflight = null;
+  let usageInflightAt = 0;
   // 凭据服务未就绪时的快速重试阶梯（最多约 60 秒），拿到 key 即归零
   const USAGE_RETRY_DELAYS = [1000, 2000, 4000, 8000, 15000, 30000];
   let usageRetryStep = 0;
@@ -618,11 +872,15 @@ export function apply(ctx, config) {
   }
 
   async function refreshUsage(force) {
-    if (usageInflight) return usageInflight;
+    if (usageInflight && Date.now() - usageInflightAt < 90000) return usageInflight;
     const current = readCfg();
     if (!current.usageVisible) return null;
-    if (!force && Date.now() - lastUsageAt < current.usageMinutes * 60000) return null;
+    if (!force) {
+      const stamped = Math.max(lastUsageAt, snapAt(vget(cfg.usage, null)));
+      if (Date.now() - stamped < current.usageMinutes * 60000) return null;
+    }
 
+    usageInflightAt = Date.now();
     usageInflight = (async function () {
       try {
         const k = await resolveOcgKey();
@@ -655,7 +913,7 @@ export function apply(ctx, config) {
       } catch (e) {
         // 保留上一次成功快照，只写错误
         const prev = vget(cfg.usage, null) || emptyUsage();
-        await writeUsage(Object.assign({}, prev, { error: describeError(e) }));
+        await writeUsage(Object.assign({}, prev, { error: describeError(e), errorAt: new Date().toISOString() }));
         return null;
       }
     })().finally(function () {
@@ -718,6 +976,20 @@ export function apply(ctx, config) {
         lastUsageAt = 0;
         refreshUsage(true).catch(function () {});
       }
+      // 客户端发现快照过期，写了 ping：立刻补刷一次（定时器被系统睡眠打断时靠这个兜底）
+      if (next.ping && next.ping !== prev.ping) {
+        lastAt = 0;
+        lastUsageAt = 0;
+        refresh(true).catch(function () {});
+        refreshUsage(true).catch(function () {});
+        refreshAlmanac().catch(function () {});
+      }
+
+      // 定时器失灵时的兜底：任何配置写回（例如键盘统计落盘）都顺带查一次是否过期。
+      // refresh 内部按快照时间节流，没过期就什么也不做，不会造成循环。
+      refresh(false).catch(function () {});
+      refreshUsage(false).catch(function () {});
+      refreshAlmanac().catch(function () {});
     });
   } catch (e) {
     console.warn("[work-countdown] 监听配置变更失败（天气/用量不会自动跟随配置改动）：" + ((e && e.message) || e));
@@ -725,21 +997,48 @@ export function apply(ctx, config) {
 
   try {
     ctx.effect(function () {
-      refresh(true).catch(function () {});
-      refreshUsage(true).catch(function () {});
-      refreshAlmanac().catch(function () {});
-      if (typeof ctx.interval !== "function") return undefined;
-      // 每分钟醒一次，按各自的「刷新间隔」到期才真拉：改配置后不用重建定时器
-      const stopTick = ctx.interval(function () {
-        refresh(false).catch(function () {});
-        refreshUsage(false).catch(function () {});
+      // 定时器必须在「没有 HMR 事务」的作用域里创建：插件被热重载时 apply 跑在
+      // HMR 的 AsyncLocalStorage 事务里，直接 setInterval 会把事务标记继承下去，
+      // 之后每次写回配置都被判成嵌套事务而永久失败（重启后第一次成功、之后全哑）。
+      return withoutHmr(ctx, function () {
+        refresh(true).catch(function () {});
+        refreshUsage(true).catch(function () {});
         refreshAlmanac().catch(function () {});
-      }, 60000);
-      return function () {
-        if (typeof stopTick === "function") stopTick();
-        for (let i = 0; i < usageRetryDisposers.length; i++) usageRetryDisposers[i]();
-        usageRetryDisposers.length = 0;
-      };
+
+        function tick() {
+          refresh(false).catch(function () {});
+          refreshUsage(false).catch(function () {});
+          refreshAlmanac().catch(function () {});
+        }
+        function cleanup() {
+          for (let i = 0; i < usageRetryDisposers.length; i++) usageRetryDisposers[i]();
+          usageRetryDisposers.length = 0;
+        }
+
+        // 固定用原生定时器：ctx.interval 注册成功也可能不触发（timer 服务作用域问题），
+        // 之前出现过「启动时拉一次、之后再也不刷新」的情况，这里不再依赖它
+        const id = setInterval(tick, 60000);
+
+        // 手动刷新走轮询而不是事件：loader/volatile-update 只要有一次没派发到插件，
+        // 按钮就永远点了没反应。配置对象是活的，2 秒看一眼 ping 变没变最稳
+        let seenPing = String(vget(cfg.ping, "") || "");
+        const idPing = setInterval(function () {
+          const p = String(vget(cfg.ping, "") || "");
+          if (!p || p === seenPing) return;
+          seenPing = p;
+          lastAt = 0;
+          lastUsageAt = 0;
+          refresh(true).catch(function () {});
+          refreshUsage(true).catch(function () {});
+          refreshAlmanac().catch(function () {});
+        }, 2000);
+
+        return function () {
+          clearInterval(id);
+          clearInterval(idPing);
+          cleanup();
+        };
+      });
     });
   } catch (e) {
     console.warn("[work-countdown] 定时任务启动失败（倒计时仍可用）：" + ((e && e.message) || e));

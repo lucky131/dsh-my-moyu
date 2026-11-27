@@ -144,7 +144,7 @@ check(code.indexOf('wcd-progress') < 0, '样式里也没有进度条');
 // 设置页：上班/下班/工作日/显示秒/悬浮/城市/显示天气 = 7 个控件
 const page = seatTree('settings.section', { ctx, t });
 const inputs = walk(page).filter((el) => el.type === 'input');
-check(inputs.length === 9, '设置页 9 个输入', '实际 ' + inputs.length);
+check(inputs.length === 11, '设置页 11 个输入', '实际 ' + inputs.length);
 const byType = (type) => inputs.filter((el) => el.props.type === type);
 const times = byType('time');
 check(times.length === 2 && times[0].props.value === '09:00' && times[1].props.value === '18:00',
@@ -154,13 +154,14 @@ check(texts.length === 2, '两个文本输入（工作日 + 城市）', '实际 
 check(texts[0] && texts[0].props.value === '1,2,3,4,5', '工作日输入', texts[0] && texts[0].props.value);
 check(texts[1] && texts[1].props.value === '', '城市默认空', texts[1] && texts[1].props.value);
 const ranges = byType('range');
-check(ranges.length === 1 && ranges[0].props.value === '70', '音量滑杆默认 70%', ranges[0] && ranges[0].props.value);
+const volumeRange = ranges.filter(function (el) { return el.props.value === '70'; });
+check(ranges.length === 2 && volumeRange.length === 1, '音量滑杆默认 70%（另有请求超时滑杆）', ranges.map(function (el) { return el.props.value; }).join(' / '));
 const checks = byType('checkbox');
-check(checks.length === 4, '四个开关', '实际 ' + checks.length);
+check(checks.length === 5, '五个开关', '实际 ' + checks.length);
 check(checks[0].props.checked === true, '显示秒默认勾选', String(checks[0] && checks[0].props.checked));
 check(checks[1].props.checked === false, '悬浮胶囊默认不勾选', String(checks[1] && checks[1].props.checked));
 check(checks[2].props.checked === true, '显示天气默认勾选', String(checks[2] && checks[2].props.checked));
-const saveBtn = walk(page).find((el) => el.type === 'button');
+const saveBtn = walk(page).filter((el) => el.type === 'button').pop();
 check(!!saveBtn && saveBtn.props.disabled === true, '未改动时保存按钮禁用', String(saveBtn && saveBtn.props.disabled));
 
 // 默认头部模式：浮窗席位必须返回 null，不能多画一颗胶囊
@@ -184,7 +185,7 @@ check(code.includes("el.addEventListener('wheel', onWheel, { passive: false })")
 
 // —— 本轮设计要求：宽度统一 / 首格高亮 / 隐藏滚动条 / 彩色图标 ——
 check(code.includes('width:240px'), '浮窗简单页固定 240 宽', '没找到 240 宽');
-check(code.includes('var W = Math.min(320'), '详情面板宽度 320', '宽度不是 320');
+check(code.includes('var W = Math.min(320'), '详情面板宽度回到 320', '宽度不是 320');
 check(code.includes('rect.left + rect.width / 2 - W / 2'), '面板与卡片中线对齐（水平居中）', '还是左缘对齐');
 check(code.includes("'data-first': i === 0"), '24h 首格单独标记', '缺 data-first');
 check(code.includes('scrollbar-width:none') && code.includes('::-webkit-scrollbar{display:none'),
@@ -204,8 +205,8 @@ check(code.includes('data-light="night"'), '夜间格子文字转浅色', '缺�
 check(code.includes('mask-image:linear-gradient'), '右缘渐隐改用 mask', '还是白色遮罩');
 
 // —— 本轮：纯白卡面 / 摄氏度 / 不可选中 / 拖拽横滑 ——
-check(code.includes('--wcd-bg:#fff') && code.includes('.wcd-pill,.wcd-panel,.wcd-mask{'),
-  '胶囊与详情面板共用同一套纯白配色', '没有共用白底变量');
+check(code.includes('--wcd-bg:#fff') && code.includes('.wcd-pill,.wcd-panel,.wcd-mask,.wcd-kbd-win{'),
+  '胶囊、详情面板与键盘浮窗共用同一套纯白配色', '没有共用白底变量');
 check(code.includes("+ '°C'"), '温度带摄氏度单位', '还是只有 °');
 check(/\.wcd-panel\{[\s\S]{0,400}user-select:none/.test(code), '面板禁止选中文字', '面板没关选中');
 check(code.includes("el.addEventListener('pointerdown', onDown)") && code.includes('el.scrollLeft = pan.left - dx'),
@@ -242,7 +243,7 @@ check(code.includes('var KNOCK_B64 = "') && code.includes('decodeAudioData'),
   '木鱼音源内嵌 base64 并解码（零网络请求）', '缺内嵌音源');
 check(code.includes('function playKnockSynth'),
   '解码失败时有合成音兜底', '缺兜底');
-check(code.includes('function FishIcon') && /\.wcd-fish\{[^}]*cursor:pointer/.test(code),
+check(code.includes('var FishIcon = pixelIcon(ICON_BUTTON)') && /\.wcd-fish\{[^}]*cursor:pointer/.test(code),
   '木鱼图标 + pointer 手势', '缺图标或手势');
 check(code.includes('@keyframes wcd-bonk') && code.includes("key: 'fish' + bonk"),
   '点击触发弹跳动画（换 key 重放）', '缺动画重放');
@@ -285,7 +286,7 @@ check(code.includes('data-move') && code.includes('.wcd-yao-row[data-move="true"
   '动爻在爻图上标蓝', '缺动爻标记');
 check(code.includes('gua.primary') && code.includes('gua.changed'), '弹窗标注本卦/变卦', '缺标签');
 check(code.includes('changed[5]'), '变卦也带白话解读', '缺变卦白话');
-check(code.includes('function TubeIcon') && code.includes("'tube.title'"), '签筒已就位', '缺签筒');
+check(code.includes('var TubeIcon = pixelIcon(ICON_TUBE)') && code.includes("'tube.title'"), '签筒已就位', '缺签筒');
 check(code.includes('function GuaModal') && code.includes('.wcd-mask{position:fixed'), '卦象弹窗已就位', '缺弹窗');
 
 
@@ -314,7 +315,7 @@ if (posSrc) {
   const strs = body.match(/'[^']*'/g) || [];
   check(strs.length >= 132 && strs.every((s) => s.length > 16), '132 段解读都有实质内容', '有过短占位');
 }
-check(code.includes('function TarotIcon') && code.includes("'tarot.title'"), '塔罗牌图标与入口已就位', '缺图标');
+check(code.includes('var TarotIcon = pixelIcon(ICON_TAROT)') && code.includes("'tarot.title'"), '塔罗牌图标与入口已就位', '缺图标');
 check(code.includes('function TarotModal') && code.includes("'tarot.reversed'"), '塔罗弹窗已就位', '缺弹窗');
 check(code.indexOf("className: 'wcd-tool wcd-tarot'") > code.indexOf("className: 'wcd-tool wcd-tube'"),
   '塔罗牌排在签筒右侧', '顺序不对');
@@ -351,7 +352,17 @@ check(code.includes('onPointerEnter: function (e) { openPanel(e.currentTarget); 
 check(code.includes('HOVER_HIDE_MS = 200'), '移出累计 200ms 才收起', '缺防抖');
 check(code.includes(`'data-out': props.leaving`) && code.includes('.wcd-panel[data-out="true"]{animation:wcd-fade-out'),
   '收起先淡出再卸载', '缺淡出');
-check(code.includes('box-shadow:0 20px 56px rgba(15,23,42,.07)'), '详情页阴影更浅更大', '阴影没改');
+// 阴影统一成同一档 .07，虚化距离统一压到原来的 2/3（便笺 26→20、浮窗 36→24、面板 56→37、拖动 54→36）
+check(
+  code.includes('box-shadow:0 20px 37px rgba(15,23,42,.07)') &&
+    code.includes('box-shadow:0 10px 24px rgba(15,23,42,.07)') &&
+    code.includes('box-shadow:0 14px 31px rgba(15,23,42,.07)') &&
+    code.includes('box-shadow:0 18px 36px rgba(15,23,42,.07)') &&
+    code.includes('box-shadow:0 10px 20px rgba(15,23,42,.07)') &&
+    !/rgba\(15,23,42,\.(05|09|12|14)\)\}*;?box|box-shadow:0 20px 56px/.test(code),
+  '阴影统一：同一档透明度 + 虚化压到 2/3',
+  '阴影没统一',
+);
 check(code.includes(`className: 'wcd-grip'`) && code.includes('.wcd-float:hover .wcd-grip'),
   '顶部拖拽把手 hover 淡入', '缺把手');
 check(code.includes('.wcd-float > .wcd-fish-row{') && code.includes('max-height:0;opacity:0'),
@@ -363,12 +374,464 @@ check(code.indexOf('overflow:visible}') > code.indexOf('data-expand="true"] > .w
   '展开后工具行放开裁剪（功德飘字不被切）', '仍在裁剪');
 check(code.includes('new ResizeObserver') && code.includes('panelPlacement') && code.includes('ro.observe(el)'),
   '详情页跟随浮窗高度重算位置', '缺尺寸跟随');
+
+// —— 键盘统计：只数本窗口按键，全键盘布局，设置页可重置 ——
+check(code.includes("document.addEventListener('keydown', onKeyDown, true)"), '只统计本窗口内的按键', '缺 keydown 监听');
+check(code.includes('e.repeat'), '长按不重复计数', '缺 repeat 过滤');
+check(code.includes('KEY_MAIN') && code.includes('KEY_NAV') && code.includes('KEY_PAD') &&
+  code.includes("'F12'") && code.includes("'ArrowUp'") && code.includes("'Numpad0'"),
+  '全键盘布局（主键区 / 辅助区 / 小键盘）', '布局不全');
+check(code.includes('grid-template-columns:repeat(3,32px)') &&
+  code.includes('grid-template-columns:repeat(4,32px)'),
+  '辅助区/小键盘严格 grid（3 列 / 4 列）', '布局约束缺失');
+check(code.includes("flex: '0 0 calc(var(--u) * ' + w + ')'") &&
+  code.includes('width:calc(var(--u) * 15 + 14 * 3px)'),
+  '特殊键定宽、其余键自动等分、容器固定 15 单位', '仍是逐键固定宽度');
+check(code.includes('function CropSprite') && code.includes("sym('wcd-crop-5-carrot'") &&
+  code.includes("sym('wcd-crop-4-tomato'") && code.includes("sym('wcd-crop-5-cabbage'") &&
+  code.includes("href: '#' + symId"),
+  '6 档作物图 + 番茄/卷心菜皮肤', '缺作物 sprite');
+check(!code.includes("code === 'KeyA'") && code.includes('CROP_KINDS'),
+  '作物种类改为首次按下时随机', '仍有固定分配');
+check(code.includes("sym('wcd-crop-4-potato'") && code.includes("sym('wcd-crop-5-potato'"),
+  '土豆两档图形', '缺土豆 sprite');
+check(code.includes("'data-ripe': tier >= 5") && code.includes('@keyframes wcd-ripe-pulse'),
+  '满级植物金色呼吸光', '缺满级发光');
+check(code.includes("'keymap.ripe': '可收获'") && code.includes('tier >= 5 ? t(\'keymap.ripe\')'),
+  '满级键名改为「可收获」', '缺可收获文案');
+check(code.includes('var t = props.t || function (key) { return key; };') &&
+  code.includes('t: props.t'),
+  'KeyBoard 自带 t 兜底（防止打开键盘崩溃）', '缺 t 兜底');
+check(code.includes('var RIPE_AT = 1000;') && code.includes('function keyStatsHasRipe()') &&
+  code.includes("className: 'wcd-tool-dot'"),
+  '有可收获植物时入口挂红点', '缺可收获红点');
+check(hostCode.includes('cropStock: z') && code.includes('parseStock(hit.value.cropStock)'),
+  '作物库存可本地保存', '缺 cropStock 字段');
+check(code.includes("className: 'wcd-stock'") && code.includes('CROP_KINDS.map'),
+  '键盘底部横向展示每种作物数量', '缺库存条');
+check(code.includes('CROP_STOCK = {};') && code.includes("STOCK_DIRTY = true;"),
+  '清空数据时一并清空库存', '缺清空联动');
+check(code.includes('.wcd-plot-key[data-ripe="true"]{color:#e8b31e'),
+  '可收获是金色纯文字（无发光无动画）', '样式不对');
+check(hostCode.includes('keyCrops: z') && code.includes('parseLooks(hit.value.keyCrops)'),
+  '每格外观可本地保存', '缺 keyCrops 字段');
+check(code.includes('var KEY_LOOKS = {};') && code.includes('KEY_LOOKS[code] = randomLook();'),
+  '首次按下时随机初始化外观', '缺首次初始化');
+check(code.includes('KEY_LOOKS[kk] = randomLook();'),
+  '已有植物加载时统一随机化一次', '缺迁移');
+check(!code.includes('codeHash('),
+  '不再按 code 哈希生成外观', '仍有 codeHash 引用');
+check(code.includes('function tap(code)') && code.includes('if (n >= RIPE_AT) {') &&
+  code.includes('delete KEY_STATS[code]') && code.includes('delete KEY_LOOKS[code]') &&
+  code.includes('addStock('),
+  '点击满级格子收获：库存 +1、该格清零回荒地', '缺收获逻辑');
+check(code.includes('KEY_STATS[code] = n + 1;') &&
+  code.includes('if (!KEY_LOOKS[code]) KEY_LOOKS[code] = randomLook();'),
+  '未满级的格子点一下次数 +1，荒地顺手播种', '缺手动 +1');
+check(code.includes("'keymap.harvest': '点击收获'") &&
+  code.includes('onClick: function () { tap(code); }') &&
+  code.includes('onClick: function () { tap(item.c); }'),
+  '主键区和小键盘格子都挂了点击，满级收获、未满级 +1', '缺点击绑定');
+check(code.includes('var tickState = React.useState(0)') &&
+  code.includes('flushKeyStats(props.ctx);') && code.includes('ctx: props.ctx'),
+  '点击后立刻重渲染并落盘', '缺即时刷新');
+check(!code.includes('keymap.tap') &&
+  code.includes("(tier >= 5 ? ' · ' + t('keymap.harvest') : '')"),
+  '悬停提示不再出现「点击 +1」字样', '仍有 +1 提示');
+check(hostCode.includes('const hard = setTimeout(') && hostCode.includes('function done(fn, value)'),
+  '请求有硬超时兜底（DNS/握手挂住也能恢复）', '缺硬超时');
+check(hostCode.includes('if (inflight && Date.now() - inflightAt < 90000) return inflight;') &&
+  hostCode.includes('if (usageInflight && Date.now() - usageInflightAt < 90000) return usageInflight;'),
+  '卡死的 inflight 90 秒后自动重建', '缺 inflight 自愈');
+check(code.includes('function tierOf') && code.includes('if (v < 10) return 1') &&
+  code.includes('if (v < 50) return 2') && code.includes('if (v < 200) return 3') &&
+  code.includes('if (v < 1000) return 4') && code.includes('if (v <= 0) return 0'),
+  '固定阈值 1/10/50/200/1000 分六档', '阈值不对');
+check(code.includes('border-radius:12px;') && code.includes('background:#e9f1dc'),
+  '键盘外围有浅色田埂', '缺田埂');
+check(code.includes("content:attr(data-tip)") && code.includes("'data-tip': label"),
+  '自定义气泡提示（不用原生 title）', '缺气泡');
+check(code.includes('@keyframes wcd-jelly') && code.includes('cursor:pointer'),
+  '指针 + 果冻动画', '缺交互动效');
+check(code.includes("className: 'wcd-tool wcd-farm'") && code.includes('var FarmIcon = pixelIcon(ICON_TOMATO)'),
+  '键盘入口在工具行（键盘农场）', '缺入口');
+check(code.includes('function KbdPanel') && code.includes("className: 'wcd-kbd-win'"),
+  '键盘是独立浮窗，可单独开关', '缺独立浮窗');
+check(code.includes("className: 'wcd-kbd-grip'") && code.includes('.wcd-kbd-grip{position:absolute'),
+  '键盘浮窗有三横线拖动把手', '缺把手');
+check(code.includes('setPointerCapture') && code.includes('onPointerMove: onMove'),
+  '把手支持按住拖动', '缺拖动实现');
+check(code.includes('function resetKeyStats') && code.includes("'settings.keymap.reset'"), '设置页有重置按钮', '缺重置');
+check(hostCode.includes('keyStats: z'), '配置里有 keyStats 字段', '缺配置字段');
+check(code.includes('persistKeyStats') && code.includes('flushKeyStats'), '统计节流写回配置', '缺写回');
 check(code.indexOf("className: 'wcd-grip'") < code.indexOf("className: 'wcd-row1'"),
   '把手排在主面板最顶上', '顺序不对');
 check(!/Object\.assign\(attrs, handlers\)/.test(code), '拖动只挂在把手上', '主面板仍整体可拖');
+check(
+  code.includes("h(RefreshBtn, {") && code.includes("label: t('panel.refresh')") &&
+    code.includes("label: t('usage.refresh')"),
+  '天气与用量首行各有手动刷新按钮',
+  '缺刷新按钮',
+);
+check(
+  code.includes('function RefreshIcon') && code.includes('M2.4 8.6A6 6 0 0 1 12 4.2') &&
+    code.includes('M13.6 7.4A6 6 0 0 1 4 11.8'),
+  '刷新图标是两段半圆弧箭头',
+  '图标不是双半弧',
+);
+check(
+  code.includes("function manualRefresh(which)") && code.includes('persistPing(ctx);'),
+  '手动刷新写 ping 让宿主立刻补刷',
+  '缺补刷通路',
+);
+check(
+  code.includes('function RefreshOk()') && code.includes("className: 'wcd-refresh-ok'") &&
+    code.includes('props.ok ? h(RefreshOk) : null'),
+  '刷新成功时在按钮左侧显示绿色对勾',
+  '缺成功对勾',
+);
+check(
+  code.includes("'.wcd-refresh-ok{color:#2f9e44;") && code.includes('.wcd-refresh-group{display:inline-flex'),
+  '对勾是绿色且与按钮同组靠右',
+  '缺对勾样式',
+);
+check(
+  code.includes("patchSide(setOkMap, 'wx', false); }, 1000);") &&
+    code.includes("patchSide(setOkMap, 'usage', false); }, 1000);"),
+  '两边对勾各管各的，一秒后自动消失',
+  '缺自动消失',
+);
+check(
+  code.includes("if (!((cfg.weather && cfg.weather.error) || '')) patchSide(setOkMap, 'wx', true);") &&
+    code.includes("if (!((cfg.usage && cfg.usage.error) || '')) patchSide(setOkMap, 'usage', true);"),
+  '只有请求成功、没有 error 才闪对勾',
+  '缺成功判定',
+);
+check(
+  code.includes('var spinState = React.useState({ wx: 0, usage: 0 });') &&
+    code.includes('var okState = React.useState({ wx: false, usage: false });') &&
+    code.includes('function patchSide(setter, which, value)') &&
+    !/refreshSpin|refreshOk/.test(code),
+  '两个刷新的转圈与对勾相互独立，点一个不影响另一个',
+  '仍共用同一份转圈状态',
+);
+check(
+  code.includes('function snapSig(snap)') &&
+    code.includes("var doneWx = spinMap.wx > 0 && prev.wx !== null && wxSig !== prev.wx;") &&
+    code.includes("var doneUsage = spinMap.usage > 0 && prev.usage !== null && usageSig !== prev.usage;"),
+  '转圈在对应快照变化（成功 or 失败）时停止',
+  '没按各自快照判断结束',
+);
+check(
+  code.includes("var spinLimitMs = (Number(cfg.requestTimeoutSeconds) || 30) * 1000;") &&
+    code.includes("var id = setTimeout(function () { patchSide(setSpinMap, 'wx', 0); }, spinLimitMs);") &&
+    code.includes("var id = setTimeout(function () { patchSide(setSpinMap, 'usage', 0); }, spinLimitMs);"),
+  '转圈兜底跟随请求超时配置',
+  '缺转圈兜底或没跟随配置',
+);
+check(
+  hostCode.includes("error: describeError(e), errorAt: new Date().toISOString()"),
+  '用量失败也带 errorAt，客户端据此结束转圈',
+  '用量失败没有时间戳',
+);
+check(
+  hostCode.includes("const direct = startJsonRequest(url, null, \"直连\");") &&
+    hostCode.includes("const proxied = startJsonRequest(url, new TunnelAgent(host, 443), \"代理\");"),
+  '直连与代理两条通道同时发起',
+  '没有并发两个通道',
+);
+check(
+  hostCode.includes("function win(value)") && hostCode.includes("direct.abort();") &&
+    hostCode.includes("proxied.abort();") && hostCode.includes("resolve(value);"),
+  '谁先返回用谁的数据，另一条立刻掐掉',
+  '赢了之后没取消另一条',
+);
+check(
+  hostCode.includes("errs.push(label") && hostCode.includes("pending === 0") &&
+    hostCode.includes("reject(new Error(errs.join(\"；\")));"),
+  '两个通道都失败才报错，错误里带两边原因',
+  '失败判定或错误信息不对',
+);
+check(
+  hostCode.includes("const RACE_TIMEOUT_MS = 30000;") &&
+    hostCode.includes("class TunnelAgent extends https.Agent") &&
+    hostCode.includes('"CONNECT " + this._host'),
+  '总超时 30 秒，代理走 CONNECT 隧道',
+  '缺 30 秒预算或隧道实现',
+);
+check(
+  hostCode.includes("requestTimeoutSeconds: z") && hostCode.includes(".default(30)") &&
+    hostCode.includes("requestTimeoutSeconds, 30)) || 30)) * 1000") &&
+    hostCode.includes("setRaceTimeout(current.timeoutMs);"),
+  '请求超时是配置项，默认 30 秒，刷新时读配置',
+  '超时没有做成配置项',
+);
+check(
+  code.includes("'settings.timeout': '请求超时（秒）'") &&
+    code.includes("requestTimeoutSeconds: clamp(toNumber(v.requestTimeoutSeconds, 30), 5, 120)"),
+  '设置页可调请求超时（5~120 秒）',
+  '设置页缺超时输入',
+);
+check(
+  code.includes("t('panel.error') + wx.error") && code.includes("t('usage.error') + usage.error") &&
+    code.includes("'.wcd-err{"),
+  '失败原因以红字显示在首行下方，成功自动消失',
+  '缺失败提示',
+);
 
 const almanacSrc = hostCode.slice(hostCode.indexOf('function computeAlmanac'), hostCode.indexOf('function emptyUsage'));
 check(!/fetch\(|XMLHttpRequest/.test(almanacSrc), '黄历计算全程不联网', '黄历里出现网络调用');
+
+check(
+  !/hookStats|mergeHookStats|moyu-keyhook|HOOK_ON/.test(hostCode + code),
+  '已回退为窗口内统计，不再拉起系统级钩子',
+  '仍残留全局钩子代码',
+);
+check(
+  code.includes("document.addEventListener('keydown', onKeyDown, true)") && code.includes('if (!e || e.repeat) return;'),
+  '按键只在 DSH 窗口内监听，长按不重复计数',
+  '缺窗口内键盘监听',
+);
+
+check(
+  /\.wcd-tool\{[^}]*width:32px;height:32px/.test(code) &&
+    code.includes('.wcd-tool > svg:not(.wcd-tool-dot),.wcd-tool > img{width:100%;height:100%}') &&
+    code.includes('.wcd-tool .wcd-tool-dot{width:10px;height:10px}'),
+  '工具按钮统一 32×32 盒子，可收获红点不被撑大',
+  '工具按钮盒子尺寸没统一',
+);
+
+// 七个工具图标改用用户自绘的 16×16 像素图：必须内联成 data URI，客户端没有可引用的插件目录 URL
+const pixelNames = ['FishIcon', 'TubeIcon', 'TarotIcon', 'FarmIcon', 'NoteIcon', 'RgbIcon', 'ClockIcon'];
+const pixelIcons = pixelNames.map((name) => {
+  const m = new RegExp('var ' + name + ' = pixelIcon\\((ICON_[A-Z]+)\\);').exec(code);
+  const iconConst = m ? m[1] : '';
+  const dm = iconConst
+    ? new RegExp('var ' + iconConst + ' = "(data:image/png;base64,[^"]{40,})";').exec(code)
+    : null;
+  return { name, iconConst, hasData: !!dm };
+});
+check(
+  pixelIcons.every((it) => it.iconConst && it.hasData),
+  '七个工具图标都内联成 png data URI',
+  '有图标没内联：' + pixelIcons.filter((it) => !it.hasData).map((it) => it.name).join(' / '),
+);
+check(
+  /function pixelIcon\(src\)/.test(code) &&
+    code.includes("imageRendering: 'pixelated'") &&
+    /width: 32,/.test(code) &&
+    /height: 32,/.test(code),
+  '像素图标统一 32×32 并按 pixelated 放大',
+  '像素图标没有统一的 32×32 盒子或缺少 pixelated',
+);
+check(
+  !/function FishIcon\(\)/.test(code) && !/function TubeIcon\(\)/.test(code),
+  '手绘 SVG 图标已移除',
+  '还残留手绘 SVG 图标函数',
+);
+
+// 两侧留白必须和图标之间的间隙一样宽，所以用 space-evenly 而不是 center + gap（后者两侧会被挤成 0 或变成两倍）
+check(
+  /\.wcd-fish-row\{[^}]*justify-content:space-evenly/.test(code) &&
+    /\.wcd-fish-row\{[^}]*flex-wrap:wrap/.test(code) &&
+    /\.wcd-fish-row\{[^}]*gap:4px 0/.test(code),
+  '工具水平均匀分布，两侧留白与中间间隙等宽',
+  '工具行还是 center + gap，两侧留白和中间间隙不等宽',
+);
+// 一行固定 5 个：编号 5 之后插入零高分隔块，第 6 个必落在第二行
+check(
+  code.includes("className: 'wcd-fish-break'") &&
+  /\.wcd-fish-break\{[^}]*flex:0 0 100%/.test(code) &&
+  code.indexOf("className: 'wcd-tool wcd-farm'") < code.indexOf("key: 'fishBreak'") &&
+  code.indexOf("key: 'fishBreak'") < code.indexOf("className: 'wcd-tool wcd-rgb-btn'"),
+  '工具图标一行恰好 5 个，第 6 个换到第二行',
+  '缺少硬换行分隔块或位置不对',
+);
+check(
+  /\.wcd-float\[data-expand="true"\] > \.wcd-fish-row\{[^}]*max-height:78px/.test(code),
+  '展开高度放得下两行图标',
+  '展开高度装不下两行',
+);
+// 颜色转换：色环图标 + 居中弹窗 + 输入 r,g,b 自动算两种格式 + 一键复制
+check(
+  code.includes('var RgbIcon = pixelIcon(ICON_PALETTE)') && code.includes("'rgb.title'"),
+  '颜色转换用调色板图标',
+  '调色板图标缺失',
+);
+check(
+  code.includes('function parseRgbInput(text)') &&
+    code.includes("'rgb(' + rgb.join(', ') + ')'") &&
+    code.includes('function hexOf(rgb)'),
+  '输入 r,g,b 自动算出 rgb() 与 #hex 两种格式',
+  '换算逻辑缺失',
+);
+check(
+  code.includes("className: 'wcd-mask'") &&
+    code.includes("className: 'wcd-rgb'") &&
+    code.includes('function copyText(text)') &&
+    code.includes("setRgbOpen(true)"),
+  '点击图标在屏幕正中弹出小窗，可一键复制',
+  '弹窗或复制缺失',
+);
+// placeholder 不写死具体颜色值，只说人话
+check(
+  !/rgb\.ph': '\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}'/.test(code) &&
+    code.includes("placeholder: t('rgb.ph')"),
+  '输入框 placeholder 不用具体数值',
+  'placeholder 里还写着具体颜色值',
+);
+// 蒙版关闭：按下和松开都要在蒙版上；从窗口内按下拖到外面松开不许关
+check(
+  code.includes('function useMaskClose(onClose)') &&
+    code.includes('downRef.current = e.target === e.currentTarget') &&
+    code.includes('var hit = downRef.current && e.target === e.currentTarget') &&
+    (code.match(/Object\.assign\(\{ className: ["']wcd-mask["'], ["']?data-closing/g) || []).length === 4 &&
+    !/className: ["']wcd-mask["'], onClick: props\.onClose/.test(code),
+  '蒙版只有在外侧按下并在外侧松开才关闭',
+  '蒙版还是靠 click 关闭，拖出去松开会误关',
+);
+// 关闭也要有动画：× 和蒙版走同一个 requestClose，先淡出 160ms 再卸载
+check(
+  code.includes('function useModalDismiss(onClose)') &&
+    code.includes('var MODAL_EXIT_MS = 160;') &&
+    code.includes('animation:wcd-fade-out .16s ease-in forwards') &&
+    code.includes('animation:wcd-pop-out .16s ease-in forwards') &&
+    (code.match(/useModalDismiss\(props\.onClose\)/g) || []).length === 4 &&
+    (code.match(/onClick: dismiss\.requestClose/g) || []).length >= 2,
+  '弹窗关闭时有淡出动画（× 与点蒙版同一套）',
+  '关闭还是直接卸载，没有淡出',
+);
+
+// —— 便笺 ——
+// 时间戳：把两个纯函数抽出来实跑，验的是换算结果而不是「代码里有没有」
+const pickFn = (name) => {
+  const at = code.indexOf('function ' + name);
+  if (at < 0) return '';
+  let depth = 0;
+  let started = false;
+  for (let i = at; i < code.length; i++) {
+    const ch = code[i];
+    if (ch === '{') {
+      depth++;
+      started = true;
+    } else if (ch === '}') {
+      depth--;
+      if (started && depth === 0) return code.slice(at, i + 1);
+    }
+  }
+  return '';
+};
+const tsSource = pickFn('pad2') + '\n' + pickFn('formatStamp') + '\n' + pickFn('parseStamp');
+const tsBox = {};
+vm.runInNewContext(
+  tsSource +
+    '\nout = { sec: parseStamp("1750000000"), ms: parseStamp("1750000000000"), bad: parseStamp("12ab"), empty: parseStamp(""), fmt: formatStamp(1750000000000) };',
+  tsBox,
+);
+const tsOut = tsBox.out || {};
+check(
+  tsOut.sec && tsOut.sec.ms === false && /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(tsOut.sec.text),
+  '秒级时间戳转成 YYYY-MM-DD HH:mm:ss',
+  '秒级解析结果不对',
+);
+check(
+  tsOut.ms && tsOut.ms.ms === true && tsOut.ms.text === tsOut.fmt,
+  '13 位毫秒时间戳按毫秒解析，与同一时刻按秒解析的结果一致',
+  '毫秒/秒判定不对',
+);
+check(tsOut.bad === null && tsOut.empty === null, '非纯数字或空输入不瞎算', '非法输入没被挡住');
+check(
+  code.includes('var ClockIcon = pixelIcon(ICON_CLOCK)') &&
+    code.indexOf("className: 'wcd-tool wcd-ts-btn'") > code.indexOf("className: 'wcd-tool wcd-rgb-btn'"),
+  '时间戳用时钟图标，排在颜色转换右边',
+  '时钟图标缺失或顺序不对',
+);
+check(
+  code.indexOf("className: 'wcd-tool wcd-note-btn'") > 0 &&
+    code.indexOf("className: 'wcd-tool wcd-note-btn'") < code.indexOf("className: 'wcd-tool wcd-farm'"),
+  '便笺与农场已互换位置（便笺在左）',
+  '便笺与农场的顺序不对',
+);
+check(
+  code.includes('function addNote(ctx)') &&
+    code.includes('NOTES.push({') &&
+    /onClick: function \(e\) \{\s*e\.stopPropagation\(\);\s*addNote\(ctx\);/.test(code),
+  '点击便笺按钮新建一个便笺（不合并、不开关）',
+  '便笺按钮没接 addNote',
+);
+check(
+  code.includes('NOTES.length ? h(NoteLayer, { notes: NOTES, ctx: ctx, t: t }) : null') &&
+    code.includes("className: 'wcd-note-head'") &&
+    code.includes("className: 'wcd-note-close'") &&
+    code.includes("className: 'wcd-note-body'"),
+  '便笺框有拖动横条、右上角关闭与正文输入区',
+  '便笺框结构缺失',
+);
+check(
+  (code.match(/className: 'wcd-note-grip-bar'/g) || []).length === 3,
+  '便笺顶部中间是三横拖动把手',
+  '三横把手数量不对',
+);
+check(
+  /\.wcd-note\{[^}]*width:240px/.test(code) && code.includes('el.style.height = Math.max(52, el.scrollHeight)'),
+  '便笺宽 240px，高度随文字变化',
+  '便笺宽度或自适应高度缺失',
+);
+check(
+  code.includes('setPointerCapture') &&
+    code.includes('doneNote(ctx, note.id)') &&
+    code.includes('persistNotes(ctx, JSON.stringify(NOTES), false)') &&
+    hostCode.includes('notes: z'),
+  '便笺可拖动、× 算办完、内容写进配置',
+  '便笺交互或持久化缺失',
+);
+
+// —— 鼠标统计已移除 ——
+check(
+  !/mouseStats|MOUSE_STATS|MouseBlock|MouseGlyph|wcd-mouse/.test(code + hostCode),
+  '鼠标统计功能已彻底移除',
+  '仍残留鼠标统计代码',
+);
+
+// —— HMR 事务逃逸 ——
+// 插件被热重载后，apply 期间创建的定时器会继承 HMR 的 AsyncLocalStorage 事务标记，
+// 导致此后所有 settings.update 都被判成「HMR transactions cannot be nested」而静默失败。
+// 这两个断言守着「写回能跳出事务」与「定时器在事务外创建」。
+check(
+  hostCode.includes('function withoutHmr(ctx, fn)') &&
+    hostCode.includes('ctx.get("hmr")') &&
+    hostCode.includes('return scope.run(undefined, fn);') &&
+    hostCode.includes('await withoutHmr(ctx, function () {'),
+  '写回配置时会跳出 HMR 事务，热重载后仍能刷新',
+  '缺 HMR 事务逃逸（重启后只有第一次能写回）',
+);
+check(
+  /return withoutHmr\(ctx, function \(\) \{[\s\S]{0,900}setInterval\(tick, 60000\)/.test(hostCode),
+  '定时器在 HMR 事务外创建，不会继承事务标记',
+  '定时器直接建在 apply 作用域里，会继承 HMR 事务标记',
+);
+
+// 行为验证：真的能清掉事务标记，且 await 链里不复原
+{
+  const { AsyncLocalStorage } = await import('node:async_hooks');
+  const start = hostCode.indexOf('function withoutHmr');
+  const tail = hostCode.indexOf('return scope.run(undefined, fn);', start);
+  const end = hostCode.indexOf('}', tail) + 1;
+  const withoutHmr = new Function(hostCode.slice(start, end) + '\nreturn withoutHmr;')();
+  const als = new AsyncLocalStorage();
+  const ctx = { get: (name) => (name === 'hmr' ? { executing: als } : null) };
+  const seen = await als.run(true, () =>
+    withoutHmr(ctx, async () => {
+      await null;
+      return String(als.getStore());
+    }),
+  );
+  check(
+    seen === 'undefined' && withoutHmr({ get: () => null }, () => 'ok') === 'ok',
+    '事务标记能被真正清掉（同步与异步两层都生效）',
+    '逃逸作用域里仍带着事务标记',
+  );
+}
 
 console.log(failed === 0 ? '\n全部通过' : '\n有 ' + failed + ' 项失败');
 process.exit(failed === 0 ? 0 : 1);
